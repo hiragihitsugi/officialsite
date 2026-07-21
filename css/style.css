@@ -409,6 +409,25 @@ Hero
     z-index:-2;
 }
 
+/* Keep the geometry canvas inside the Hero's visual stack. */
+#particles{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:5;
+
+    overflow:hidden;
+
+    pointer-events:none;
+}
+
+#particles canvas{
+
+    display:block;
+}
+
 @keyframes aurora{
 
     from{
@@ -1630,3 +1649,195 @@ body{
 /*=========================
 End
 =========================*/
+/*==================================================
+    Hero Experience v1.1
+==================================================*/
+
+#hero {
+    min-height: 720px;
+    isolation: isolate;
+    perspective: 1100px;
+}
+
+.hero-content {
+    width: min(1180px, calc(100% - 48px));
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+}
+
+.hero-title {
+    display: inline-block;
+    position: relative;
+    filter: drop-shadow(0 18px 42px rgba(0, 0, 0, .35));
+}
+
+.hero-title span {
+    display: inline-block;
+    background: linear-gradient(180deg, #fff 12%, #d8faff 52%, #6beaff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    will-change: transform, opacity;
+}
+
+.hero-title::after {
+    content: "";
+    position: absolute;
+    inset: 44% -6% -15%;
+    z-index: -1;
+    background: radial-gradient(ellipse, rgba(0, 207, 255, .19), transparent 68%);
+    filter: blur(22px);
+    pointer-events: none;
+}
+
+.hero-background img {
+    will-change: transform;
+    filter: saturate(.84) contrast(1.08) brightness(.82);
+}
+
+.hero-overlay {
+    background:
+        linear-gradient(180deg, rgba(2, 5, 15, .48), rgba(3, 7, 18, .77) 68%, #050816 100%),
+        radial-gradient(circle at 50% 42%, transparent 0, rgba(3, 7, 18, .34) 62%);
+}
+
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: .42;
+    background-image:
+        linear-gradient(rgba(102, 241, 255, .065) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102, 241, 255, .065) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, transparent 3%, #000 30%, transparent 92%);
+    transform: perspective(700px) rotateX(57deg) scale(1.65) translateY(23%);
+    transform-origin: center bottom;
+    pointer-events: none;
+}
+
+.hero-glow {
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    width: min(78vw, 980px);
+    aspect-ratio: 1;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 207, 255, .16), rgba(0, 207, 255, .035) 38%, transparent 68%);
+    filter: blur(16px);
+    animation: heroGlowPulse 7s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.hero-pointer-glow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 520px;
+    height: 520px;
+    z-index: 2;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(102, 241, 255, .13), rgba(0, 207, 255, .035) 42%, transparent 70%);
+    filter: blur(12px);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+.hero-orbit {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    z-index: 1;
+    border: 1px solid rgba(102, 241, 255, .13);
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.hero-orbit::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan2);
+    box-shadow: 0 0 18px var(--cyan);
+}
+
+.hero-orbit-one {
+    width: min(72vw, 900px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%) rotate(18deg);
+    animation: orbitSpin 28s linear infinite;
+}
+
+.hero-orbit-two {
+    width: min(52vw, 650px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%) rotate(-24deg);
+    border-color: rgba(255, 255, 255, .08);
+    animation: orbitSpinReverse 22s linear infinite;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 48px;
+}
+
+#explore,
+.secondary-button {
+    margin-top: 0;
+    min-width: 190px;
+    padding: 17px 34px;
+    border-radius: 999px;
+    letter-spacing: 2.5px;
+}
+
+.secondary-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(102, 241, 255, .28);
+    background: rgba(5, 12, 28, .42);
+    color: #e7fbff;
+    backdrop-filter: blur(14px);
+    transition: transform .35s ease, border-color .35s ease, background .35s ease, box-shadow .35s ease;
+}
+
+.secondary-button:hover {
+    transform: translateY(-5px);
+    border-color: rgba(102, 241, 255, .75);
+    background: rgba(0, 207, 255, .11);
+    box-shadow: 0 14px 38px rgba(0, 207, 255, .16);
+}
+
+.hero-social {
+    z-index: 25;
+}
+
+@keyframes heroGlowPulse {
+    from { opacity: .55; transform: translate(-50%, -50%) scale(.94); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@keyframes orbitSpin {
+    to { transform: translate(-50%, -50%) rotate(378deg); }
+}
+
+@keyframes orbitSpinReverse {
+    to { transform: translate(-50%, -50%) rotate(-384deg); }
+}
+
+.motion-reduced .hero-pointer-glow,
+.motion-reduced .hero-orbit {
+    display: none;
+}

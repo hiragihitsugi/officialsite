@@ -1,0 +1,7 @@
+
+/* Pointer performance patch */
+.work-pointer-glow{
+    left:0 !important;
+    top:0 !important;
+    will-change:translate,opacity;
+}

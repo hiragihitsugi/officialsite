@@ -105,8 +105,6 @@
             Background Layers
     ======================================= -->
 
-    <div id="particles"></div>
-
     <div id="noise"></div>
 
     <!-- ======================================
@@ -123,7 +121,8 @@
 
         </a>
 
-        <nav>
+        <nav id="primary-navigation"
+            aria-label="Primary navigation">
 
             <a href="#hero">HOME</a>
 
@@ -136,7 +135,10 @@
         </nav>
 
         <button class="hamburger"
-            aria-label="Menu">
+            type="button"
+            aria-label="メニューを開く"
+            aria-controls="primary-navigation"
+            aria-expanded="false">
 
             <span></span>
 
@@ -171,9 +173,17 @@
 
             <div class="hero-gradient"></div>
 
+            <!-- Decorative geometry belongs to the Hero and must not create page height. -->
+            <div id="particles" aria-hidden="true"></div>
+
             <div class="hero-grid"></div>
 
             <div class="hero-glow"></div>
+
+            <div class="hero-pointer-glow" aria-hidden="true"></div>
+
+            <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+            <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
 
             <div class="hero-content">
 
@@ -393,75 +403,87 @@
 
         </section>
 
-
-
-
-
         <!-- ======================================
                 Works
         ======================================= -->
 
-        <section id="works">
-
-            <div class="section-container">
-
-                <div class="section-title">
-
-                    WORKS
-
+        <section id="works" aria-labelledby="works-heading">
+            <div class="section-container works-studio">
+                <div class="works-heading-row">
+                    <div>
+                        <div class="section-title">WORKS</div>
+                        <h2 id="works-heading" class="works-heading">Selected Digital Projects.</h2>
+                    </div>
+                    <p class="works-intro">Web、UI、ゲーム表現を横断しながら、技術と世界観をひとつの体験へまとめています。</p>
                 </div>
 
-                <div class="works-grid">
-
-                    <article class="work-card">
-
-                        <span>01</span>
-
-                        <h3>Official Website</h3>
-
-                        <p>
-
-                            Cyber Design
-
-                            Official Portfolio
-
-                        </p>
-
-                    </article>
-
-                    <article class="work-card">
-
-                        <span>02</span>
-
-                        <h3>Coming Soon</h3>
-
-                        <p>
-
-                            New Project
-
-                        </p>
-
-                    </article>
-
-                    <article class="work-card">
-
-                        <span>03</span>
-
-                        <h3>Coming Soon</h3>
-
-                        <p>
-
-                            New Project
-
-                        </p>
-
-                    </article>
-
+                <div class="works-filter" role="group" aria-label="作品カテゴリー">
+                    <button class="works-filter-button is-active" type="button" data-filter="all" aria-pressed="true">ALL</button>
+                    <button class="works-filter-button" type="button" data-filter="web" aria-pressed="false">WEB</button>
+                    <button class="works-filter-button" type="button" data-filter="ui" aria-pressed="false">UI</button>
+                    <button class="works-filter-button" type="button" data-filter="game" aria-pressed="false">GAME</button>
                 </div>
 
+                <div class="works-grid" aria-live="polite">
+                    <article class="work-card work-card-featured" data-category="web ui">
+                        <a class="work-card-link" href="#hero" aria-label="HIIRAGI HITSUGI Official Websiteを見る">
+                            <div class="work-visual">
+                                <img src="images/hero.webp" alt="HIIRAGI HITSUGI Official Websiteのメインビジュアル">
+                                <div class="work-visual-grid" aria-hidden="true"></div>
+                                <span class="work-index">01</span><span class="work-status">LIVE PROJECT</span>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-meta"><span>WEB DESIGN</span><span>2026</span></div>
+                                <h3>Official Website</h3>
+                                <p>サイバー表現、GSAP、Lenis、Canvasを統合した公式ポートフォリオサイト。</p>
+                                <ul class="work-tags" aria-label="使用技術"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>GSAP</li></ul>
+                                <span class="work-cta">VIEW PROJECT <span aria-hidden="true">↗</span></span>
+                            </div>
+                            <span class="work-pointer-glow" aria-hidden="true"></span>
+                        </a>
+                    </article>
+
+                    <article class="work-card" data-category="ui web">
+                        <div class="work-card-link" tabindex="0" role="group" aria-label="Interface System、制作予定">
+                            <div class="work-visual work-visual-interface">
+                                <div class="interface-window" aria-hidden="true"><span></span><span></span><span></span><div></div><div></div><div></div></div>
+                                <span class="work-index">02</span><span class="work-status">IN DEVELOPMENT</span>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-meta"><span>UI SYSTEM</span><span>2026</span></div>
+                                <h3>Interface System</h3>
+                                <p>ゲームとWebの境界を越える、再利用可能なインターフェースデザイン。</p>
+                                <ul class="work-tags" aria-label="予定技術"><li>UI</li><li>Motion</li><li>Prototype</li></ul>
+                                <span class="work-cta">COMING SOON <span aria-hidden="true">＋</span></span>
+                            </div>
+                            <span class="work-pointer-glow" aria-hidden="true"></span>
+                        </div>
+                    </article>
+
+                    <article class="work-card" data-category="game">
+                        <div class="work-card-link" tabindex="0" role="group" aria-label="Digital Horizon、制作予定">
+                            <div class="work-visual work-visual-game">
+                                <div class="game-core" aria-hidden="true"><span></span><span></span></div>
+                                <span class="work-index">03</span><span class="work-status">CONCEPT</span>
+                            </div>
+                            <div class="work-body">
+                                <div class="work-meta"><span>GAME CONCEPT</span><span>FUTURE</span></div>
+                                <h3>Digital Horizon</h3>
+                                <p>インタラクションと空間演出を中心に設計する、次世代Webゲーム構想。</p>
+                                <ul class="work-tags" aria-label="予定技術"><li>Three.js</li><li>WebGL</li><li>Audio</li></ul>
+                                <span class="work-cta">COMING SOON <span aria-hidden="true">＋</span></span>
+                            </div>
+                            <span class="work-pointer-glow" aria-hidden="true"></span>
+                        </div>
+                    </article>
+                </div>
+
+                <p class="works-count"><span id="works-visible-count">3</span> PROJECTS DISPLAYED</p>
             </div>
-
         </section>
+
+
+
 
 
 
@@ -558,11 +580,15 @@
 
     <script src="js/cursor.js"></script>
 
+    <script src="js/navigation.js"></script>
+
     <script src="js/scroll.js"></script>
 
     <script src="js/animation.js"></script>
 
     <script src="js/particles.js"></script>
+
+    <script src="js/works.js"></script>
 
     <script src="js/script.js"></script>
 

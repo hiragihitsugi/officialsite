@@ -339,3 +339,35 @@ select{
 /*==================================================
     End
 ==================================================*/
+/*==================================================
+    Cursor Performance Patch v1.3
+==================================================*/
+
+#cursor-light,
+#cursor-ring,
+#cursor-dot{
+    --cursor-position:translate3d(50vw,50vh,0);
+    will-change:transform,opacity;
+}
+
+#cursor-light,
+#cursor-ring,
+#cursor-dot{
+    transform:var(--cursor-position) translate(-50%,-50%);
+}
+
+#cursor-dot{
+    transform:var(--cursor-position) translate(-50%,-50%);
+}
+
+.cursor-hover #cursor-dot{
+    transform:var(--cursor-position) translate(-50%,-50%) scale(1.4);
+}
+
+.cursor-click #cursor-ring{
+    transform:var(--cursor-position) translate(-50%,-50%) scale(.82);
+}
+
+.cursor-click #cursor-dot{
+    transform:var(--cursor-position) translate(-50%,-50%) scale(.6);
+}

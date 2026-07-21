@@ -1,0 +1,128 @@
+/*==================================================
+    HIIRAGI HITSUGI Official Website
+    responsive.css
+    Version : 1.1.0
+==================================================*/
+
+.hamburger {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    header { padding-inline: 36px; }
+    nav { gap: 26px; }
+    .hero-content h1 { font-size: clamp(64px, 11vw, 120px); }
+    .hero-orbit-one { width: 88vw; }
+    .hero-orbit-two { width: 64vw; }
+}
+
+@media (max-width: 768px) {
+    header { height: 72px; padding-inline: 22px; }
+
+    header nav {
+        position: fixed;
+        inset: 72px 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 26px 22px 32px;
+        background: rgba(5, 8, 22, .94);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translate3d(0, -14px, 0);
+        transition: opacity .3s ease, transform .3s ease, visibility .3s;
+    }
+
+    header nav a {
+        width: min(100%, 420px);
+        padding: 18px;
+        text-align: center;
+        letter-spacing: 3px;
+        border-bottom: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    header nav a:last-child { border-bottom: 0; }
+
+    header.is-menu-open nav {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .hamburger {
+        position: relative;
+        display: flex;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 24px;
+        height: 1px;
+        background: currentColor;
+        transform-origin: center;
+        transition: transform .3s ease, opacity .2s ease;
+    }
+
+    .hamburger:focus-visible {
+        outline: 2px solid var(--cyan2);
+        outline-offset: 2px;
+    }
+
+    .is-menu-open .hamburger span:first-child {
+        transform: translate3d(0, 7px, 0) rotate(45deg);
+    }
+
+    .is-menu-open .hamburger span:nth-child(2) { opacity: 0; }
+
+    .is-menu-open .hamburger span:last-child {
+        transform: translate3d(0, -7px, 0) rotate(-45deg);
+    }
+
+    #hero { min-height: 660px; height: 100svh; }
+    .hero-content { width: min(100% - 28px, 620px); }
+    .hero-sub { margin-bottom: 20px; font-size: 11px; letter-spacing: 6px; }
+    .hero-content h1 { font-size: clamp(48px, 15vw, 86px); line-height: .92; letter-spacing: 2px; }
+    .hero-text { margin-top: 25px; font-size: 17px; }
+    .hero-buttons { flex-direction: column; gap: 12px; margin-top: 34px; }
+    #explore, .secondary-button { width: min(280px, 84vw); min-width: 0; padding: 15px 24px; }
+    .hero-social { left: 22px; bottom: 26px; }
+    .scroll-indicator { right: 18px; left: auto; bottom: 25px; transform: none; }
+    .scroll-indicator span { height: 48px; }
+    .hero-orbit-one { width: 124vw; }
+    .hero-orbit-two { width: 88vw; }
+    .hero-pointer-glow { display: none; }
+}
+
+@media (max-width: 420px) {
+    .logo { font-size: 14px; letter-spacing: 3px; }
+    .hero-content h1 { font-size: clamp(43px, 15.5vw, 65px); }
+    .hero-sub { letter-spacing: 4px; }
+    .hero-text { font-size: 15px; }
+    .hero-social { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero-glow,
+    .hero-orbit,
+    .scroll-indicator span { animation: none !important; }
+    .hero-pointer-glow { display: none; }
+    header nav,
+    .hamburger span { transition: none; }
+}
