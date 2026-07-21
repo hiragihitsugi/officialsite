@@ -32,11 +32,91 @@
         // custom-cursor latency on GPU/CPU constrained environments.
 
         if (hasScrollTrigger) {
+            initSectionEffects();
+            initSectionTransitions();
             initAbout();
             initSkills();
             initContact();
             requestAnimationFrame(() => ScrollTrigger.refresh());
         }
+    }
+
+    /**
+     * セクション同士を視覚的につなぐスクロール演出。
+     * 追従処理はPCの精密ポインター環境だけに限定する。
+     */
+    function initSectionEffects() {
+        const sections = gsap.utils.toArray("main > section:not(#hero)");
+
+        sections.forEach((section) => {
+            const divider = section.querySelector(".section-divider");
+            if (!divider) return;
+
+            gsap.fromTo(divider, { scaleX: 0, opacity: 0 }, {
+                scaleX: 1,
+                opacity: 1,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: { trigger: section, start: "top 88%", once: true }
+            });
+        });
+
+        if (!finePointer || !window.matchMedia("(min-width: 769px)").matches) return;
+
+        document.documentElement.classList.add("scroll-effects-active");
+
+        sections.forEach((section, index) => {
+            const atmosphere = section.querySelector(".section-atmosphere");
+            if (!atmosphere) return;
+
+            const direction = index % 2 === 0 ? 1 : -1;
+
+            gsap.fromTo(atmosphere, {
+                yPercent: -14,
+                xPercent: direction * -3,
+                scale: 0.86,
+                opacity: 0.08
+            }, {
+                yPercent: 16,
+                xPercent: direction * 3,
+                scale: 1.08,
+                opacity: 0.3,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1.1,
+                    invalidateOnRefresh: true
+                }
+            });
+        });
+    }
+
+
+    function initSectionTransitions() {
+        const sections = gsap.utils.toArray("main > section:not(#hero):not(#showcase)");
+
+        sections.forEach(section => {
+            const container = section.querySelector(":scope > .section-container");
+            if (!container) return;
+
+            gsap.fromTo(container,
+                { y: 54, opacity: 0.72 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 92%",
+                        end: "top 58%",
+                        scrub: 0.55,
+                        invalidateOnRefresh: true
+                    }
+                }
+            );
+        });
     }
 
     function initHeroEntrance() {
@@ -108,73 +188,6 @@
             .to(".hero-overlay", { opacity: 0.92, ease: "none" }, 0);
     }
 
-    function initHeroPointer() {
-        const hero = document.querySelector("#hero");
-        const content = document.querySelector(".hero-content");
-        const image = document.querySelector(".hero-background img");
-        const glow = document.querySelector(".hero-pointer-glow");
-        const orbits = gsap.utils.toArray(".hero-orbit");
-
-        if (!hero || !content || !image || !glow) return;
-
-        const contentX = gsap.quickTo(content, "x", { duration: 0.75, ease: "power3.out" });
-        const contentY = gsap.quickTo(content, "y", { duration: 0.75, ease: "power3.out" });
-        const contentRotateX = gsap.quickTo(content, "rotationX", { duration: 0.75, ease: "power3.out" });
-        const contentRotateY = gsap.quickTo(content, "rotationY", { duration: 0.75, ease: "power3.out" });
-        const imageX = gsap.quickTo(image, "x", { duration: 1.2, ease: "power3.out" });
-        const imageY = gsap.quickTo(image, "y", { duration: 1.2, ease: "power3.out" });
-        const glowX = gsap.quickTo(glow, "x", { duration: 0.35, ease: "power2.out" });
-        const glowY = gsap.quickTo(glow, "y", { duration: 0.35, ease: "power2.out" });
-
-        const orbitX = orbits.map(orbit => gsap.quickTo(orbit, "x", { duration: 0.8, ease: "power3.out" }));
-        const orbitY = orbits.map(orbit => gsap.quickTo(orbit, "y", { duration: 0.8, ease: "power3.out" }));
-        let pointerX = 0;
-        let pointerY = 0;
-        let pointerFrame = 0;
-
-        hero.addEventListener("pointermove", event => {
-            pointerX = event.clientX;
-            pointerY = event.clientY;
-            if (pointerFrame) return;
-
-            pointerFrame = requestAnimationFrame(() => {
-                pointerFrame = 0;
-                const rect = hero.getBoundingClientRect();
-                const x = (pointerX - rect.left) / rect.width - 0.5;
-                const y = (pointerY - rect.top) / rect.height - 0.5;
-
-                contentX(x * 18);
-                contentY(y * 12);
-                contentRotateX(y * -3.5);
-                contentRotateY(x * 4.5);
-                imageX(x * -18);
-                imageY(y * -12);
-                glowX(pointerX - rect.left);
-                glowY(pointerY - rect.top);
-
-                orbits.forEach((orbit, index) => {
-                    orbitX[index](x * (index ? -22 : 30));
-                    orbitY[index](y * (index ? -18 : 24));
-                });
-            });
-        }, { passive: true });
-
-        hero.addEventListener("pointerleave", () => {
-            contentX(0);
-            contentY(0);
-            contentRotateX(0);
-            contentRotateY(0);
-            imageX(0);
-            imageY(0);
-            gsap.to(glow, { opacity: 0, duration: 0.35 });
-            gsap.to(orbits, { x: 0, y: 0, duration: 0.9, ease: "power3.out" });
-        });
-
-        hero.addEventListener("pointerenter", () => {
-            gsap.to(glow, { opacity: 1, duration: 0.35 });
-        });
-    }
-
     function initAbout() {
         const timeline = gsap.timeline({
             scrollTrigger: { trigger: "#about", start: "top 72%", once: true }
@@ -182,32 +195,43 @@
 
         timeline
             .from("#about .section-title", { opacity: 0, x: -70, duration: 0.7 })
-            .from(".about-image", { opacity: 0, x: 90, duration: 0.9 }, "-=0.45")
-            .from(".about-text h2", { opacity: 0, y: 45, duration: 0.65 }, "-=0.65")
-            .from(".about-text p", { opacity: 0, y: 24, stagger: 0.12, duration: 0.5 }, "-=0.35");
+            .from(".about-statement > *", { opacity: 0, y: 44, stagger: 0.1, duration: 0.7 }, "-=0.4")
+            .from(".about-lead", { opacity: 0, y: 28, duration: 0.6 }, "-=0.45")
+            .from(".about-principles > div", { opacity: 0, y: 22, stagger: 0.1, duration: 0.5 }, "-=0.3");
     }
 
     function initSkills() {
-        gsap.from(".skill-card", {
-            opacity: 0,
-            y: 65,
-            rotateY: 14,
-            stagger: 0.1,
-            duration: 0.75,
-            ease: "back.out(1.4)",
+        const timeline = gsap.timeline({
             scrollTrigger: { trigger: "#skills", start: "top 78%", once: true }
         });
+
+        timeline
+            .from("#skills .section-title", {
+                opacity: 0, y: 28, duration: 0.65, ease: "power3.out"
+            })
+            .from(".capabilities-heading > *", {
+                opacity: 0, y: 32, stagger: 0.08, duration: 0.7, ease: "power3.out"
+            }, "-=0.38")
+            .from(".skill-card", {
+                opacity: 0, y: 54, stagger: 0.1, duration: 0.75, ease: "power3.out"
+            }, "-=0.34");
     }
 
     function initContact() {
-        gsap.from("#contact .section-title, #contact h2, #contact p, .contact-button", {
-            opacity: 0,
-            y: 38,
-            stagger: 0.1,
-            duration: 0.65,
-            ease: "power3.out",
+        const timeline = gsap.timeline({
             scrollTrigger: { trigger: "#contact", start: "top 76%", once: true }
         });
+
+        timeline
+            .from("#contact .section-title", {
+                opacity: 0, y: 28, duration: 0.65, ease: "power3.out"
+            })
+            .from("#contact h2, #contact p", {
+                opacity: 0, y: 34, stagger: 0.1, duration: 0.7, ease: "power3.out"
+            }, "-=0.38")
+            .from(".contact-button", {
+                opacity: 0, y: 26, duration: 0.6, ease: "power3.out"
+            }, "-=0.32");
     }
 
     let resizeTimer;

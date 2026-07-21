@@ -215,62 +215,6 @@
 
 
 /*==================================================
-    Glow
-==================================================*/
-
-.hero-glow{
-
-    animation:
-
-        glowFloat
-
-        7s
-
-        ease-in-out
-
-        infinite;
-
-}
-
-
-
-@keyframes glowFloat{
-
-    0%{
-
-        transform:
-
-            translateY(0)
-
-            scale(1);
-
-    }
-
-    50%{
-
-        transform:
-
-            translateY(-20px)
-
-            scale(1.05);
-
-    }
-
-    100%{
-
-        transform:
-
-            translateY(0)
-
-            scale(1);
-
-    }
-
-}
-
-
-
-/*==================================================
     Button
 ==================================================*/
 
@@ -621,6 +565,71 @@
 
 
 /*==================================================
+    Section Scroll Atmosphere
+==================================================*/
+
+main > section:not(#hero) {
+    isolation: isolate;
+}
+
+main > section:not(#hero) > .section-container {
+    position: relative;
+    z-index: 1;
+}
+
+.section-atmosphere {
+    position: absolute;
+    top: 16%;
+    right: -18%;
+    width: clamp(26rem, 58vw, 56rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 38% 42%, rgba(0, 212, 255, .13), transparent 34%),
+        radial-gradient(circle at 62% 58%, rgba(123, 97, 255, .08), transparent 48%);
+    opacity: .16;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    contain: strict;
+    z-index: 0;
+}
+
+.section-atmosphere::after {
+    content: "";
+    position: absolute;
+    inset: 16%;
+    border: 1px solid rgba(255, 255, 255, .05);
+    border-radius: inherit;
+}
+
+#skills .section-atmosphere,
+#contact .section-atmosphere {
+    right: auto;
+    left: -20%;
+}
+
+#works .section-atmosphere { top: 8%; }
+#contact .section-atmosphere { top: -12%; }
+
+.section-divider {
+    position: absolute;
+    top: 0;
+    right: var(--page-gutter);
+    left: var(--page-gutter);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .09) 24%, rgba(0, 212, 255, .34) 50%, rgba(255, 255, 255, .09) 76%, transparent);
+    opacity: 0;
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: center;
+    z-index: 2;
+}
+
+html.scroll-effects-active .section-atmosphere {
+    will-change: transform, opacity;
+}
+
+/*==================================================
     Accessibility
 ==================================================*/
 
@@ -633,6 +642,9 @@
     transition:none!important;
 
 }
+
+.section-atmosphere { display: none; }
+.section-divider { opacity: 1; transform: scaleX(1); }
 
 }
 
@@ -654,4 +666,26 @@
 
         translateZ(0);
 
+}
+
+/* Premium reveal foundation */
+@media (prefers-reduced-motion: no-preference) {
+    main > section:not(#hero):not(#showcase) .section-container {
+        will-change: transform, opacity;
+    }
+
+    .section-title {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .section-title::after {
+        content: "";
+        width: clamp(46px, 6vw, 92px);
+        height: 1px;
+        background: linear-gradient(90deg, var(--cyan2), transparent);
+        opacity: .72;
+    }
 }

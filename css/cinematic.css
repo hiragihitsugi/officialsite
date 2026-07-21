@@ -1,0 +1,322 @@
+/*==================================================
+    HIIRAGI HITSUGI Official Website
+    cinematic.css / Version 2.8.0
+==================================================*/
+
+.image-section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-color: #050816 !important;
+}
+
+.image-section > .section-container,
+.image-section > .section-atmosphere,
+.image-section > .section-divider {
+    position: relative;
+    z-index: 2;
+}
+
+.section-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    contain: layout paint;
+}
+
+/* Added in <head>, before first paint. This prevents an initial visible flash. */
+html.cinematic-js .image-section:not(.cinematic-shown):not(.cinematic-playing) .section-visual {
+    opacity: 0;
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
+}
+
+/* CSS-only fallback when GSAP CDN is unavailable. */
+html.cinematic-js .image-section.cinematic-fallback-visible .section-visual {
+    visibility: visible;
+    animation: cinematicFallbackReveal 1.15s cubic-bezier(.76,0,.24,1) both;
+}
+
+html.cinematic-js .image-section.cinematic-fallback-visible .section-visual-image {
+    animation: cinematicFallbackImage 1.35s .08s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes cinematicFallbackReveal {
+    from { opacity: 0; clip-path: inset(0 0 100% 0); }
+    to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes cinematicFallbackImage {
+    from { opacity: 0; transform: translate3d(6%, 2%, 0) scale(1.06); }
+    to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.section-visual-backdrop,
+.section-visual-image,
+.section-visual-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* A static low-resolution-feeling fill. No animated blur or per-frame work. */
+.section-visual-backdrop {
+    object-fit: cover;
+    object-position: center;
+    filter: blur(18px) brightness(.38) saturate(.78);
+    transform: scale(1.055);
+    opacity: .68;
+    transform: scale(1.055);
+    transition:
+        opacity .9s .05s ease-out,
+        transform 1.8s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+
+
+
+
+.section-visual-image {
+    object-fit: contain;
+    object-position: 82% 50%;
+    width: min(72vw, 1040px);
+    height: calc(100% - clamp(44px, 7vh, 96px));
+    inset: clamp(22px, 3.5vh, 48px) clamp(1rem, 3vw, 3rem) auto auto;
+    filter: brightness(.78) contrast(1.04) saturate(.9);
+    transform: translate3d(5%, 3%, 0) scale(1.07);
+    opacity: 1;
+    transition:
+        transform 1.65s .18s cubic-bezier(.22, 1, .36, 1),
+        opacity .85s .16s ease-out;
+    will-change: transform, opacity;
+}
+
+
+.image-section-left .section-visual-image {
+    right: auto;
+    left: clamp(1rem, 3vw, 3rem);
+    object-position: 18% 50%;
+    transform: translate3d(-5%, 3%, 0) scale(1.07);
+}
+
+
+/* Preserve legibility while allowing the image to remain clearly visible. */
+.section-visual-shade {
+    z-index: 1;
+    opacity: 1;
+    transition: opacity .9s .28s ease-out;
+    background:
+        linear-gradient(90deg, rgba(5, 8, 22, .97) 0%, rgba(5, 8, 22, .84) 35%, rgba(5, 8, 22, .32) 67%, rgba(5, 8, 22, .58) 100%),
+        linear-gradient(180deg, rgba(5, 8, 22, .48), rgba(5, 8, 22, .72));
+}
+
+
+.image-section-left .section-visual-shade {
+    background:
+        linear-gradient(90deg, rgba(5, 8, 22, .52) 0%, rgba(5, 8, 22, .28) 32%, rgba(5, 8, 22, .85) 67%, rgba(5, 8, 22, .98) 100%),
+        linear-gradient(180deg, rgba(5, 8, 22, .48), rgba(5, 8, 22, .76));
+}
+
+/* Landscape artwork fills substantially more of the Works section. */
+.image-section-landscape .section-visual-image {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.09);
+    opacity: .9;
+}
+
+
+.image-section-landscape .section-visual-shade {
+    background:
+        linear-gradient(180deg, rgba(5, 8, 22, .74) 0%, rgba(5, 8, 22, .43) 38%, rgba(5, 8, 22, .82) 100%),
+        linear-gradient(90deg, rgba(5, 8, 22, .76), rgba(5, 8, 22, .2) 52%, rgba(5, 8, 22, .68));
+}
+
+/* Replace the old opaque section fills that hid the artwork. */
+#about,
+#skills,
+#works {
+    background-image: none !important;
+}
+
+/* Keep cards readable without erasing the section image. */
+#skills .capabilities-grid .skill-card {
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, .045), transparent 58%),
+        rgba(7, 13, 27, .76);
+    backdrop-filter: blur(10px);
+}
+
+#works .work-card-link {
+    background: rgba(6, 11, 23, .62);
+    backdrop-filter: blur(8px);
+}
+
+@media (max-width: 900px) {
+    .section-visual-image {
+        width: min(88vw, 820px);
+        height: calc(100% - 52px);
+        inset: 26px -8vw auto auto;
+        opacity: .78;
+    }
+
+    .image-section-left .section-visual-image {
+        left: -8vw;
+    }
+
+    .section-visual-shade,
+    .image-section-left .section-visual-shade {
+        background: linear-gradient(180deg, rgba(5, 8, 22, .68), rgba(5, 8, 22, .88));
+    }
+}
+
+@media (max-width: 640px) {
+    .section-visual-backdrop {
+        filter: blur(12px) brightness(.34) saturate(.74);
+    }
+
+    .section-visual-image {
+        width: 108vw;
+        height: 78%;
+        inset: 10% -18vw auto auto;
+        object-position: center;
+        opacity: .64;
+    }
+
+    .image-section-left .section-visual-image {
+        left: -18vw;
+    }
+
+    .image-section-landscape .section-visual-image {
+        width: 100%;
+        height: 100%;
+        inset: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-visual,
+    .section-visual-image {
+        transition: none;
+        transform: none !important;
+    }
+
+    .section-visual {
+        opacity: 1;
+        clip-path: none;
+    }
+
+    .section-visual::after {
+        display: none;
+    }
+}
+
+/*==================================================
+  Version 2.8 — deterministic curtain reveal
+==================================================*/
+.section-visual-curtain {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: #050816;
+    transform: scaleY(1);
+    transform-origin: bottom center;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* Override the older class-based hiding model. The curtain now owns visibility. */
+html.cinematic-js .image-section:not(.cinematic-shown):not(.cinematic-playing) .section-visual {
+    opacity: 1;
+    visibility: visible;
+    clip-path: none;
+}
+
+.image-section.cinematic-revealed .section-visual-curtain {
+    transform: scaleY(0);
+}
+
+/* Deliberately retain the requested reveal even under reduced-motion settings. */
+@media (prefers-reduced-motion: reduce) {
+    .section-visual-curtain {
+        display: block !important;
+        transform: scaleY(1);
+    }
+
+    .image-section.cinematic-revealed .section-visual-curtain {
+        transform: scaleY(0);
+    }
+}
+
+/*==================================================
+  Version 2.9 — premium corporate reveal
+==================================================*/
+.section-visual-curtain {
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(20, 43, 76, .26), transparent 42%),
+        #050816;
+}
+
+.section-visual-light {
+    position: absolute;
+    z-index: 6;
+    top: -18%;
+    bottom: -18%;
+    left: -34%;
+    width: 22%;
+    opacity: 0;
+    pointer-events: none;
+    transform: skewX(-18deg) translate3d(-180%, 0, 0);
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(173, 226, 255, .02) 18%,
+        rgba(216, 242, 255, .44) 50%,
+        rgba(94, 196, 255, .08) 72%,
+        transparent 100%
+    );
+    filter: blur(2px);
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+}
+
+.image-section.cinematic-playing .section-visual-image,
+.image-section.cinematic-revealed .section-visual-image {
+    will-change: transform, opacity;
+}
+
+/* A thin corporate-style edge appears while the mask opens. */
+.section-visual-curtain::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    opacity: .7;
+    background: linear-gradient(90deg, transparent, rgba(124, 220, 255, .82), transparent);
+    box-shadow: 0 0 18px rgba(80, 196, 255, .32);
+}
+
+#skills .section-visual-curtain::after {
+    inset: 0 0 0 auto;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, rgba(124, 220, 255, .82), transparent);
+}
+
+#works .section-visual-curtain::after {
+    inset: 50% 0 auto;
+}
+
+@media (max-width: 640px) {
+    .section-visual-light {
+        width: 32%;
+    }
+}

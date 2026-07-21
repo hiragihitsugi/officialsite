@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+    <script>document.documentElement.classList.add("cinematic-js");</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>HIIRAGI HITSUGI | Official Website</title>
@@ -34,7 +35,7 @@
 
     <!-- favicon -->
     <!--
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="data:,">
     -->
 
     <!-- Google Fonts -->
@@ -62,6 +63,12 @@
 
     <link rel="stylesheet"
         href="css/works.css">
+
+    <link rel="stylesheet"
+        href="css/sections.css">
+
+    <link rel="stylesheet"
+        href="css/cinematic.css?v=2.9.0">
 
     <link rel="stylesheet"
         href="css/animation.css">
@@ -181,11 +188,6 @@
 
             <div class="hero-glow"></div>
 
-            <div class="hero-pointer-glow" aria-hidden="true"></div>
-
-            <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
-            <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
-
             <div class="hero-content">
 
                 <p class="hero-sub">
@@ -210,7 +212,7 @@
 
                     <button id="explore">
 
-                        ENTER
+                        EXPLORE
 
                     </button>
 
@@ -264,7 +266,16 @@
                 About
         ======================================= -->
 
-        <section id="about">
+        <section id="about" class="image-section image-section-portrait">
+            <div class="section-visual" aria-hidden="true">
+                <div class="section-visual-curtain"></div>
+                <img class="section-visual-backdrop" src="images/hero2.webp" alt="" loading="lazy" decoding="async">
+                <img class="section-visual-image" src="images/hero2.webp" alt="" loading="lazy" decoding="async">
+                <div class="section-visual-shade"></div>
+            </div>
+
+            <div class="section-atmosphere" aria-hidden="true"></div>
+            <div class="section-divider" aria-hidden="true"></div>
 
             <div class="section-container">
 
@@ -274,44 +285,33 @@
 
                 </div>
 
-                <div class="section-content">
+                <div class="about-layout">
 
-                    <article class="about-text">
-
-                        <h2>
-
-                            Designing
-                            Digital Experiences.
-
-                        </h2>
-
-                        <p>
-
-                            HIIRAGI HITSUGI Official Websiteへ
-                            ようこそ。
-
-                            このサイトはCyberデザインをテーマに、
-                            アニメーション・UI・フロントエンド技術を
-                            組み合わせたポートフォリオサイトです。
-
-                        </p>
-
-                        <p>
-
-                            作品紹介だけではなく、
-                            技術力やデザイン性も
-                            表現できるWebサイトを目指しています。
-
-                        </p>
-
+                    <article class="about-statement">
+                        <p class="about-kicker">DESIGN × ENGINEERING</p>
+                        <h2>Designing digital experiences with clarity and atmosphere.</h2>
                     </article>
 
-                    <div class="about-image">
+                    <div class="about-details">
+                        <p class="about-lead">
+                            HIIRAGI HITSUGIは、世界観と使いやすさを両立するデジタル体験を設計します。
+                            表層の美しさだけでなく、構造・動き・速度までひとつの体験として組み立てます。
+                        </p>
 
-                        <img
-                            src="images/hero.webp"
-                            alt="About Image">
-
+                        <dl class="about-principles">
+                            <div>
+                                <dt>01</dt>
+                                <dd><strong>Clarity</strong><span>情報が迷わず届く構造</span></dd>
+                            </div>
+                            <div>
+                                <dt>02</dt>
+                                <dd><strong>Motion</strong><span>意味を持つ自然な動き</span></dd>
+                            </div>
+                            <div>
+                                <dt>03</dt>
+                                <dd><strong>Quality</strong><span>細部まで一貫した実装</span></dd>
+                            </div>
+                        </dl>
                     </div>
 
                 </div>
@@ -328,7 +328,16 @@
                 Skills
         ======================================= -->
 
-        <section id="skills">
+        <section id="skills" class="image-section image-section-portrait image-section-left">
+            <div class="section-visual" aria-hidden="true">
+                <div class="section-visual-curtain"></div>
+                <img class="section-visual-backdrop" src="images/hero3.webp" alt="" loading="lazy" decoding="async">
+                <img class="section-visual-image" src="images/hero3.webp" alt="" loading="lazy" decoding="async">
+                <div class="section-visual-shade"></div>
+            </div>
+
+            <div class="section-atmosphere" aria-hidden="true"></div>
+            <div class="section-divider" aria-hidden="true"></div>
 
             <div class="section-container">
 
@@ -338,64 +347,39 @@
 
                 </div>
 
-                <div class="skills-grid">
+                <div class="capabilities-heading">
+                    <h2>Capabilities built around the complete experience.</h2>
+                    <p>デザインと実装を分断せず、ひとつの品質基準で設計します。</p>
+                </div>
+
+                <div class="skills-grid capabilities-grid">
 
                     <article class="skill-card">
-
-                        <h3>HTML5</h3>
-
-                        <p>
-
-                            Semantic Markup
-                            SEO
-                            Accessibility
-
-                        </p>
-
+                        <span class="capability-index">01</span>
+                        <h3>Interface Engineering</h3>
+                        <p>意味のあるHTMLと保守しやすいCSSで、拡張可能なインターフェースを構築します。</p>
+                        <ul><li>Semantic HTML</li><li>Responsive UI</li><li>Accessibility</li></ul>
                     </article>
 
                     <article class="skill-card">
-
-                        <h3>CSS3</h3>
-
-                        <p>
-
-                            Animation
-                            Responsive
-                            Glass UI
-
-                        </p>
-
+                        <span class="capability-index">02</span>
+                        <h3>Motion Systems</h3>
+                        <p>視線誘導と操作理解を助ける、目的を持ったモーションシステムを設計します。</p>
+                        <ul><li>GSAP</li><li>Scroll Motion</li><li>Interaction</li></ul>
                     </article>
 
                     <article class="skill-card">
-
-                        <h3>JavaScript</h3>
-
-                        <p>
-
-                            ES6
-                            GSAP
-                            Lenis
-
-                        </p>
-
+                        <span class="capability-index">03</span>
+                        <h3>Performance Design</h3>
+                        <p>描画コストと操作応答を設計段階から考慮し、滑らかな体験を維持します。</p>
+                        <ul><li>Rendering</li><li>Core Web Vitals</li><li>Progressive Enhancement</li></ul>
                     </article>
 
                     <article class="skill-card">
-
-                        <h3>Future</h3>
-
-                        <p>
-
-                            Three.js
-
-                            WebGL
-
-                            WebGPU
-
-                        </p>
-
+                        <span class="capability-index">04</span>
+                        <h3>Creative Technology</h3>
+                        <p>Webとゲーム表現の境界を越える、新しいインタラクションを探求します。</p>
+                        <ul><li>Three.js</li><li>WebGL</li><li>WebGPU</li></ul>
                     </article>
 
                 </div>
@@ -408,7 +392,15 @@
                 Works
         ======================================= -->
 
-        <section id="works" aria-labelledby="works-heading">
+        <section id="works" class="image-section image-section-landscape" aria-labelledby="works-heading">
+            <div class="section-visual" aria-hidden="true">
+                <div class="section-visual-curtain"></div>
+                <img class="section-visual-backdrop" src="images/hero4.webp" alt="" loading="lazy" decoding="async">
+                <img class="section-visual-image" src="images/hero4.webp" alt="" loading="lazy" decoding="async">
+                <div class="section-visual-shade"></div>
+            </div>
+            <div class="section-atmosphere" aria-hidden="true"></div>
+            <div class="section-divider" aria-hidden="true"></div>
             <div class="section-container works-studio">
                 <div class="works-heading-row">
                     <div>
@@ -495,6 +487,9 @@
         ======================================= -->
 
         <section id="contact">
+
+            <div class="section-atmosphere" aria-hidden="true"></div>
+            <div class="section-divider" aria-hidden="true"></div>
 
             <div class="section-container">
 
@@ -586,6 +581,8 @@
     <script src="js/scroll.js"></script>
 
     <script src="js/animation.js"></script>
+
+    <script src="js/cinematic.js?v=2.9.0"></script>
 
     <script src="js/particles.js"></script>
 

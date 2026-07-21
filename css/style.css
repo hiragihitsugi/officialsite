@@ -468,7 +468,7 @@ Hero
 
     );
 
-    animation:aurora 8s ease-in-out infinite alternate;
+    animation:none;
 
     z-index:-2;
 }
@@ -1184,40 +1184,7 @@ Version 0.2 Complete
 ==================================================*/
 
 
-/*=========================
-Glow Animation
-=========================*/
-
-@keyframes glow{
-
-    0%{
-
-        box-shadow:
-            0 0 20px rgba(0,207,255,.15);
-
-    }
-
-    50%{
-
-        box-shadow:
-            0 0 50px rgba(0,207,255,.45);
-
-    }
-
-    100%{
-
-        box-shadow:
-            0 0 20px rgba(0,207,255,.15);
-
-    }
-
-}
-
-#explore{
-
-    animation:glow 3s ease-in-out infinite;
-
-}
+#explore{ animation:none; }
 
 
 
@@ -1225,64 +1192,7 @@ Glow Animation
 Hero Title
 =========================*/
 
-.hero-content h1{
-
-    animation:
-
-        heroFade 1.4s ease,
-
-        heroFloat 6s ease-in-out infinite;
-
-}
-
-@keyframes heroFade{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            translateY(40px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-@keyframes heroFloat{
-
-    0%{
-
-        transform:
-            translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(-8px);
-
-    }
-
-    100%{
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
+.hero-content h1{ animation:none; }
 
 /*=========================
 Glass Hover
@@ -1815,62 +1725,8 @@ End
     border-radius: 50%;
     background: radial-gradient(circle, rgba(0, 207, 255, .16), rgba(0, 207, 255, .035) 38%, transparent 68%);
     filter: blur(16px);
-    animation: heroGlowPulse 7s ease-in-out infinite alternate;
+    animation: none;
     pointer-events: none;
-}
-
-.hero-pointer-glow {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 520px;
-    height: 520px;
-    z-index: 2;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(102, 241, 255, .13), rgba(0, 207, 255, .035) 42%, transparent 70%);
-    filter: blur(12px);
-    pointer-events: none;
-    mix-blend-mode: screen;
-}
-
-.hero-orbit {
-    position: absolute;
-    left: 50%;
-    top: 48%;
-    z-index: 1;
-    border: 1px solid rgba(102, 241, 255, .13);
-    border-radius: 50%;
-    pointer-events: none;
-    will-change: transform;
-}
-
-.hero-orbit::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -3px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--cyan2);
-    box-shadow: 0 0 18px var(--cyan);
-}
-
-.hero-orbit-one {
-    width: min(72vw, 900px);
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%) rotate(18deg);
-    animation: orbitSpin 28s linear infinite;
-}
-
-.hero-orbit-two {
-    width: min(52vw, 650px);
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%) rotate(-24deg);
-    border-color: rgba(255, 255, 255, .08);
-    animation: orbitSpinReverse 22s linear infinite;
 }
 
 .hero-buttons {
@@ -1910,22 +1766,4 @@ End
 
 .hero-social {
     z-index: 25;
-}
-
-@keyframes heroGlowPulse {
-    from { opacity: .55; transform: translate(-50%, -50%) scale(.94); }
-    to { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
-}
-
-@keyframes orbitSpin {
-    to { transform: translate(-50%, -50%) rotate(378deg); }
-}
-
-@keyframes orbitSpinReverse {
-    to { transform: translate(-50%, -50%) rotate(-384deg); }
-}
-
-.motion-reduced .hero-pointer-glow,
-.motion-reduced .hero-orbit {
-    display: none;
 }

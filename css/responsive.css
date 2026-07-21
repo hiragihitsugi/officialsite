@@ -12,8 +12,10 @@
     header { padding-inline: 36px; }
     nav { gap: 26px; }
     .hero-content h1 { font-size: clamp(64px, 11vw, 120px); }
-    .hero-orbit-one { width: 88vw; }
-    .hero-orbit-two { width: 64vw; }
+    .about-layout { grid-template-columns: 1fr; gap: 54px; }
+    .about-details { max-width: 760px; padding-top: 0; margin-left: auto; }
+    .capabilities-heading { grid-template-columns: 1fr; }
+    .capabilities-heading > p { max-width: 560px; padding-bottom: 0; }
 
     .works-heading-row {
         grid-template-columns: minmax(0, 1fr) minmax(260px, .6fr);
@@ -25,6 +27,9 @@
 }
 
 @media (max-width: 768px) {
+    /* スマホではスクロール追従レイヤーを停止して描画負荷を抑える */
+    .section-atmosphere { display: none; }
+
     header { height: 72px; padding-inline: 22px; }
 
     header nav {
@@ -112,11 +117,11 @@
     .hero-social { left: 22px; bottom: 26px; }
     .scroll-indicator { right: 18px; left: auto; bottom: 25px; transform: none; }
     .scroll-indicator span { height: 48px; }
-    .hero-orbit-one { width: 124vw; }
-    .hero-orbit-two { width: 88vw; }
-    .hero-pointer-glow { display: none; }
-
     section { padding-inline: 22px; }
+
+    .about-principles dd { flex-direction: column; gap: 5px; }
+    .capabilities-grid { grid-template-columns: 1fr; }
+    .capabilities-grid .skill-card { min-height: 300px; }
 
     .works-heading-row { grid-template-columns: 1fr; gap: 24px; }
     .works-intro { padding-bottom: 0; }
@@ -142,9 +147,7 @@
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .hero-glow,
-    .hero-orbit,
     .scroll-indicator span { animation: none !important; }
-    .hero-pointer-glow { display: none; }
     header nav,
     .hamburger span { transition: none; }
 }
