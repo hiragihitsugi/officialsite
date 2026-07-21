@@ -1,4 +1,13 @@
-document.getElementById("btn").onclick = () => {
+const btn = document.getElementById("btn");
 
-    alert("こんにちは！");
-}
+btn.addEventListener("click", () => {
+
+    window.scrollTo({
+
+        top: window.innerHeight,
+
+        behavior: "smooth"
+
+    });
+
+});
