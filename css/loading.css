@@ -1,0 +1,414 @@
+/*==================================================
+    HIRAGI HITSUGI Official Website
+
+    loading.css
+    Version : 0.3.0
+==================================================*/
+
+
+
+/*==================================================
+    Loading Screen
+==================================================*/
+
+#loader{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(
+        circle at top,
+        rgba(0,207,255,.10),
+        transparent 60%
+    ),
+    #050816;
+
+    z-index:99999;
+
+}
+
+
+
+/*==================================================
+    Background Glow
+==================================================*/
+
+#loader::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(0,207,255,.15),
+
+        transparent 70%
+
+    );
+
+    filter:blur(50px);
+
+    animation:
+
+        loaderGlow 6s ease-in-out infinite;
+
+}
+
+
+
+@keyframes loaderGlow{
+
+    0%{
+
+        transform:
+            scale(.9);
+
+        opacity:.4;
+
+    }
+
+    50%{
+
+        transform:
+            scale(1.15);
+
+        opacity:.9;
+
+    }
+
+    100%{
+
+        transform:
+            scale(.9);
+
+        opacity:.4;
+
+    }
+
+}
+
+
+
+/*==================================================
+    Logo
+==================================================*/
+
+.loader-logo{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+
+    z-index:10;
+
+}
+
+
+
+.loader-logo span{
+
+    display:block;
+
+    font-size:52px;
+
+    font-weight:700;
+
+    letter-spacing:12px;
+
+    color:#ffffff;
+
+    opacity:0;
+
+    transform:
+
+        translateY(30px);
+
+    animation:
+
+        loaderTitle .8s forwards;
+
+}
+
+
+
+.loader-logo span:last-child{
+
+    animation-delay:.25s;
+
+}
+
+
+
+@keyframes loaderTitle{
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+/*==================================================
+    Subtitle
+==================================================*/
+
+.loader-logo::after{
+
+    content:"Official Website";
+
+    margin-top:20px;
+
+    font-size:14px;
+
+    letter-spacing:8px;
+
+    color:#66f1ff;
+
+    opacity:.75;
+
+}
+
+
+
+/*==================================================
+    Progress Bar
+==================================================*/
+
+.loader-line{
+
+    position:relative;
+
+    width:240px;
+
+    height:2px;
+
+    margin-top:50px;
+
+    overflow:hidden;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+}
+
+
+
+.loader-line::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-100%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        #00cfff,
+
+        #66f1ff,
+
+        transparent
+
+    );
+
+    animation:
+
+        loadingBar 1.6s linear infinite;
+
+}
+
+
+
+@keyframes loadingBar{
+
+    from{
+
+        left:-100%;
+
+    }
+
+    to{
+
+        left:100%;
+
+    }
+
+}
+
+
+
+/*==================================================
+    Decorative Grid
+==================================================*/
+
+#loader::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.05;
+
+    background-image:
+
+        linear-gradient(
+
+            rgba(255,255,255,.15) 1px,
+
+            transparent 1px
+
+        ),
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(255,255,255,.15) 1px,
+
+            transparent 1px
+
+        );
+
+    background-size:40px 40px;
+
+}
+
+
+
+/*==================================================
+    Hide Animation
+==================================================*/
+
+#loader.hide{
+
+    animation:
+
+        loaderHide
+
+        1s
+
+        forwards;
+
+}
+
+
+
+@keyframes loaderHide{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+            scale(1);
+
+        filter:blur(0);
+
+    }
+
+    60%{
+
+        opacity:1;
+
+        transform:
+            scale(1.02);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            scale(1.12);
+
+        filter:blur(20px);
+
+        visibility:hidden;
+
+    }
+
+}
+
+
+
+/*==================================================
+    Responsive
+==================================================*/
+
+@media(max-width:768px){
+
+.loader-logo span{
+
+    font-size:34px;
+
+    letter-spacing:6px;
+
+}
+
+.loader-logo::after{
+
+    font-size:11px;
+
+    letter-spacing:5px;
+
+}
+
+.loader-line{
+
+    width:170px;
+
+}
+
+}

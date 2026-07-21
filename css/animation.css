@@ -1,0 +1,657 @@
+/*==================================================
+    HIIRAGI HITSUGI Official Website
+
+    animation.css
+    Version : 0.3.0
+==================================================*/
+
+
+
+/*==================================================
+    Animation Variables
+==================================================*/
+
+:root{
+
+    --transition-fast:.25s;
+
+    --transition:.45s;
+
+    --transition-slow:.8s;
+
+}
+
+
+
+/*==================================================
+    Initial State
+==================================================*/
+
+.fade-up,
+.fade-down,
+.fade-left,
+.fade-right,
+.zoom-in,
+.blur-in{
+
+    opacity:0;
+
+    will-change:
+        transform,
+        opacity;
+
+}
+
+
+
+/*==================================================
+    Fade Up
+==================================================*/
+
+.fade-up{
+
+    transform:
+
+        translateY(80px);
+
+}
+
+
+
+/*==================================================
+    Fade Down
+==================================================*/
+
+.fade-down{
+
+    transform:
+
+        translateY(-80px);
+
+}
+
+
+
+/*==================================================
+    Fade Left
+==================================================*/
+
+.fade-left{
+
+    transform:
+
+        translateX(-80px);
+
+}
+
+
+
+/*==================================================
+    Fade Right
+==================================================*/
+
+.fade-right{
+
+    transform:
+
+        translateX(80px);
+
+}
+
+
+
+/*==================================================
+    Zoom
+==================================================*/
+
+.zoom-in{
+
+    transform:
+
+        scale(.8);
+
+}
+
+
+
+/*==================================================
+    Blur
+==================================================*/
+
+.blur-in{
+
+    filter:
+
+        blur(20px);
+
+}
+
+
+
+/*==================================================
+    Hero
+==================================================*/
+
+.hero-sub{
+
+    will-change:
+        transform,
+        opacity;
+
+}
+
+
+
+.hero-content h1{
+
+    will-change:
+        transform,
+        opacity;
+
+}
+
+
+
+.hero-text{
+
+    will-change:
+        transform,
+        opacity;
+
+}
+
+
+
+.hero-buttons{
+
+    will-change:
+        transform,
+        opacity;
+
+}
+
+
+
+/*==================================================
+    Hero Grid Animation
+==================================================*/
+
+.hero-grid{
+
+    animation:
+
+        gridMove
+
+        18s
+
+        linear
+
+        infinite;
+
+}
+
+
+
+@keyframes gridMove{
+
+    from{
+
+        background-position:
+
+            0 0;
+
+    }
+
+    to{
+
+        background-position:
+
+            0 120px;
+
+    }
+
+}
+
+
+
+/*==================================================
+    Glow
+==================================================*/
+
+.hero-glow{
+
+    animation:
+
+        glowFloat
+
+        7s
+
+        ease-in-out
+
+        infinite;
+
+}
+
+
+
+@keyframes glowFloat{
+
+    0%{
+
+        transform:
+
+            translateY(0)
+
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+
+            translateY(-20px)
+
+            scale(1.05);
+
+    }
+
+    100%{
+
+        transform:
+
+            translateY(0)
+
+            scale(1);
+
+    }
+
+}
+
+
+
+/*==================================================
+    Button
+==================================================*/
+
+#explore{
+
+    transition:
+
+        transform .35s,
+
+        box-shadow .35s,
+
+        background .35s;
+
+}
+
+
+
+.secondary-button{
+
+    transition:
+
+        transform .35s,
+
+        color .35s,
+
+        border-color .35s;
+
+}
+
+
+
+#explore:hover,
+
+.secondary-button:hover{
+
+    transform:
+
+        translateY(-6px);
+
+}
+
+
+
+/*==================================================
+    Skills
+==================================================*/
+
+.skill-card{
+
+    transition:
+
+        transform .45s,
+
+        box-shadow .45s,
+
+        border-color .45s;
+
+}
+
+
+
+.skill-card:hover{
+
+    transform:
+
+        translateY(-12px)
+
+        rotateX(6deg);
+
+}
+
+
+
+/*==================================================
+    Works
+==================================================*/
+
+.work-card{
+
+    transform-style:
+
+        preserve-3d;
+
+}
+
+
+
+.work-card img{
+
+    transition:
+
+        transform .8s;
+
+}
+
+
+
+.work-card:hover img{
+
+    transform:
+
+        scale(1.08);
+
+}
+
+
+
+/*==================================================
+    Floating Animation
+==================================================*/
+
+.float{
+
+    animation:
+
+        floating
+
+        5s
+
+        ease-in-out
+
+        infinite;
+
+}
+
+
+
+@keyframes floating{
+
+    0%{
+
+        transform:
+
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+
+            translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+/*==================================================
+    Pulse
+==================================================*/
+
+.pulse{
+
+    animation:
+
+        pulse
+
+        2.5s
+
+        infinite;
+
+}
+
+
+
+@keyframes pulse{
+
+    0%{
+
+        transform:
+
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+
+            scale(1.05);
+
+    }
+
+    100%{
+
+        transform:
+
+            scale(1);
+
+    }
+
+}
+
+
+
+/*==================================================
+    Rotate
+==================================================*/
+
+.rotate-slow{
+
+    animation:
+
+        rotateSlow
+
+        25s
+
+        linear
+
+        infinite;
+
+}
+
+
+
+@keyframes rotateSlow{
+
+    from{
+
+        transform:
+
+            rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+
+            rotate(360deg);
+
+    }
+
+}
+
+
+
+/*==================================================
+    Neon Flicker
+==================================================*/
+
+.neon{
+
+    animation:
+
+        neon
+
+        4s
+
+        infinite;
+
+}
+
+
+
+@keyframes neon{
+
+    0%{
+
+        opacity:.85;
+
+    }
+
+    25%{
+
+        opacity:1;
+
+    }
+
+    26%{
+
+        opacity:.7;
+
+    }
+
+    27%{
+
+        opacity:1;
+
+    }
+
+    60%{
+
+        opacity:.95;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}
+
+
+
+/*==================================================
+    Scroll Indicator
+==================================================*/
+
+.scroll-indicator{
+
+    animation:
+
+        indicator
+
+        2.2s
+
+        infinite;
+
+}
+
+
+
+@keyframes indicator{
+
+    0%{
+
+        opacity:.4;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.4;
+
+    }
+
+}
+
+
+
+/*==================================================
+    Accessibility
+==================================================*/
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+
+    animation:none!important;
+
+    transition:none!important;
+
+}
+
+}
+
+
+
+/*==================================================
+    Performance
+==================================================*/
+
+.hero-content,
+.skill-card,
+.work-card,
+.hero-grid,
+.hero-glow{
+
+    backface-visibility:hidden;
+
+    transform:
+
+        translateZ(0);
+
+}

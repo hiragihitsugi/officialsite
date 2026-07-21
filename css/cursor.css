@@ -1,0 +1,341 @@
+/*==================================================
+    HIIRAGI HITSUGI Official Website
+
+    cursor.css
+    Version : 0.3.0
+==================================================*/
+
+
+
+/*==================================================
+    Hide Default Cursor
+==================================================*/
+
+html{
+
+    cursor:none;
+
+}
+
+body{
+
+    cursor:none;
+
+}
+
+a,
+button,
+input,
+textarea,
+select{
+
+    cursor:none;
+
+}
+
+
+
+/*==================================================
+    Cursor Light
+==================================================*/
+
+#cursor-light{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:320px;
+
+    height:320px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    z-index:9000;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(0,207,255,.22),
+
+            rgba(0,207,255,.08),
+
+            transparent 72%
+
+        );
+
+    filter:blur(40px);
+
+    transition:
+
+        opacity .35s ease;
+
+}
+
+
+
+/*==================================================
+    Cursor Ring
+==================================================*/
+
+#cursor-ring{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    border:2px solid rgba(0,207,255,.9);
+
+    z-index:9100;
+
+    transition:
+
+        width .25s ease,
+
+        height .25s ease,
+
+        border-color .25s ease,
+
+        background .25s ease,
+
+        opacity .25s ease;
+
+    box-shadow:
+
+        0 0 18px rgba(0,207,255,.45);
+
+}
+
+
+
+/*==================================================
+    Cursor Dot
+==================================================*/
+
+#cursor-dot{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    transform:translate(-50%,-50%);
+
+    background:#66f1ff;
+
+    pointer-events:none;
+
+    z-index:9200;
+
+    box-shadow:
+
+        0 0 15px rgba(0,207,255,.9);
+
+}
+
+
+
+/*==================================================
+    Hover State
+==================================================*/
+
+.cursor-hover #cursor-ring{
+
+    width:70px;
+
+    height:70px;
+
+    border-color:#66f1ff;
+
+    background:
+
+        rgba(0,207,255,.08);
+
+    box-shadow:
+
+        0 0 35px rgba(0,207,255,.6);
+
+}
+
+.cursor-hover #cursor-dot{
+
+    transform:
+
+        translate(-50%,-50%)
+
+        scale(1.4);
+
+}
+
+
+
+/*==================================================
+    Click State
+==================================================*/
+
+.cursor-click #cursor-ring{
+
+    transform:
+
+        translate(-50%,-50%)
+
+        scale(.82);
+
+}
+
+.cursor-click #cursor-dot{
+
+    transform:
+
+        translate(-50%,-50%)
+
+        scale(.6);
+
+}
+
+
+
+/*==================================================
+    Hidden State
+==================================================*/
+
+.cursor-hidden #cursor-light,
+
+.cursor-hidden #cursor-ring,
+
+.cursor-hidden #cursor-dot{
+
+    opacity:0;
+
+}
+
+
+
+/*==================================================
+    Blend Effect
+==================================================*/
+
+#cursor-ring{
+
+    mix-blend-mode:screen;
+
+}
+
+#cursor-dot{
+
+    mix-blend-mode:screen;
+
+}
+
+
+
+/*==================================================
+    Performance
+==================================================*/
+
+#cursor-light,
+
+#cursor-ring,
+
+#cursor-dot{
+
+    will-change:
+
+        transform,
+
+        left,
+
+        top;
+
+}
+
+
+
+/*==================================================
+    Accessibility
+==================================================*/
+
+@media (pointer:coarse){
+
+    html{
+
+        cursor:auto;
+
+    }
+
+    body{
+
+        cursor:auto;
+
+    }
+
+    a,
+    button{
+
+        cursor:pointer;
+
+    }
+
+    #cursor-light,
+
+    #cursor-ring,
+
+    #cursor-dot{
+
+        display:none;
+
+    }
+
+}
+
+
+
+/*==================================================
+    Reduced Motion
+==================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    #cursor-light,
+
+    #cursor-ring{
+
+        transition:none;
+
+    }
+
+}
+
+
+
+/*==================================================
+    End
+==================================================*/
