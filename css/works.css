@@ -1,7 +1,381 @@
+/*==================================================
+    HIIRAGI HITSUGI Official Website
+    works.css / Version 1.3.0
+==================================================*/
 
-/* Pointer performance patch */
-.work-pointer-glow{
-    left:0 !important;
-    top:0 !important;
-    will-change:translate,opacity;
+#works {
+    overflow: hidden;
+}
+
+.works-studio {
+    position: relative;
+    z-index: 1;
+}
+
+.works-heading-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+    align-items: end;
+    gap: clamp(36px, 7vw, 96px);
+}
+
+.works-heading-row .section-title {
+    margin-bottom: 28px;
+}
+
+.works-heading {
+    max-width: 760px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(44px, 6.2vw, 88px);
+    font-weight: 500;
+    line-height: .98;
+    letter-spacing: -.045em;
+}
+
+.works-intro {
+    max-width: 430px;
+    padding-bottom: 8px;
+    color: var(--sub);
+    font-size: clamp(15px, 1.45vw, 18px);
+    line-height: 1.9;
+}
+
+.works-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: clamp(44px, 6vw, 78px);
+}
+
+.works-filter-button {
+    min-width: 72px;
+    padding: 10px 17px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .025);
+    color: rgba(255, 255, 255, .62);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    cursor: pointer;
+    transition:
+        color var(--duration-fast) ease,
+        border-color var(--duration-fast) ease,
+        background var(--duration-fast) ease,
+        transform var(--duration-fast) ease;
+}
+
+.works-filter-button:hover,
+.works-filter-button.is-active {
+    border-color: var(--border-strong);
+    background: rgba(0, 207, 255, .09);
+    color: var(--text);
+}
+
+.works-filter-button:active {
+    transform: scale(.97);
+}
+
+.works-filter-button:focus-visible,
+.work-card-link:focus-visible {
+    outline: 2px solid var(--cyan2);
+    outline-offset: 4px;
+}
+
+#works .works-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: clamp(18px, 2.2vw, 30px);
+    margin-top: 28px;
+}
+
+#works .work-card {
+    grid-column: span 5;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: transparent;
+    backdrop-filter: none;
+    overflow: visible;
+    cursor: default;
+}
+
+#works .work-card-featured {
+    grid-column: span 7;
+    grid-row: span 2;
+}
+
+#works .work-card::before {
+    display: none;
+}
+
+.work-card-link {
+    --rx: 0deg;
+    --ry: 0deg;
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .095);
+    border-radius: var(--radius-lg);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .018)),
+        rgba(7, 14, 27, .82);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .24);
+    transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 0);
+    transform-style: preserve-3d;
+    transition:
+        transform var(--duration-standard) var(--ease-standard),
+        border-color var(--duration-standard) ease,
+        box-shadow var(--duration-standard) ease;
+}
+
+.work-card-link:hover {
+    border-color: rgba(102, 241, 255, .3);
+    box-shadow: 0 34px 100px rgba(0, 0, 0, .38), 0 0 44px rgba(0, 207, 255, .07);
+}
+
+.work-visual {
+    position: relative;
+    min-height: 238px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 42%, rgba(0, 207, 255, .2), transparent 52%),
+        var(--bg2);
+}
+
+.work-card-featured .work-visual {
+    min-height: 430px;
+}
+
+.work-visual > img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    filter: saturate(.82) brightness(.72);
+    transition: transform .9s var(--ease-standard), filter .6s ease;
+}
+
+.work-card-link:hover .work-visual > img {
+    transform: scale(1.035);
+    filter: saturate(.92) brightness(.8);
+}
+
+.work-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(5, 8, 22, .74));
+    pointer-events: none;
+}
+
+.work-visual-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: .25;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .08) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(to bottom, transparent, #000 38%, transparent);
+}
+
+#works .work-card span {
+    color: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+}
+
+.work-index,
+.work-status {
+    position: absolute;
+    z-index: 2;
+    top: 22px;
+    font-size: 10px !important;
+    font-weight: 600;
+    letter-spacing: .18em !important;
+}
+
+.work-index {
+    left: 24px;
+    color: var(--cyan2) !important;
+}
+
+.work-status {
+    right: 22px;
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 999px;
+    background: rgba(5, 8, 22, .62);
+    color: rgba(255, 255, 255, .72) !important;
+    backdrop-filter: blur(10px);
+}
+
+.work-body {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(24px, 3vw, 38px);
+}
+
+.work-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    color: rgba(255, 255, 255, .45);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .16em;
+}
+
+#works .work-card h3 {
+    margin-top: 18px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(27px, 3vw, 42px);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -.03em;
+}
+
+#works .work-card p {
+    max-width: 620px;
+    margin-top: 16px;
+    color: var(--sub);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+    list-style: none;
+}
+
+.work-tags li {
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, .55);
+    font-size: 10px;
+    letter-spacing: .08em;
+}
+
+.work-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 28px;
+    color: var(--text) !important;
+    font-size: 11px !important;
+    font-weight: 600;
+    letter-spacing: .16em !important;
+}
+
+.work-pointer-glow {
+    position: absolute;
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 1;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    opacity: 0;
+    background: radial-gradient(circle, rgba(102, 241, 255, .13), transparent 68%);
+    pointer-events: none;
+    transform: translate3d(-999px, -999px, 0) translate(-50%, -50%);
+    transition: opacity var(--duration-fast) ease;
+    will-change: transform, opacity;
+}
+
+.work-card-link:hover .work-pointer-glow {
+    opacity: 1;
+}
+
+.work-visual-interface,
+.work-visual-game {
+    display: grid;
+    place-items: center;
+}
+
+.interface-window {
+    width: min(72%, 290px);
+    aspect-ratio: 1.4;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 34px 18px 18px;
+    border: 1px solid rgba(102, 241, 255, .24);
+    border-radius: 14px;
+    background: rgba(5, 12, 28, .72);
+    box-shadow: 0 22px 70px rgba(0, 207, 255, .12);
+}
+
+.interface-window span {
+    position: absolute;
+    top: 16px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cyan2);
+}
+
+.interface-window span:first-child { left: 18px; }
+.interface-window span:nth-child(2) { left: 29px; }
+.interface-window span:nth-child(3) { left: 40px; }
+.interface-window div { border-radius: 7px; background: rgba(102, 241, 255, .1); }
+
+.game-core {
+    position: relative;
+    width: 132px;
+    aspect-ratio: 1;
+    border: 1px solid rgba(102, 241, 255, .34);
+    transform: rotate(45deg);
+    box-shadow: inset 0 0 40px rgba(0, 207, 255, .08), 0 0 55px rgba(0, 207, 255, .1);
+}
+
+.game-core::before,
+.game-core::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(102, 241, 255, .22);
+}
+
+.game-core::after { inset: 38px; background: rgba(0, 207, 255, .12); }
+
+.works-count {
+    margin-top: 28px;
+    color: rgba(255, 255, 255, .38);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-align: right;
+}
+
+.works-count span {
+    color: var(--cyan2);
+}
+
+.work-card.is-hidden {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-card-link,
+    .work-visual > img,
+    .work-pointer-glow {
+        transform: none !important;
+        transition: none !important;
+    }
 }

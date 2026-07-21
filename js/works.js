@@ -139,7 +139,7 @@
                 surface.style.setProperty("--ry", `${rotateY.toFixed(2)}deg`);
 
                 if (glow) {
-                    glow.style.translate = `${pointerX - rect.left}px ${pointerY - rect.top}px`;
+                    glow.style.transform = `translate3d(${pointerX - rect.left}px, ${pointerY - rect.top}px, 0) translate(-50%, -50%)`;
                 }
             });
         }, { passive: true });

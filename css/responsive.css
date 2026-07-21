@@ -14,6 +14,14 @@
     .hero-content h1 { font-size: clamp(64px, 11vw, 120px); }
     .hero-orbit-one { width: 88vw; }
     .hero-orbit-two { width: 64vw; }
+
+    .works-heading-row {
+        grid-template-columns: minmax(0, 1fr) minmax(260px, .6fr);
+    }
+
+    #works .work-card-featured { grid-column: 1 / -1; grid-row: auto; }
+    #works .work-card:not(.work-card-featured) { grid-column: span 6; }
+    .work-card-featured .work-visual { min-height: 52vw; max-height: 620px; }
 }
 
 @media (max-width: 768px) {
@@ -107,6 +115,20 @@
     .hero-orbit-one { width: 124vw; }
     .hero-orbit-two { width: 88vw; }
     .hero-pointer-glow { display: none; }
+
+    section { padding-inline: 22px; }
+
+    .works-heading-row { grid-template-columns: 1fr; gap: 24px; }
+    .works-intro { padding-bottom: 0; }
+    .works-filter { margin-top: 38px; }
+    #works .works-grid { grid-template-columns: 1fr; gap: 18px; }
+    #works .work-card,
+    #works .work-card-featured,
+    #works .work-card:not(.work-card-featured) { grid-column: 1; grid-row: auto; }
+    .work-card-featured .work-visual,
+    .work-visual { min-height: 54vw; }
+    .work-body { padding: 24px; }
+    .work-pointer-glow { display: none; }
 }
 
 @media (max-width: 420px) {
