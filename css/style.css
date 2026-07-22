@@ -2078,15 +2078,6 @@ End
     color: var(--cyan2);
 }
 
-.contact-honeypot {
-    position: absolute !important;
-    left: -9999px !important;
-    width: 1px !important;
-    height: 1px !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
-
 /* Thank-you page */
 .thanks-page {
     min-height: 100svh;

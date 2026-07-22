@@ -12,3 +12,10 @@
 
 リダイレクト先:
 - https://hiragihitsugi.github.io/officialsite/thanks.html
+
+
+## v3.9 診断修正
+
+- `_honey` はブラウザの自動入力による誤検知を避けるため削除しました。
+- `_url` に公開サイトURLを明示しました。
+- 切り分けのため `_autoresponse` は一旦削除しています。
