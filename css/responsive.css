@@ -151,3 +151,229 @@
     header nav,
     .hamburger span { transition: none; }
 }
+
+
+/*==================================================
+    VTuber Hero Responsive / Version 3.4.0
+==================================================*/
+@media (max-width: 768px) {
+    .hero-content {
+        padding-top: 36px;
+    }
+
+    .hero-social {
+        position: static;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin-top: 20px;
+        gap: 8px;
+    }
+
+    .hero-social a {
+        min-width: 80px;
+        min-height: 36px;
+        padding: 8px 14px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero-social {
+        display: flex;
+        width: min(100%, 310px);
+    }
+
+    .hero-social a {
+        flex: 1 1 82px;
+    }
+
+    #contact h2 {
+        font-size: clamp(34px, 10vw, 48px);
+        letter-spacing: 2px;
+    }
+
+    #contact p {
+        font-size: 16px;
+    }
+}
+
+
+/*==================================================
+    Mobile Character Framing / Version 3.6.0
+==================================================*/
+@media (max-width: 768px) {
+    /* Hero: reserve the upper area for the character and keep the face in frame. */
+    #hero {
+        align-items: stretch;
+        background: #050816;
+    }
+
+    .hero-background {
+        background: #050816;
+    }
+
+    .hero-background img {
+        display: block;
+        width: 100%;
+        height: 70%;
+        object-fit: cover;
+        object-position: 36% 48%;
+        transform: scale(1.025);
+        transform-origin: center top;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(180deg, rgba(2, 5, 15, .18) 0%, rgba(3, 7, 18, .2) 31%, rgba(5, 8, 22, .88) 66%, #050816 86%),
+            linear-gradient(90deg, rgba(3, 7, 18, .28), transparent 60%);
+    }
+
+    .hero-gradient {
+        background: radial-gradient(circle at 36% 24%, rgba(0, 207, 255, .18), transparent 45%);
+    }
+
+    .hero-content {
+        min-height: 100%;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding: clamp(205px, 31svh, 280px) 0 54px;
+    }
+
+    .hero-sub {
+        margin-bottom: 14px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(42px, 13.5vw, 70px);
+    }
+
+    .hero-text {
+        margin-top: 18px;
+    }
+
+    .hero-buttons {
+        margin-top: 24px;
+    }
+
+    .hero-social {
+        margin-top: 16px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    /* Portrait sections: show the upper character area instead of centering the full canvas. */
+    #about .section-visual-image,
+    #skills .section-visual-image {
+        max-width: none;
+        height: 86%;
+        object-fit: contain;
+        object-position: center top;
+        opacity: .72;
+    }
+
+    #about .section-visual-image {
+        width: 118vw;
+        inset: 3% -13vw auto auto;
+    }
+
+    #skills .section-visual-image {
+        width: 122vw;
+        inset: 2% auto auto -9vw;
+        object-position: 64% top;
+    }
+
+    #about .section-visual-backdrop {
+        object-position: 50% 14%;
+    }
+
+    #skills .section-visual-backdrop {
+        object-position: 64% 12%;
+    }
+
+    /* Landscape content art: the face is on the left side of the source image. */
+    #works .section-visual-image,
+    #works .section-visual-backdrop {
+        object-position: 24% 50%;
+    }
+
+    #works .section-visual-image {
+        transform-origin: 24% 50%;
+    }
+
+    /* Featured card uses hero.webp; keep its face visible too. */
+    #works .work-card-featured .work-visual img {
+        object-position: 36% 48%;
+    }
+
+    .contact-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-field-wide {
+        grid-column: auto;
+    }
+
+    .contact-form {
+        margin-top: 38px;
+        border-radius: 22px;
+    }
+}
+
+@media (max-width: 420px) {
+    #hero {
+        min-height: 720px;
+        height: max(100svh, 720px);
+    }
+
+    .hero-background img {
+        height: 66%;
+        object-position: 35% 48%;
+    }
+
+    .hero-content {
+        padding-top: 220px;
+        padding-bottom: 34px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(40px, 12.8vw, 56px);
+        line-height: .94;
+    }
+
+    .hero-buttons {
+        gap: 9px;
+    }
+
+    #explore,
+    .secondary-button {
+        min-height: 46px;
+        padding-block: 12px;
+    }
+
+    #about .section-visual-image {
+        width: 126vw;
+        inset-inline-end: -17vw;
+    }
+
+    #skills .section-visual-image {
+        width: 128vw;
+        inset-inline-start: -13vw;
+    }
+
+    .contact-form {
+        padding: 24px 17px;
+    }
+
+    .contact-field > span small {
+        display: block;
+        margin: 4px 0 0;
+    }
+
+    .contact-submit {
+        width: 100%;
+        min-width: 0;
+    }
+}

@@ -2,7 +2,7 @@
     HIIRAGI HITSUGI Official Website
 
     script.js
-    Version : 0.3.0
+    Version : 0.3.4
 ==================================================*/
 
 "use strict";
@@ -19,7 +19,7 @@ window.addEventListener("load", () => {
     );
 
     console.info(
-        "%cVersion 0.3.0",
+        "%cVersion 0.3.4",
         "color:#66F1FF;"
     );
 

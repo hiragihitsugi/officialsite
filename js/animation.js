@@ -156,7 +156,8 @@
             }, "-=0.35")
             .from(".hero-social a", {
                 opacity: 0,
-                x: -18,
+                y: 18,
+                scale: 0.96,
                 stagger: 0.08,
                 duration: 0.45
             }, "-=0.42")

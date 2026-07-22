@@ -1767,3 +1767,380 @@ End
 .hero-social {
     z-index: 25;
 }
+
+
+/*==================================================
+    VTuber Hero Alignment / Version 3.4.0
+==================================================*/
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.hero-sub,
+.hero-text {
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+.hero-buttons {
+    width: 100%;
+    justify-content: center;
+}
+
+.hero-social {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+    z-index: 25;
+}
+
+.hero-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    min-height: 38px;
+    padding: 9px 18px;
+    border: 1px solid rgba(102, 241, 255, .22);
+    border-radius: 999px;
+    background: rgba(5, 12, 28, .46);
+    color: rgba(231, 251, 255, .82);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    backdrop-filter: blur(14px);
+    transition: transform .3s ease, color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease;
+}
+
+.hero-social a:hover,
+.hero-social a:focus-visible {
+    transform: translateY(-3px);
+    color: #fff;
+    border-color: rgba(102, 241, 255, .7);
+    background: rgba(0, 207, 255, .12);
+    box-shadow: 0 12px 30px rgba(0, 207, 255, .13);
+}
+
+.hero-social a:focus-visible {
+    outline: 2px solid var(--cyan2);
+    outline-offset: 3px;
+}
+
+#contact .section-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contact p {
+    max-width: 720px;
+    line-height: 1.9;
+}
+
+.contact-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 240px;
+    margin-top: 34px;
+    padding: 16px 28px;
+    border: 1px solid rgba(102, 241, 255, .22);
+    border-radius: 999px;
+    background: rgba(5, 12, 28, .5);
+    color: rgba(231, 251, 255, .58);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: default;
+    user-select: none;
+}
+
+
+/*==================================================
+    Contact Form / Version 3.6.0
+==================================================*/
+#contact {
+    overflow: hidden;
+}
+
+#contact .contact-container {
+    width: min(100%, 1080px);
+}
+
+.contact-heading {
+    max-width: 780px;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.contact-kicker {
+    margin-bottom: 18px;
+    color: var(--cyan);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
+
+.contact-form {
+    position: relative;
+    width: min(100%, 880px);
+    margin-top: 54px;
+    padding: clamp(24px, 4vw, 46px);
+    border: 1px solid rgba(102, 241, 255, .16);
+    border-radius: 28px;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, .045), transparent 46%),
+        rgba(5, 12, 28, .72);
+    box-shadow: 0 32px 90px rgba(0, 0, 0, .28);
+    backdrop-filter: blur(18px);
+}
+
+.contact-form::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 8%;
+    width: 44%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 241, 255, .72), transparent);
+}
+
+.contact-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 20px;
+}
+
+.contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.contact-field-wide {
+    grid-column: 1 / -1;
+}
+
+.contact-field > span {
+    color: rgba(231, 251, 255, .92);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.contact-field > span small {
+    margin-left: 9px;
+    color: rgba(190, 205, 218, .64);
+    font-family: "Outfit", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .05em;
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, .11);
+    border-radius: 14px;
+    outline: 0;
+    background: rgba(2, 7, 18, .62);
+    color: #f4fdff;
+    font: inherit;
+    transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.contact-field input,
+.contact-field select {
+    min-height: 54px;
+    padding: 0 17px;
+}
+
+.contact-field textarea {
+    min-height: 180px;
+    padding: 16px 17px;
+    resize: vertical;
+    line-height: 1.8;
+}
+
+.contact-field select {
+    appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, rgba(102, 241, 255, .8) 50%),
+        linear-gradient(135deg, rgba(102, 241, 255, .8) 50%, transparent 50%);
+    background-position:
+        calc(100% - 20px) 23px,
+        calc(100% - 14px) 23px;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+
+.contact-field select option {
+    color: #0a1020;
+}
+
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+    border-color: rgba(102, 241, 255, .72);
+    background-color: rgba(4, 13, 30, .88);
+    box-shadow: 0 0 0 4px rgba(0, 207, 255, .08), 0 0 30px rgba(0, 207, 255, .08);
+}
+
+.contact-consent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    color: rgba(190, 205, 218, .76);
+    font-size: 13px;
+    line-height: 1.7;
+    cursor: pointer;
+}
+
+.contact-consent input {
+    flex: 0 0 auto;
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+    accent-color: var(--cyan);
+}
+
+.contact-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-width: 248px;
+    min-height: 56px;
+    margin-top: 30px;
+    padding: 15px 30px;
+    border: 1px solid rgba(102, 241, 255, .5);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(0, 207, 255, .2), rgba(5, 12, 28, .76));
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.4px;
+    cursor: pointer;
+    box-shadow: 0 16px 40px rgba(0, 207, 255, .12);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease, background .3s ease;
+}
+
+.contact-submit:hover,
+.contact-submit:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(102, 241, 255, .92);
+    background: linear-gradient(135deg, rgba(0, 207, 255, .34), rgba(5, 12, 28, .82));
+    box-shadow: 0 20px 48px rgba(0, 207, 255, .22);
+}
+
+.contact-submit:focus-visible {
+    outline: 2px solid var(--cyan2);
+    outline-offset: 4px;
+}
+
+.contact-form-note {
+    margin-top: 18px !important;
+    color: rgba(190, 205, 218, .55) !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+}
+
+.contact-mail-link {
+    display: inline-block;
+    margin-top: 22px;
+    color: rgba(190, 205, 218, .72);
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    transition: color .25s ease;
+}
+
+.contact-mail-link:hover,
+.contact-mail-link:focus-visible {
+    color: var(--cyan2);
+}
+
+.contact-honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Thank-you page */
+.thanks-page {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 32px 22px;
+    background:
+        radial-gradient(circle at 50% 25%, rgba(0, 207, 255, .14), transparent 42%),
+        #050816;
+}
+
+.thanks-card {
+    width: min(100%, 680px);
+    padding: clamp(34px, 7vw, 72px);
+    border: 1px solid rgba(102, 241, 255, .18);
+    border-radius: 30px;
+    background: rgba(5, 12, 28, .76);
+    text-align: center;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, .35);
+    backdrop-filter: blur(18px);
+}
+
+.thanks-kicker {
+    color: var(--cyan);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.thanks-card h1 {
+    margin-top: 20px;
+    font-size: clamp(36px, 7vw, 66px);
+    line-height: 1.05;
+}
+
+.thanks-card p {
+    max-width: 520px;
+    margin: 24px auto 0;
+    color: var(--sub);
+    line-height: 1.9;
+}
+
+.thanks-card a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 220px;
+    margin-top: 34px;
+    padding: 16px 28px;
+    border: 1px solid rgba(102, 241, 255, .45);
+    border-radius: 999px;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
