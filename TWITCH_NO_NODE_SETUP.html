@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twitch連携セットアップ — Node.js不要</title>
+<style>
+:root{color-scheme:dark;--bg:#07080c;--panel:#11131a;--line:#292d3a;--text:#f5f7ff;--muted:#aeb5c8;--accent:#a970ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#171226 0,#07080c 42%);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.75}
+main{width:min(980px,calc(100% - 32px));margin:48px auto 96px}h1{font-size:clamp(28px,5vw,54px);line-height:1.1;margin:0 0 16px}h2{font-size:22px;margin:0 0 14px}p{color:var(--muted)}.lead{font-size:18px;max-width:760px}.card{background:rgba(17,19,26,.92);border:1px solid var(--line);border-radius:20px;padding:24px;margin-top:20px;box-shadow:0 24px 70px rgba(0,0,0,.28)}.step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start}.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:800}code,textarea,input{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}textarea{width:100%;min-height:360px;background:#080910;color:#e9e7ff;border:1px solid var(--line);border-radius:14px;padding:14px;resize:vertical}input{width:100%;background:#080910;color:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:16px}button,a.button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:12px 18px;background:var(--accent);color:#fff;font-weight:750;text-decoration:none;cursor:pointer;margin-top:12px}button.secondary{background:#242735}.notice{border-left:4px solid var(--accent);padding:10px 16px;background:#151220;border-radius:8px;color:#ddd6f8}.ok{color:#a9f5c4}ol{padding-left:22px}.small{font-size:14px}@media(max-width:600px){main{margin-top:24px}.card{padding:18px}}
+</style>
+</head>
+<body><main>
+<p class="small">HIIRAGI HITSUGI / Twitch latest archive setup</p>
+<h1>Node.js不要の<br>Twitch連携セットアップ</h1>
+<p class="lead">Cloudflareのブラウザ管理画面だけで設定できます。Client IDはコードへ設定済みです。Client SecretはCloudflareのSecret欄にだけ入力してください。</p>
+<div class="notice"><strong>重要：</strong> Client SecretはGitHub、サイトのJavaScript、このチャットへ貼らないでください。</div>
+
+<section class="card step"><div class="num">1</div><div><h2>CloudflareでWorkerを作成</h2><ol><li>Cloudflare Dashboardを開く</li><li><strong>Workers & Pages</strong> → <strong>Create application</strong></li><li><strong>Create Worker</strong> → <strong>Deploy</strong></li><li>作成したWorkerでコード編集画面を開く</li></ol><a class="button" href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare Dashboardを開く</a></div></section>
+
+<section class="card step"><div class="num">2</div><div><h2>Workerコードを貼り付け</h2><p>既存コードをすべて削除し、下のコードへ置き換えてデプロイします。</p><textarea id="workerCode" readonly>/**
+ * Cloudflare Worker: latest Twitch archive API
+ * Required secrets:
+ *   TWITCH_CLIENT_ID
+ *   TWITCH_CLIENT_SECRET
+ * Optional variable:
+ *   ALLOWED_ORIGINS=https://hiragihitsugi.github.io,http://localhost:5500
+ */
+
+let tokenCache = {
+    value: &quot;&quot;,
+    expiresAt: 0
+};
+
+const TWITCH_TOKEN_URL = &quot;https://id.twitch.tv/oauth2/token&quot;;
+const TWITCH_API_URL = &quot;https://api.twitch.tv/helix&quot;;
+const DEFAULT_CHANNEL = &quot;hiragi_hitsugi&quot;;
+const DEFAULT_SITE_ORIGIN = &quot;https://hiragihitsugi.github.io&quot;;
+const CONFIGURED_TWITCH_CLIENT_ID = &quot;y1xa5t8h43ygyd6ygmi4fgsg0i162q&quot;;
+
+function allowedOrigins(env) {
+    const configured = String(env.ALLOWED_ORIGINS || DEFAULT_SITE_ORIGIN)
+        .split(&quot;,&quot;)
+        .map(value =&gt; value.trim())
+        .filter(Boolean);
+
+    return new Set(configured);
+}
+
+function isLocalOrigin(origin) {
+    return /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin || &quot;&quot;);
+}
+
+function corsOrigin(request, env) {
+    const origin = request.headers.get(&quot;Origin&quot;) || &quot;&quot;;
+    if (allowedOrigins(env).has(origin) || isLocalOrigin(origin)) return origin;
+    return DEFAULT_SITE_ORIGIN;
+}
+
+function responseHeaders(request, env, cacheSeconds = 0) {
+    return {
+        &quot;Access-Control-Allow-Origin&quot;: corsOrigin(request, env),
+        &quot;Access-Control-Allow-Methods&quot;: &quot;GET, OPTIONS&quot;,
+        &quot;Access-Control-Allow-Headers&quot;: &quot;Content-Type&quot;,
+        &quot;Content-Type&quot;: &quot;application/json; charset=utf-8&quot;,
+        &quot;Cache-Control&quot;: cacheSeconds &gt; 0
+            ? `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}`
+            : &quot;no-store&quot;,
+        &quot;Vary&quot;: &quot;Origin&quot;
+    };
+}
+
+function json(request, env, body, status = 200, cacheSeconds = 0) {
+    return new Response(JSON.stringify(body), {
+        status,
+        headers: responseHeaders(request, env, cacheSeconds)
+    });
+}
+
+async function getAppAccessToken(env) {
+    const now = Date.now();
+    if (tokenCache.value &amp;&amp; tokenCache.expiresAt &gt; now + 60_000) {
+        return tokenCache.value;
+    }
+
+    const clientId = String(env.TWITCH_CLIENT_ID || CONFIGURED_TWITCH_CLIENT_ID).trim();
+
+    if (!clientId || !env.TWITCH_CLIENT_SECRET) {
+        throw new Error(&quot;TWITCH_CLIENT_ID and TWITCH_CLIENT_SECRET are required&quot;);
+    }
+
+    const body = new URLSearchParams({
+        client_id: clientId,
+        client_secret: env.TWITCH_CLIENT_SECRET,
+        grant_type: &quot;client_credentials&quot;
+    });
+
+    const response = await fetch(TWITCH_TOKEN_URL, {
+        method: &quot;POST&quot;,
+        headers: { &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot; },
+        body
+    });
+
+    if (!response.ok) {
+        throw new Error(`Twitch token request failed with ${response.status}`);
+    }
+
+    const payload = await response.json();
+    if (!payload.access_token) throw new Error(&quot;Twitch token response did not include access_token&quot;);
+
+    tokenCache = {
+        value: payload.access_token,
+        expiresAt: now + Math.max(300, Number(payload.expires_in || 3600)) * 1000
+    };
+
+    return tokenCache.value;
+}
+
+async function twitchGet(path, params, env, token) {
+    const url = new URL(`${TWITCH_API_URL}/${path}`);
+    Object.entries(params).forEach(([key, value]) =&gt; url.searchParams.set(key, value));
+
+    const response = await fetch(url, {
+        headers: {
+            &quot;Authorization&quot;: `Bearer ${token}`,
+            &quot;Client-Id&quot;: String(env.TWITCH_CLIENT_ID || CONFIGURED_TWITCH_CLIENT_ID).trim()
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Twitch API ${path} failed with ${response.status}`);
+    }
+
+    return response.json();
+}
+
+function normalizeThumbnail(value) {
+    if (!value) return &quot;&quot;;
+    return value
+        .replace(/%?\{width\}/gi, &quot;1280&quot;)
+        .replace(/%?\{height\}/gi, &quot;720&quot;);
+}
+
+async function fetchLatestArchive(channel, env) {
+    const token = await getAppAccessToken(env);
+    const userPayload = await twitchGet(&quot;users&quot;, { login: channel }, env, token);
+    const user = userPayload.data?.[0];
+
+    if (!user) {
+        return {
+            channel: { login: channel, displayName: channel, url: `https://www.twitch.tv/${channel}` },
+            archive: null
+        };
+    }
+
+    const videosPayload = await twitchGet(&quot;videos&quot;, {
+        user_id: user.id,
+        type: &quot;archive&quot;,
+        sort: &quot;time&quot;,
+        first: &quot;1&quot;
+    }, env, token);
+
+    const video = videosPayload.data?.[0] || null;
+
+    return {
+        channel: {
+            id: user.id,
+            login: user.login,
+            displayName: user.display_name,
+            profileImageUrl: user.profile_image_url,
+            url: `https://www.twitch.tv/${user.login}`
+        },
+        archive: video ? {
+            id: video.id,
+            title: video.title,
+            description: video.description,
+            url: video.url,
+            thumbnailUrl: normalizeThumbnail(video.thumbnail_url),
+            createdAt: video.created_at,
+            publishedAt: video.published_at,
+            duration: video.duration,
+            viewCount: video.view_count,
+            language: video.language
+        } : null
+    };
+}
+
+export default {
+    async fetch(request, env, context) {
+        if (request.method === &quot;OPTIONS&quot;) {
+            return new Response(null, {
+                status: 204,
+                headers: responseHeaders(request, env)
+            });
+        }
+
+        if (request.method !== &quot;GET&quot;) {
+            return json(request, env, { ok: false, error: &quot;Method not allowed&quot; }, 405);
+        }
+
+        const requestUrl = new URL(request.url);
+        if (requestUrl.pathname !== &quot;/latest&quot; &amp;&amp; requestUrl.pathname !== &quot;/&quot;) {
+            return json(request, env, { ok: false, error: &quot;Not found&quot; }, 404);
+        }
+
+        const channel = (requestUrl.searchParams.get(&quot;channel&quot;) || DEFAULT_CHANNEL)
+            .trim()
+            .toLowerCase();
+
+        if (!/^[a-z0-9_]{3,25}$/.test(channel)) {
+            return json(request, env, { ok: false, error: &quot;Invalid channel&quot; }, 400);
+        }
+
+        const cacheUrl = new URL(request.url);
+        cacheUrl.search = `?channel=${encodeURIComponent(channel)}`;
+        const cacheKey = new Request(cacheUrl.toString(), { method: &quot;GET&quot; });
+        const cache = caches.default;
+        const cached = await cache.match(cacheKey);
+        if (cached) return cached;
+
+        try {
+            const result = await fetchLatestArchive(channel, env);
+            const response = json(request, env, {
+                ok: true,
+                ...result,
+                fetchedAt: new Date().toISOString()
+            }, 200, 300);
+
+            context.waitUntil(cache.put(cacheKey, response.clone()));
+            return response;
+        } catch (error) {
+            console.error(&quot;Twitch latest archive worker error:&quot;, error);
+            return json(request, env, {
+                ok: false,
+                error: &quot;Twitch archive information is temporarily unavailable&quot;
+            }, 502);
+        }
+    }
+};
+</textarea><button onclick="copyText('workerCode',this)">Workerコードをコピー</button></div></section>
+
+<section class="card step"><div class="num">3</div><div><h2>Client Secretを登録</h2><ol><li>Workerの <strong>Settings</strong> を開く</li><li><strong>Variables and Secrets</strong> → <strong>Add</strong></li><li>Typeを <strong>Secret</strong> にする</li><li>Nameに <code>TWITCH_CLIENT_SECRET</code></li><li>ValueにTwitchで発行したClient Secret</li><li>保存後、再デプロイ</li></ol><p class="small">Client ID <code>y1xa5t8h43ygyd6ygmi4fgsg0i162q</code> はWorkerコードへ設定済みです。</p></div></section>
+
+<section class="card step"><div class="num">4</div><div><h2>APIをテスト</h2><p>Workerに表示される <code>https://◯◯.workers.dev</code> を開き、末尾に次を付けます。</p><p><code>/latest?channel=hiragi_hitsugi</code></p><p><span class="ok"><code>"ok": true</code></span> が返れば成功です。</p></div></section>
+
+<section class="card step"><div class="num">5</div><div><h2>サイト設定を生成</h2><label for="workerUrl">Worker URL</label><input id="workerUrl" placeholder="https://your-worker.your-subdomain.workers.dev"><button onclick="generateConfig()">設定を生成</button><textarea id="configOutput" readonly style="min-height:130px;margin-top:14px" placeholder="ここに media-config.js の内容が生成されます"></textarea><button class="secondary" onclick="copyText('configOutput',this)">設定をコピー</button><p>コピーした内容で <code>js/media-config.js</code> を丸ごと置き換え、GitHubへアップロードしてください。</p></div></section>
+</main>
+<script>
+function copyText(id,button){const el=document.getElementById(id);el.focus();el.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}if(navigator.clipboard&&location.protocol!=='file:'){navigator.clipboard.writeText(el.value).then(()=>{}).catch(()=>{})}const old=button.textContent;button.textContent=ok?'コピーしました':'選択しました';setTimeout(()=>button.textContent=old,1600)}
+function generateConfig(){let url=document.getElementById('workerUrl').value.trim().replace(/\/$/,'');const out=document.getElementById('configOutput');if(!/^https:\/\/[a-z0-9._-]+\.workers\.dev$/i.test(url)){out.value='Worker URLを https://...workers.dev の形式で入力してください。';return}out.value='window.MEDIA_CONFIG = Object.freeze({
+    twitchLatestEndpoint: "'+url+'/latest?channel=hiragi_hitsugi"
+});'}
+</script></body></html>

@@ -1,0 +1,3 @@
+# The ready-to-use configuration is worker/wrangler.toml.
+# Twitch Client ID is already configured there.
+# Never write TWITCH_CLIENT_SECRET in this file.

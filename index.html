@@ -65,6 +65,9 @@
         href="css/works.css">
 
     <link rel="stylesheet"
+        href="css/media.css?v=1.0.0">
+
+    <link rel="stylesheet"
         href="css/sections.css">
 
     <link rel="stylesheet"
@@ -136,6 +139,8 @@
             <a href="#about">ABOUT</a>
 
             <a href="#works">WORKS</a>
+
+            <a href="#media">MEDIA</a>
 
             <a href="#contact">CONTACT</a>
 
@@ -243,10 +248,21 @@
 
                 </a>
 
-                <a href="#"
-                    aria-label="YouTube">
+                <a href="https://youtu.be/I9FS-fWVDUw?si=Rj7WNnZ5u9xXoxYp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTubeの動画を見る">
 
                     YouTube
+
+                </a>
+
+                <a href="https://www.twitch.tv/hiragi_hitsugi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Twitchチャンネルを見る">
+
+                    Twitch
 
                 </a>
 
@@ -483,6 +499,108 @@
 
 
         <!-- ======================================
+                Media
+        ======================================= -->
+
+        <section id="media" aria-labelledby="media-heading">
+
+            <div class="section-atmosphere" aria-hidden="true"></div>
+            <div class="section-divider" aria-hidden="true"></div>
+
+            <div class="section-container media-studio">
+
+                <div class="media-heading-row">
+                    <div>
+                        <div class="section-title">MEDIA</div>
+                        <h2 id="media-heading" class="media-heading">Watch. Stream. Connect.</h2>
+                    </div>
+                    <p class="media-intro">YouTubeの注目動画と、Twitchの最新公開アーカイブをひとつの場所から楽しめます。</p>
+                </div>
+
+                <div class="media-grid">
+
+                    <article class="media-card media-card-youtube">
+                        <div class="media-card-topline">
+                            <span class="media-brand">YOUTUBE</span>
+                            <span>FEATURED VIDEO</span>
+                        </div>
+
+                        <div class="media-frame">
+                            <iframe
+                                src="https://www.youtube-nocookie.com/embed/I9FS-fWVDUw?rel=0"
+                                title="HIIRAGI HITSUGI YouTube featured video"
+                                loading="lazy"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="media-card-body">
+                            <p class="media-eyebrow">SELECTED MOVIE</p>
+                            <h3>Featured YouTube Video</h3>
+                            <p class="media-description">サイト内で再生するか、YouTubeで動画ページを開いて視聴できます。</p>
+                            <a class="media-action"
+                                href="https://youtu.be/I9FS-fWVDUw?si=Rj7WNnZ5u9xXoxYp"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                WATCH ON YOUTUBE ↗
+                            </a>
+                        </div>
+                    </article>
+
+                    <article id="twitch-latest-card" class="media-card media-card-twitch is-loading" aria-live="polite">
+                        <div class="media-card-topline">
+                            <span class="media-brand">TWITCH</span>
+                            <span>AUTO UPDATE</span>
+                        </div>
+
+                        <a id="twitch-archive-link"
+                            class="twitch-archive-link"
+                            href="https://www.twitch.tv/hiragi_hitsugi"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Twitchの最新アーカイブを見る">
+                            <div class="twitch-archive-visual">
+                                <div class="twitch-archive-placeholder" aria-hidden="true">
+                                    <span class="twitch-placeholder-mark">T</span>
+                                </div>
+                                <img id="twitch-archive-image" class="twitch-archive-image" alt="">
+                                <span id="twitch-archive-status" class="twitch-status">LOADING</span>
+                            </div>
+                        </a>
+
+                        <div class="media-card-body">
+                            <p class="media-eyebrow">LATEST PUBLIC ARCHIVE</p>
+                            <h3 id="twitch-archive-title">最新アーカイブを確認中</h3>
+                            <p id="twitch-archive-description" class="media-description">Twitchから最新の公開配信アーカイブを取得しています。</p>
+                            <div class="media-meta">
+                                <span id="twitch-archive-published">LOADING</span>
+                                <span id="twitch-archive-duration"></span>
+                            </div>
+                            <a id="twitch-archive-action"
+                                class="media-action"
+                                href="https://www.twitch.tv/hiragi_hitsugi"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                VISIT TWITCH ↗
+                            </a>
+                        </div>
+
+                        <noscript>
+                            <p class="media-noscript">最新アーカイブの自動取得にはJavaScriptが必要です。</p>
+                        </noscript>
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
                 Contact
         ======================================= -->
 
@@ -583,6 +701,10 @@
     <script src="js/animation.js"></script>
 
     <script src="js/cinematic.js?v=2.9.0"></script>
+
+    <script src="js/media-config.js?v=1.0.0"></script>
+
+    <script src="js/media.js?v=1.0.0"></script>
 
     <script src="js/particles.js"></script>
 

@@ -1,7 +1,7 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
     animation.js
-    Version : 1.4.0
+    Version : 1.5.0
 ==================================================*/
 
 "use strict";
@@ -36,6 +36,7 @@
             initSectionTransitions();
             initAbout();
             initSkills();
+            initMedia();
             initContact();
             requestAnimationFrame(() => ScrollTrigger.refresh());
         }
@@ -217,6 +218,27 @@
             }, "-=0.34");
     }
 
+
+    function initMedia() {
+        const cards = gsap.utils.toArray("#media .media-card");
+        if (!cards.length) return;
+
+        const timeline = gsap.timeline({
+            scrollTrigger: { trigger: "#media", start: "top 76%", once: true }
+        });
+
+        timeline
+            .from("#media .section-title", {
+                opacity: 0, x: -52, duration: 0.65, ease: "power3.out"
+            })
+            .from("#media .media-heading-row h2, #media .media-intro", {
+                opacity: 0, y: 34, stagger: 0.1, duration: 0.72, ease: "power3.out"
+            }, "-=0.36")
+            .from(cards, {
+                opacity: 0, y: 56, scale: 0.975, stagger: 0.13, duration: 0.82, ease: "power3.out"
+            }, "-=0.34");
+    }
+
     function initContact() {
         const timeline = gsap.timeline({
             scrollTrigger: { trigger: "#contact", start: "top 76%", once: true }
@@ -241,5 +263,5 @@
         resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 180);
     }, { passive: true });
 
-    console.info("%cAnimation Module v1.4 Ready", "color:#00CFFF;font-weight:bold;");
+    console.info("%cAnimation Module v1.5 Ready", "color:#00CFFF;font-weight:bold;");
 })();
