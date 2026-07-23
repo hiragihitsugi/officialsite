@@ -377,3 +377,75 @@
         min-width: 0;
     }
 }
+
+/*==================================================
+    Expanded Navigation Breakpoint / Version 4.0.0
+    Six navigation items switch to the menu before they crowd the logo.
+==================================================*/
+@media (min-width: 769px) and (max-width: 980px) {
+    header { height: 72px; padding-inline: 28px; }
+
+    header nav {
+        position: fixed;
+        inset: 72px 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 26px 22px 32px;
+        background: rgba(5, 8, 22, .96);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translate3d(0, -14px, 0);
+        transition: opacity .3s ease, transform .3s ease, visibility .3s;
+    }
+
+    header nav a {
+        width: min(100%, 460px);
+        padding: 17px;
+        text-align: center;
+        letter-spacing: 3px;
+        border-bottom: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    header nav a:last-child { border-bottom: 0; }
+
+    header.is-menu-open nav {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .hamburger {
+        position: relative;
+        display: flex;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 24px;
+        height: 1px;
+        background: currentColor;
+        transform-origin: center;
+        transition: transform .3s ease, opacity .2s ease;
+    }
+
+    .is-menu-open .hamburger span:first-child { transform: translate3d(0, 7px, 0) rotate(45deg); }
+    .is-menu-open .hamburger span:nth-child(2) { opacity: 0; }
+    .is-menu-open .hamburger span:last-child { transform: translate3d(0, -7px, 0) rotate(-45deg); }
+}

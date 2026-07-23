@@ -1,721 +1,449 @@
 <!DOCTYPE html>
+
 <html lang="ja">
-
 <head>
-
-    <meta charset="UTF-8">
-    <script>document.documentElement.classList.add("cinematic-js");</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>HIIRAGI HITSUGI | Official Website</title>
-
-    <meta name="description"
-        content="VTuber HIIRAGI HITSUGIの公式サイト。YouTube・Twitchでの配信、動画、活動情報をまとめています。">
-
-    <meta name="theme-color"
-        content="#050816">
-
-    <meta name="robots"
-        content="index, follow">
-
-    <meta property="og:type"
-        content="website">
-
-    <meta property="og:title"
-        content="HIIRAGI HITSUGI | Official Website">
-
-    <meta property="og:description"
-        content="VTuber HIIRAGI HITSUGIの公式サイト。YouTube・Twitchでの配信、動画、活動情報をまとめています。">
-
-    <meta property="og:image"
-        content="images/hero.webp">
-
-    <meta property="og:url"
-        content="https://hiragihitsugi.github.io/officialsite/">
-
-    <!-- favicon -->
-    <!--
+<meta charset="utf-8"/>
+<script>document.documentElement.classList.add("cinematic-js");</script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HIIRAGI HITSUGI | Official Website</title>
+<meta content="VTuber HIIRAGI HITSUGIの公式サイト。YouTube・Twitchでの配信、動画、活動情報をまとめています。" name="description"/>
+<meta content="#050816" name="theme-color"/>
+<meta content="index, follow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="HIIRAGI HITSUGI | Official Website" property="og:title"/>
+<meta content="VTuber HIIRAGI HITSUGIの公式サイト。YouTube・Twitchでの配信、動画、活動情報をまとめています。" property="og:description"/>
+<meta content="images/hero.webp" property="og:image"/>
+<meta content="https://hiragihitsugi.github.io/officialsite/" property="og:url"/>
+<!-- favicon -->
+<!--
     <link rel="icon" href="data:,">
     -->
-
-    <!-- Google Fonts -->
-
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-
-    <!-- CSS -->
-
-    <link rel="stylesheet"
-        href="css/style.css?v=3.6.0">
-
-    <link rel="stylesheet"
-        href="css/loading.css">
-
-    <link rel="stylesheet"
-        href="css/cursor.css">
-
-    <link rel="stylesheet"
-        href="css/works.css">
-
-    <link rel="stylesheet"
-        href="css/media.css?v=1.0.0">
-
-    <link rel="stylesheet"
-        href="css/sections.css">
-
-    <link rel="stylesheet"
-        href="css/cinematic.css?v=3.6.0">
-
-    <link rel="stylesheet"
-        href="css/animation.css">
-
-    <link rel="stylesheet"
-        href="css/responsive.css?v=3.6.0">
-
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- CSS -->
+<link href="css/style.css?v=4.0.0" rel="stylesheet"/>
+<link href="css/loading.css" rel="stylesheet"/>
+<link href="css/cursor.css" rel="stylesheet"/>
+<link href="css/works.css" rel="stylesheet"/>
+<link href="css/media.css?v=1.0.0" rel="stylesheet"/>
+<link href="css/sections.css?v=4.0.0" rel="stylesheet"/>
+<link href="css/cinematic.css?v=3.6.0" rel="stylesheet"/>
+<link href="css/animation.css" rel="stylesheet"/>
+<link href="css/responsive.css?v=4.0.0" rel="stylesheet"/>
 </head>
-
 <body>
-
-    <!-- ======================================
+<!-- ======================================
             Loading
     ======================================= -->
-
-    <div id="loader">
-
-        <div class="loader-logo">
-
-            <span>HIIRAGI</span>
-
-            <span>HITSUGI</span>
-
-        </div>
-
-        <div class="loader-line"></div>
-
-    </div>
-
-    <!-- ======================================
+<div id="loader">
+<div class="loader-logo">
+<span>HIIRAGI</span>
+<span>HITSUGI</span>
+</div>
+<div class="loader-line"></div>
+</div>
+<!-- ======================================
             Cursor
     ======================================= -->
-
-    <div id="cursor-light"></div>
-
-    <div id="cursor-dot"></div>
-
-    <div id="cursor-ring"></div>
-
-    <!-- ======================================
+<div id="cursor-light"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<!-- ======================================
             Background Layers
     ======================================= -->
-
-    <div id="noise"></div>
-
-    <!-- ======================================
+<div id="noise"></div>
+<!-- ======================================
             Header
     ======================================= -->
-
-    <header>
-
-        <a href="#hero"
-            class="logo"
-            aria-label="Home">
+<header>
+<a aria-label="Home" class="logo" href="#hero">
 
             HIIRAGI HITSUGI
 
         </a>
-
-        <nav id="primary-navigation"
-            aria-label="Primary navigation">
-
-            <a href="#hero">HOME</a>
-
-            <a href="#about">ABOUT</a>
-
-            <a href="#works">CONTENTS</a>
-
-            <a href="#media">MEDIA</a>
-
-            <a href="#contact">CONTACT</a>
-
-        </nav>
-
-        <button class="hamburger"
-            type="button"
-            aria-label="メニューを開く"
-            aria-controls="primary-navigation"
-            aria-expanded="false">
-
-            <span></span>
-
-            <span></span>
-
-            <span></span>
-
-        </button>
-
-    </header>
-
-    <!-- ======================================
+<nav aria-label="Primary navigation" id="primary-navigation"><a href="#hero">HOME</a><a href="about.html">ABOUT</a><a href="guideline.html">GUIDELINE</a><a href="#works">CONTENTS</a><a href="#media">MEDIA</a><a href="#contact">CONTACT</a></nav>
+<button aria-controls="primary-navigation" aria-expanded="false" aria-label="メニューを開く" class="hamburger" type="button">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</header>
+<!-- ======================================
             Main
     ======================================= -->
-
-    <main>
-
-        <!-- ======================================
+<main>
+<!-- ======================================
                 Hero
         ======================================= -->
-
-        <section id="hero">
-
-            <div class="hero-background">
-
-                <img src="images/hero.webp"
-                    alt="VTuber HIIRAGI HITSUGI"
-                    fetchpriority="high">
-
-            </div>
-
-            <div class="hero-overlay"></div>
-
-            <div class="hero-gradient"></div>
-
-            <div id="particles" aria-hidden="true"></div>
-
-            <div class="hero-grid"></div>
-
-            <div class="hero-glow"></div>
-
-            <div class="hero-content">
-
-                <p class="hero-sub">VTUBER / STREAMER</p>
-
-                <h1 class="hero-title">
-                    <span>H</span><span>I</span><span>I</span><span>R</span><span>A</span><span>G</span><span>I</span>
-                    <br>
-                    <span>H</span><span>I</span><span>T</span><span>S</span><span>U</span><span>G</span><span>I</span>
-                </h1>
-
-                <p class="hero-text">あなたに癒しを届ける戦闘員バーチャルストリーマー。</p>
-
-                <div class="hero-buttons">
-
-                    <button id="explore" type="button">PROFILE</button>
-
-                    <a href="#media" class="secondary-button">WATCH MEDIA</a>
-
-                </div>
-
-                <div class="hero-social" aria-label="公式SNSリンク">
-
-                    <a href="https://x.com/home"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Xを開く">X</a>
-
-                    <a href="https://www.youtube.com/@hiragi_hitsugi"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="YouTubeチャンネルを見る">YouTube</a>
-
-                    <a href="https://www.twitch.tv/hiragi_hitsugi"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Twitchチャンネルを見る">Twitch</a>
-
-                </div>
-
-            </div>
-
-            <div class="scroll-indicator">
-
-                <span></span>
-
-                <p>SCROLL</p>
-
-            </div>
-
-        </section>
-
-        <!-- ======================================
+<section id="hero">
+<div class="hero-background">
+<img alt="VTuber HIIRAGI HITSUGI" fetchpriority="high" src="images/hero.webp"/>
+</div>
+<div class="hero-overlay"></div>
+<div class="hero-gradient"></div>
+<div aria-hidden="true" id="particles"></div>
+<div class="hero-grid"></div>
+<div class="hero-glow"></div>
+<div class="hero-content">
+<p class="hero-sub">VTUBER / STREAMER</p>
+<h1 class="hero-title">
+<span>H</span><span>I</span><span>I</span><span>R</span><span>A</span><span>G</span><span>I</span>
+<br/>
+<span>H</span><span>I</span><span>T</span><span>S</span><span>U</span><span>G</span><span>I</span>
+</h1>
+<p class="hero-text">あなたに癒しを届ける戦闘員バーチャルストリーマー。</p>
+<div class="hero-buttons">
+<a class="hero-profile-link" href="about.html" id="explore">PROFILE</a>
+<a class="secondary-button" href="#media">WATCH MEDIA</a>
+</div>
+<div aria-label="公式SNSリンク" class="hero-social">
+<a aria-label="Xを開く" href="https://x.com/home" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="YouTubeチャンネルを見る" href="https://www.youtube.com/@hiragi_hitsugi" rel="noopener noreferrer" target="_blank">YouTube</a>
+<a aria-label="Twitchチャンネルを見る" href="https://www.twitch.tv/hiragi_hitsugi" rel="noopener noreferrer" target="_blank">Twitch</a>
+</div>
+</div>
+<div class="scroll-indicator">
+<span></span>
+<p>SCROLL</p>
+</div>
+</section>
+<!-- ======================================
                 About
         ======================================= -->
-
-        <section id="about" class="image-section image-section-portrait">
-            <div class="section-visual" aria-hidden="true">
-                <div class="section-visual-curtain"></div>
-                <img class="section-visual-backdrop" src="images/hero2.webp" alt="" loading="lazy" decoding="async">
-                <img class="section-visual-image" src="images/hero2.webp" alt="" loading="lazy" decoding="async">
-                <div class="section-visual-shade"></div>
-            </div>
-
-            <div class="section-atmosphere" aria-hidden="true"></div>
-            <div class="section-divider" aria-hidden="true"></div>
-
-            <div class="section-container">
-
-                <div class="section-title">ABOUT</div>
-
-                <div class="about-layout">
-
-                    <article class="about-statement">
-                        <p class="about-kicker">VTUBER × STREAMING</p>
-                        <h2>声と物語で、あなたの夜に寄り添う。</h2>
-                    </article>
-
-                    <div class="about-details">
-                        <p class="about-lead">
+<section class="image-section image-section-portrait" id="about">
+<div aria-hidden="true" class="section-visual">
+<div class="section-visual-curtain"></div>
+<img alt="" class="section-visual-backdrop" decoding="async" loading="lazy" src="images/hero2.webp"/>
+<img alt="" class="section-visual-image" decoding="async" loading="lazy" src="images/hero2.webp"/>
+<div class="section-visual-shade"></div>
+</div>
+<div aria-hidden="true" class="section-atmosphere"></div>
+<div aria-hidden="true" class="section-divider"></div>
+<div class="section-container">
+<div class="section-title">ABOUT</div>
+<div class="about-layout">
+<article class="about-statement">
+<p class="about-kicker">VTUBER × STREAMING</p>
+<h2>声と物語で、あなたの夜に寄り添う。</h2>
+</article>
+<div class="about-details">
+<p class="about-lead">
                             HIIRAGI HITSUGIは、YouTubeとTwitchを中心に活動する個人VTuberです。
                             ゲーム配信や雑談、動画を通して、ふと立ち寄りたくなる居場所をつくっていきます。
                         </p>
-
-                        <dl class="about-principles">
-                            <div>
-                                <dt>01</dt>
-                                <dd><strong>STREAM</strong><span>ゲームと雑談を中心に配信</span></dd>
-                            </div>
-                            <div>
-                                <dt>02</dt>
-                                <dd><strong>VIDEO</strong><span>配信の見どころや企画動画</span></dd>
-                            </div>
-                            <div>
-                                <dt>03</dt>
-                                <dd><strong>COMMUNITY</strong><span>一緒に楽しめる時間と空間</span></dd>
-                            </div>
-                        </dl>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-
-
-        <!-- ======================================
+<dl class="about-principles">
+<div>
+<dt>01</dt>
+<dd><strong>STREAM</strong><span>ゲームと雑談を中心に配信</span></dd>
+</div>
+<div>
+<dt>02</dt>
+<dd><strong>VIDEO</strong><span>配信の見どころや企画動画</span></dd>
+</div>
+<div>
+<dt>03</dt>
+<dd><strong>COMMUNITY</strong><span>一緒に楽しめる時間と空間</span></dd>
+</div>
+</dl><a aria-label="HIIRAGI HITSUGIの詳しいプロフィールを見る" class="about-more-link" href="about.html">MORE ABOUT <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================
                 Skills
         ======================================= -->
-
-        <section id="skills" class="image-section image-section-portrait image-section-left">
-            <div class="section-visual" aria-hidden="true">
-                <div class="section-visual-curtain"></div>
-                <img class="section-visual-backdrop" src="images/hero3.webp" alt="" loading="lazy" decoding="async">
-                <img class="section-visual-image" src="images/hero3.webp" alt="" loading="lazy" decoding="async">
-                <div class="section-visual-shade"></div>
-            </div>
-
-            <div class="section-atmosphere" aria-hidden="true"></div>
-            <div class="section-divider" aria-hidden="true"></div>
-
-            <div class="section-container">
-
-                <div class="section-title">ACTIVITIES</div>
-
-                <div class="capabilities-heading">
-                    <h2>Live streams, videos, and stories from the virtual world.</h2>
-                    <p>ゲーム配信を軸に、雑談や動画、企画など幅広い活動を届けていきます。</p>
-                </div>
-
-                <div class="skills-grid capabilities-grid">
-
-                    <article class="skill-card">
-                        <span class="capability-index">01</span>
-                        <h3>Game Streaming</h3>
-                        <p>好きなゲームをじっくり楽しみながら、リスナーのみなさんと同じ時間を共有します。</p>
-                        <ul><li>Twitch</li><li>YouTube Live</li><li>Archive</li></ul>
-                    </article>
-
-                    <article class="skill-card">
-                        <span class="capability-index">02</span>
-                        <h3>Talk & Community</h3>
-                        <p>雑談やコメントを通して、気軽に立ち寄れて落ち着ける配信空間を目指します。</p>
-                        <ul><li>Free Talk</li><li>Community</li><li>Late Night</li></ul>
-                    </article>
-
-                    <article class="skill-card">
-                        <span class="capability-index">03</span>
-                        <h3>Video Content</h3>
-                        <p>配信の見どころ、企画動画、ショートなど、配信外でも楽しめるコンテンツを制作します。</p>
-                        <ul><li>Highlights</li><li>Shorts</li><li>Projects</li></ul>
-                    </article>
-
-                    <article class="skill-card">
-                        <span class="capability-index">04</span>
-                        <h3>Special Projects</h3>
-                        <p>コラボや記念企画をはじめ、VTuberとして新しい表現や体験に挑戦していきます。</p>
-                        <ul><li>Collaboration</li><li>Event</li><li>Challenge</li></ul>
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- ======================================
+<section class="image-section image-section-portrait image-section-left" id="skills">
+<div aria-hidden="true" class="section-visual">
+<div class="section-visual-curtain"></div>
+<img alt="" class="section-visual-backdrop" decoding="async" loading="lazy" src="images/hero3.webp"/>
+<img alt="" class="section-visual-image" decoding="async" loading="lazy" src="images/hero3.webp"/>
+<div class="section-visual-shade"></div>
+</div>
+<div aria-hidden="true" class="section-atmosphere"></div>
+<div aria-hidden="true" class="section-divider"></div>
+<div class="section-container">
+<div class="section-title">ACTIVITIES</div>
+<div class="capabilities-heading">
+<h2>Live streams, videos, and stories from the virtual world.</h2>
+<p>ゲーム配信を軸に、雑談や動画、企画など幅広い活動を届けていきます。</p>
+</div>
+<div class="skills-grid capabilities-grid">
+<article class="skill-card">
+<span class="capability-index">01</span>
+<h3>Game Streaming</h3>
+<p>好きなゲームをじっくり楽しみながら、リスナーのみなさんと同じ時間を共有します。</p>
+<ul><li>Twitch</li><li>YouTube Live</li><li>Archive</li></ul>
+</article>
+<article class="skill-card">
+<span class="capability-index">02</span>
+<h3>Talk &amp; Community</h3>
+<p>雑談やコメントを通して、気軽に立ち寄れて落ち着ける配信空間を目指します。</p>
+<ul><li>Free Talk</li><li>Community</li><li>Late Night</li></ul>
+</article>
+<article class="skill-card">
+<span class="capability-index">03</span>
+<h3>Video Content</h3>
+<p>配信の見どころ、企画動画、ショートなど、配信外でも楽しめるコンテンツを制作します。</p>
+<ul><li>Highlights</li><li>Shorts</li><li>Projects</li></ul>
+</article>
+<article class="skill-card">
+<span class="capability-index">04</span>
+<h3>Special Projects</h3>
+<p>コラボや記念企画をはじめ、VTuberとして新しい表現や体験に挑戦していきます。</p>
+<ul><li>Collaboration</li><li>Event</li><li>Challenge</li></ul>
+</article>
+</div>
+</div>
+</section>
+<!-- ======================================
                 Works
         ======================================= -->
-
-        <section id="works" class="image-section image-section-landscape" aria-labelledby="works-heading">
-            <div class="section-visual" aria-hidden="true">
-                <div class="section-visual-curtain"></div>
-                <img class="section-visual-backdrop" src="images/hero4.webp" alt="" loading="lazy" decoding="async">
-                <img class="section-visual-image" src="images/hero4.webp" alt="" loading="lazy" decoding="async">
-                <div class="section-visual-shade"></div>
-            </div>
-            <div class="section-atmosphere" aria-hidden="true"></div>
-            <div class="section-divider" aria-hidden="true"></div>
-            <div class="section-container works-studio">
-                <div class="works-heading-row">
-                    <div>
-                        <div class="section-title">CONTENTS</div>
-                        <h2 id="works-heading" class="works-heading">Streams, videos, and new adventures.</h2>
-                    </div>
-                    <p class="works-intro">配信、動画、これから始まる企画をまとめています。気になるコンテンツからHIIRAGI HITSUGIの世界を楽しんでください。</p>
-                </div>
-
-                <div class="works-filter" role="group" aria-label="コンテンツカテゴリー">
-                    <button class="works-filter-button is-active" type="button" data-filter="all" aria-pressed="true">ALL</button>
-                    <button class="works-filter-button" type="button" data-filter="stream" aria-pressed="false">STREAM</button>
-                    <button class="works-filter-button" type="button" data-filter="video" aria-pressed="false">VIDEO</button>
-                    <button class="works-filter-button" type="button" data-filter="project" aria-pressed="false">PROJECT</button>
-                </div>
-
-                <div class="works-grid" aria-live="polite">
-                    <article class="work-card work-card-featured" data-category="stream">
-                        <a class="work-card-link" href="https://www.twitch.tv/hiragi_hitsugi" target="_blank" rel="noopener noreferrer" aria-label="HIIRAGI HITSUGIのTwitchチャンネルを見る">
-                            <div class="work-visual">
-                                <img src="images/hero.webp" alt="HIIRAGI HITSUGIの配信ビジュアル">
-                                <div class="work-visual-grid" aria-hidden="true"></div>
-                                <span class="work-index">01</span><span class="work-status">TWITCH CHANNEL</span>
-                            </div>
-                            <div class="work-body">
-                                <div class="work-meta"><span>LIVE STREAM</span><span>ONGOING</span></div>
-                                <h3>Twitch Live & Archives</h3>
-                                <p>ゲーム配信や雑談を中心に活動中。最新配信と公開アーカイブはTwitchから視聴できます。</p>
-                                <ul class="work-tags" aria-label="配信内容"><li>GAME</li><li>TALK</li><li>ARCHIVE</li></ul>
-                                <span class="work-cta">VISIT TWITCH <span aria-hidden="true">↗</span></span>
-                            </div>
-                            <span class="work-pointer-glow" aria-hidden="true"></span>
-                        </a>
-                    </article>
-
-                    <article class="work-card" data-category="video">
-                        <a class="work-card-link" href="https://youtu.be/I9FS-fWVDUw?si=Rj7WNnZ5u9xXoxYp" target="_blank" rel="noopener noreferrer" aria-label="YouTubeのおすすめ動画を見る">
-                            <div class="work-visual work-visual-interface">
-                                <div class="interface-window" aria-hidden="true"><span></span><span></span><span></span><div></div><div></div><div></div></div>
-                                <span class="work-index">02</span><span class="work-status">FEATURED VIDEO</span>
-                            </div>
-                            <div class="work-body">
-                                <div class="work-meta"><span>YOUTUBE</span><span>SELECTED</span></div>
-                                <h3>Featured YouTube Video</h3>
-                                <p>はじめて訪れた方にもおすすめしたい動画をピックアップして紹介しています。</p>
-                                <ul class="work-tags" aria-label="動画カテゴリー"><li>VIDEO</li><li>HIGHLIGHT</li><li>YOUTUBE</li></ul>
-                                <span class="work-cta">WATCH VIDEO <span aria-hidden="true">↗</span></span>
-                            </div>
-                            <span class="work-pointer-glow" aria-hidden="true"></span>
-                        </a>
-                    </article>
-
-                    <article class="work-card" data-category="project">
-                        <div class="work-card-link" tabindex="0" role="group" aria-label="新しい企画、準備中">
-                            <div class="work-visual work-visual-game">
-                                <div class="game-core" aria-hidden="true"><span></span><span></span></div>
-                                <span class="work-index">03</span><span class="work-status">COMING SOON</span>
-                            </div>
-                            <div class="work-body">
-                                <div class="work-meta"><span>SPECIAL PROJECT</span><span>FUTURE</span></div>
-                                <h3>Next Virtual Project</h3>
-                                <p>コラボ、記念配信、新しい動画など、次の活動に向けた企画を準備しています。</p>
-                                <ul class="work-tags" aria-label="予定内容"><li>COLLAB</li><li>EVENT</li><li>NEW STORY</li></ul>
-                                <span class="work-cta">COMING SOON <span aria-hidden="true">＋</span></span>
-                            </div>
-                            <span class="work-pointer-glow" aria-hidden="true"></span>
-                        </div>
-                    </article>
-                </div>
-
-                <p class="works-count"><span id="works-visible-count">3</span> CONTENTS DISPLAYED</p>
-            </div>
-        </section>
-
-
-
-
-
-
-
-
-        <!-- ======================================
+<section aria-labelledby="works-heading" class="image-section image-section-landscape" id="works">
+<div aria-hidden="true" class="section-visual">
+<div class="section-visual-curtain"></div>
+<img alt="" class="section-visual-backdrop" decoding="async" loading="lazy" src="images/hero4.webp"/>
+<img alt="" class="section-visual-image" decoding="async" loading="lazy" src="images/hero4.webp"/>
+<div class="section-visual-shade"></div>
+</div>
+<div aria-hidden="true" class="section-atmosphere"></div>
+<div aria-hidden="true" class="section-divider"></div>
+<div class="section-container works-studio">
+<div class="works-heading-row">
+<div>
+<div class="section-title">CONTENTS</div>
+<h2 class="works-heading" id="works-heading">Streams, videos, and new adventures.</h2>
+</div>
+<p class="works-intro">配信、動画、これから始まる企画をまとめています。気になるコンテンツからHIIRAGI HITSUGIの世界を楽しんでください。</p>
+</div>
+<div aria-label="コンテンツカテゴリー" class="works-filter" role="group">
+<button aria-pressed="true" class="works-filter-button is-active" data-filter="all" type="button">ALL</button>
+<button aria-pressed="false" class="works-filter-button" data-filter="stream" type="button">STREAM</button>
+<button aria-pressed="false" class="works-filter-button" data-filter="video" type="button">VIDEO</button>
+<button aria-pressed="false" class="works-filter-button" data-filter="project" type="button">PROJECT</button>
+</div>
+<div aria-live="polite" class="works-grid">
+<article class="work-card work-card-featured" data-category="stream">
+<a aria-label="HIIRAGI HITSUGIのTwitchチャンネルを見る" class="work-card-link" href="https://www.twitch.tv/hiragi_hitsugi" rel="noopener noreferrer" target="_blank">
+<div class="work-visual">
+<img alt="HIIRAGI HITSUGIの配信ビジュアル" src="images/hero.webp"/>
+<div aria-hidden="true" class="work-visual-grid"></div>
+<span class="work-index">01</span><span class="work-status">TWITCH CHANNEL</span>
+</div>
+<div class="work-body">
+<div class="work-meta"><span>LIVE STREAM</span><span>ONGOING</span></div>
+<h3>Twitch Live &amp; Archives</h3>
+<p>ゲーム配信や雑談を中心に活動中。最新配信と公開アーカイブはTwitchから視聴できます。</p>
+<ul aria-label="配信内容" class="work-tags"><li>GAME</li><li>TALK</li><li>ARCHIVE</li></ul>
+<span class="work-cta">VISIT TWITCH <span aria-hidden="true">↗</span></span>
+</div>
+<span aria-hidden="true" class="work-pointer-glow"></span>
+</a>
+</article>
+<article class="work-card" data-category="video">
+<a aria-label="YouTubeのおすすめ動画を見る" class="work-card-link" href="https://youtu.be/I9FS-fWVDUw?si=Rj7WNnZ5u9xXoxYp" rel="noopener noreferrer" target="_blank">
+<div class="work-visual work-visual-interface">
+<div aria-hidden="true" class="interface-window"><span></span><span></span><span></span><div></div><div></div><div></div></div>
+<span class="work-index">02</span><span class="work-status">FEATURED VIDEO</span>
+</div>
+<div class="work-body">
+<div class="work-meta"><span>YOUTUBE</span><span>SELECTED</span></div>
+<h3>Featured YouTube Video</h3>
+<p>はじめて訪れた方にもおすすめしたい動画をピックアップして紹介しています。</p>
+<ul aria-label="動画カテゴリー" class="work-tags"><li>VIDEO</li><li>HIGHLIGHT</li><li>YOUTUBE</li></ul>
+<span class="work-cta">WATCH VIDEO <span aria-hidden="true">↗</span></span>
+</div>
+<span aria-hidden="true" class="work-pointer-glow"></span>
+</a>
+</article>
+<article class="work-card" data-category="project">
+<div aria-label="新しい企画、準備中" class="work-card-link" role="group" tabindex="0">
+<div class="work-visual work-visual-game">
+<div aria-hidden="true" class="game-core"><span></span><span></span></div>
+<span class="work-index">03</span><span class="work-status">COMING SOON</span>
+</div>
+<div class="work-body">
+<div class="work-meta"><span>SPECIAL PROJECT</span><span>FUTURE</span></div>
+<h3>Next Virtual Project</h3>
+<p>コラボ、記念配信、新しい動画など、次の活動に向けた企画を準備しています。</p>
+<ul aria-label="予定内容" class="work-tags"><li>COLLAB</li><li>EVENT</li><li>NEW STORY</li></ul>
+<span class="work-cta">COMING SOON <span aria-hidden="true">＋</span></span>
+</div>
+<span aria-hidden="true" class="work-pointer-glow"></span>
+</div>
+</article>
+</div>
+<p class="works-count"><span id="works-visible-count">3</span> CONTENTS DISPLAYED</p>
+</div>
+</section>
+<!-- ======================================
                 Media
         ======================================= -->
-
-        <section id="media" aria-labelledby="media-heading">
-
-            <div class="section-atmosphere" aria-hidden="true"></div>
-            <div class="section-divider" aria-hidden="true"></div>
-
-            <div class="section-container media-studio">
-
-                <div class="media-heading-row">
-                    <div>
-                        <div class="section-title">MEDIA</div>
-                        <h2 id="media-heading" class="media-heading">Watch the latest stream and featured video.</h2>
-                    </div>
-                    <p class="media-intro">YouTubeのおすすめ動画と、Twitchの最新公開アーカイブをここから楽しめます。</p>
-                </div>
-
-                <div class="media-grid">
-
-                    <article class="media-card media-card-youtube">
-                        <div class="media-card-topline">
-                            <span class="media-brand">YOUTUBE</span>
-                            <span>FEATURED VIDEO</span>
-                        </div>
-
-                        <div class="media-frame">
-                            <iframe
-                                src="https://www.youtube-nocookie.com/embed/I9FS-fWVDUw?rel=0"
-                                title="HIIRAGI HITSUGI YouTube featured video"
-                                loading="lazy"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-
-                        <div class="media-card-body">
-                            <p class="media-eyebrow">SELECTED MOVIE</p>
-                            <h3>はじめての方におすすめの動画</h3>
-                            <p class="media-description">サイト内でそのまま再生するか、YouTubeの動画ページから視聴できます。</p>
-                            <a class="media-action"
-                                href="https://youtu.be/I9FS-fWVDUw?si=Rj7WNnZ5u9xXoxYp"
-                                target="_blank"
-                                rel="noopener noreferrer">
+<section aria-labelledby="media-heading" id="media">
+<div aria-hidden="true" class="section-atmosphere"></div>
+<div aria-hidden="true" class="section-divider"></div>
+<div class="section-container media-studio">
+<div class="media-heading-row">
+<div>
+<div class="section-title">MEDIA</div>
+<h2 class="media-heading" id="media-heading">Watch the latest stream and featured video.</h2>
+</div>
+<p class="media-intro">YouTubeのおすすめ動画と、Twitchの最新公開アーカイブをここから楽しめます。</p>
+</div>
+<div class="media-grid">
+<article class="media-card media-card-youtube">
+<div class="media-card-topline">
+<span class="media-brand">YOUTUBE</span>
+<span>FEATURED VIDEO</span>
+</div>
+<div class="media-frame">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/I9FS-fWVDUw?rel=0" title="HIIRAGI HITSUGI YouTube featured video">
+</iframe>
+</div>
+<div class="media-card-body">
+<p class="media-eyebrow">SELECTED MOVIE</p>
+<h3>はじめての方におすすめの動画</h3>
+<p class="media-description">サイト内でそのまま再生するか、YouTubeの動画ページから視聴できます。</p>
+<a class="media-action" href="https://youtu.be/I9FS-fWVDUw?si=Rj7WNnZ5u9xXoxYp" rel="noopener noreferrer" target="_blank">
                                 WATCH ON YOUTUBE ↗
                             </a>
-                        </div>
-                    </article>
-
-                    <article id="twitch-latest-card" class="media-card media-card-twitch is-loading" aria-live="polite">
-                        <div class="media-card-topline">
-                            <span class="media-brand">TWITCH</span>
-                            <span>LATEST ARCHIVE</span>
-                        </div>
-
-                        <a id="twitch-archive-link"
-                            class="twitch-archive-link"
-                            href="https://www.twitch.tv/hiragi_hitsugi"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Twitchの最新アーカイブを見る">
-                            <div class="twitch-archive-visual">
-                                <div class="twitch-archive-placeholder" aria-hidden="true">
-                                    <span class="twitch-placeholder-mark">T</span>
-                                </div>
-                                <img id="twitch-archive-image" class="twitch-archive-image" alt="">
-                                <span id="twitch-archive-status" class="twitch-status">LOADING</span>
-                            </div>
-                        </a>
-
-                        <div class="media-card-body">
-                            <p class="media-eyebrow">LATEST PUBLIC ARCHIVE</p>
-                            <h3 id="twitch-archive-title">最新の配信アーカイブを確認中</h3>
-                            <p id="twitch-archive-description" class="media-description">Twitchから最新の公開配信アーカイブを取得しています。</p>
-                            <div class="media-meta">
-                                <span id="twitch-archive-published">LOADING</span>
-                                <span id="twitch-archive-duration"></span>
-                            </div>
-                            <a id="twitch-archive-action"
-                                class="media-action"
-                                href="https://www.twitch.tv/hiragi_hitsugi"
-                                target="_blank"
-                                rel="noopener noreferrer">
+</div>
+</article>
+<article aria-live="polite" class="media-card media-card-twitch is-loading" id="twitch-latest-card">
+<div class="media-card-topline">
+<span class="media-brand">TWITCH</span>
+<span>LATEST ARCHIVE</span>
+</div>
+<a aria-label="Twitchの最新アーカイブを見る" class="twitch-archive-link" href="https://www.twitch.tv/hiragi_hitsugi" id="twitch-archive-link" rel="noopener noreferrer" target="_blank">
+<div class="twitch-archive-visual">
+<div aria-hidden="true" class="twitch-archive-placeholder">
+<span class="twitch-placeholder-mark">T</span>
+</div>
+<img alt="" class="twitch-archive-image" id="twitch-archive-image"/>
+<span class="twitch-status" id="twitch-archive-status">LOADING</span>
+</div>
+</a>
+<div class="media-card-body">
+<p class="media-eyebrow">LATEST PUBLIC ARCHIVE</p>
+<h3 id="twitch-archive-title">最新の配信アーカイブを確認中</h3>
+<p class="media-description" id="twitch-archive-description">Twitchから最新の公開配信アーカイブを取得しています。</p>
+<div class="media-meta">
+<span id="twitch-archive-published">LOADING</span>
+<span id="twitch-archive-duration"></span>
+</div>
+<a class="media-action" href="https://www.twitch.tv/hiragi_hitsugi" id="twitch-archive-action" rel="noopener noreferrer" target="_blank">
                                 VISIT TWITCH ↗
                             </a>
-                        </div>
-
-                        <noscript>
-                            <p class="media-noscript">最新アーカイブの自動取得にはJavaScriptが必要です。</p>
-                        </noscript>
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ======================================
+</div>
+<noscript>
+<p class="media-noscript">最新アーカイブの自動取得にはJavaScriptが必要です。</p>
+</noscript>
+</article>
+</div>
+</div>
+</section>
+<!-- ======================================
                 Contact
         ======================================= -->
-
-        <section id="contact">
-
-            <div class="section-atmosphere" aria-hidden="true"></div>
-            <div class="section-divider" aria-hidden="true"></div>
-
-            <div class="section-container contact-container">
-
-                <div class="section-title">CONTACT</div>
-
-                <div class="contact-heading">
-                    <p class="contact-kicker">COLLABORATION / BUSINESS / MESSAGE</p>
-                    <h2>Let&apos;s create something together.</h2>
-                    <p>コラボ、出演、制作のご相談やメッセージはこちらからお送りください。内容を確認のうえ、必要に応じて返信いたします。</p>
-                </div>
-
-                <form class="contact-form"
-                    action="https://formsubmit.co/hiragi.hitsugi@gmail.com"
-                    method="POST"
-                    accept-charset="UTF-8">
-
-                    <input type="hidden" name="_subject" value="【HIIRAGI HITSUGI公式サイト】新しいお問い合わせ">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_next" value="https://hiragihitsugi.github.io/officialsite/thanks.html">
-                    <input type="hidden" name="_url" value="https://hiragihitsugi.github.io/officialsite/">
-
-                    <div class="contact-form-grid">
-                        <label class="contact-field">
-                            <span>NAME <small>お名前</small></span>
-                            <input type="text" name="お名前" autocomplete="name" maxlength="80" required>
-                        </label>
-
-                        <label class="contact-field">
-                            <span>EMAIL <small>返信先メールアドレス</small></span>
-                            <input type="email" name="email" autocomplete="email" maxlength="160" required>
-                        </label>
-
-                        <label class="contact-field">
-                            <span>CATEGORY <small>お問い合わせ種別</small></span>
-                            <select name="お問い合わせ種別" required>
-                                <option value="" selected disabled>選択してください</option>
-                                <option value="コラボ・出演について">コラボ・出演について</option>
-                                <option value="お仕事・制作について">お仕事・制作について</option>
-                                <option value="応援メッセージ">応援メッセージ</option>
-                                <option value="その他">その他</option>
-                            </select>
-                        </label>
-
-                        <label class="contact-field">
-                            <span>SUBJECT <small>件名</small></span>
-                            <input type="text" name="件名" maxlength="120" required>
-                        </label>
-
-                        <label class="contact-field contact-field-wide">
-                            <span>MESSAGE <small>お問い合わせ内容</small></span>
-                            <textarea name="お問い合わせ内容" rows="7" maxlength="3000" required></textarea>
-                        </label>
-                    </div>
-
-                    <label class="contact-consent">
-                        <input type="checkbox" required>
-                        <span>入力内容を確認し、送信することに同意します。</span>
-                    </label>
-
-                    <button class="contact-submit" type="submit">
-                        <span>SEND MESSAGE</span>
-                        <span aria-hidden="true">↗</span>
-                    </button>
-
-                    <p class="contact-form-note">送信後に完了画面が表示されます。メールが届かない場合は迷惑メールと「すべてのメール」もご確認ください。</p>
-                </form>
-
-                <a class="contact-mail-link" href="mailto:hiragi.hitsugi@gmail.com">メールアプリから直接送る</a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-
-
-    <!-- ======================================
+<section id="contact">
+<div aria-hidden="true" class="section-atmosphere"></div>
+<div aria-hidden="true" class="section-divider"></div>
+<div class="section-container contact-container">
+<div class="section-title">CONTACT</div>
+<div class="contact-heading">
+<p class="contact-kicker">COLLABORATION / BUSINESS / MESSAGE</p>
+<h2>Let's create something together.</h2>
+<p>コラボ、出演、制作のご相談やメッセージはこちらからお送りください。内容を確認のうえ、必要に応じて返信いたします。</p>
+</div>
+<form accept-charset="UTF-8" action="https://formsubmit.co/hiragi.hitsugi@gmail.com" class="contact-form" method="POST">
+<input name="_subject" type="hidden" value="【HIIRAGI HITSUGI公式サイト】新しいお問い合わせ"/>
+<input name="_template" type="hidden" value="table"/>
+<input name="_next" type="hidden" value="https://hiragihitsugi.github.io/officialsite/thanks.html"/>
+<input name="_url" type="hidden" value="https://hiragihitsugi.github.io/officialsite/"/>
+<div class="contact-form-grid">
+<label class="contact-field">
+<span>NAME <small>お名前</small></span>
+<input autocomplete="name" maxlength="80" name="お名前" required="" type="text"/>
+</label>
+<label class="contact-field">
+<span>EMAIL <small>返信先メールアドレス</small></span>
+<input autocomplete="email" maxlength="160" name="email" required="" type="email"/>
+</label>
+<label class="contact-field">
+<span>CATEGORY <small>お問い合わせ種別</small></span>
+<select name="お問い合わせ種別" required="">
+<option disabled="" selected="" value="">選択してください</option>
+<option value="コラボ・出演について">コラボ・出演について</option>
+<option value="お仕事・制作について">お仕事・制作について</option>
+<option value="応援メッセージ">応援メッセージ</option>
+<option value="その他">その他</option>
+</select>
+</label>
+<label class="contact-field">
+<span>SUBJECT <small>件名</small></span>
+<input maxlength="120" name="件名" required="" type="text"/>
+</label>
+<label class="contact-field contact-field-wide">
+<span>MESSAGE <small>お問い合わせ内容</small></span>
+<textarea maxlength="3000" name="お問い合わせ内容" required="" rows="7"></textarea>
+</label>
+</div>
+<label class="contact-consent">
+<input required="" type="checkbox"/>
+<span>入力内容を確認し、送信することに同意します。</span>
+</label>
+<button class="contact-submit" type="submit">
+<span>SEND MESSAGE</span>
+<span aria-hidden="true">↗</span>
+</button>
+<p class="contact-form-note">送信後に完了画面が表示されます。メールが届かない場合は迷惑メールと「すべてのメール」もご確認ください。</p>
+</form>
+<a class="contact-mail-link" href="mailto:hiragi.hitsugi@gmail.com">メールアプリから直接送る</a>
+</div>
+</section>
+</main>
+<!-- ======================================
             Footer
     ======================================= -->
-
-    <footer>
-
-        <div class="footer-logo">
+<footer>
+<div class="footer-logo">
 
             HIIRAGI HITSUGI
 
         </div>
-
-        <div class="footer-copy">
+<div class="footer-copy">
 
             © 2026 HIIRAGI HITSUGI.
             All Rights Reserved.
 
         </div>
-
-    </footer>
-
-
-
-
-
-    <!-- ======================================
+</footer>
+<!-- ======================================
             Library
     ======================================= -->
-
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
-
-
-
-
-
-    <!-- ======================================
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<!-- ======================================
             JavaScript
     ======================================= -->
-
-    <script src="js/loading.js"></script>
-
-    <script src="js/cursor.js"></script>
-
-    <script src="js/navigation.js"></script>
-
-    <script src="js/scroll.js"></script>
-
-    <script src="js/animation.js?v=3.6.0"></script>
-
-    <script src="js/cinematic.js?v=3.6.0"></script>
-
-    <script src="js/media-config.js?v=3.4.0"></script>
-
-    <script src="js/media.js?v=1.0.0"></script>
-
-    <script src="js/particles.js"></script>
-
-    <script src="js/works.js"></script>
-
-    <script src="js/script.js"></script>
-
-    <!-- Scroll Progress -->
-    <div id="scroll-progress"></div>
-
-    <!-- Back To Top -->
-    <button id="back-to-top" aria-label="Back to top">
+<script src="js/loading.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/scroll.js?v=4.0.0"></script>
+<script src="js/animation.js?v=3.6.0"></script>
+<script src="js/cinematic.js?v=3.6.0"></script>
+<script src="js/media-config.js?v=3.4.0"></script>
+<script src="js/media.js?v=1.0.0"></script>
+<script src="js/particles.js"></script>
+<script src="js/works.js"></script>
+<script src="js/script.js"></script>
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+<!-- Back To Top -->
+<button aria-label="Back to top" id="back-to-top">
         ↑
     </button>
 </body>
-
 </html>

@@ -173,3 +173,40 @@
     font-size: 10px;
     letter-spacing: .08em;
 }
+
+
+/*==================================================
+    About Fixed Page Link / Version 4.0.0
+==================================================*/
+.about-more-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-width: 196px;
+    min-height: 52px;
+    margin-top: 34px;
+    padding: 14px 24px;
+    border: 1px solid rgba(102, 241, 255, .28);
+    border-radius: 999px;
+    background: rgba(5, 12, 28, .5);
+    color: #e7fbff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+    transition: transform .32s ease, border-color .32s ease, background .32s ease, box-shadow .32s ease;
+}
+
+.about-more-link:hover,
+.about-more-link:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(102, 241, 255, .75);
+    background: rgba(0, 207, 255, .12);
+    box-shadow: 0 14px 36px rgba(0, 207, 255, .14);
+}
+
+.about-more-link:focus-visible {
+    outline: 2px solid var(--cyan2);
+    outline-offset: 4px;
+}

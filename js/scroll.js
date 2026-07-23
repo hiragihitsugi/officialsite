@@ -216,9 +216,13 @@ const ScrollManager = (() => {
         });
 
         const exploreButton = document.getElementById("explore");
-        exploreButton?.addEventListener("click", () => {
-            scrollTo("#about", { duration: 1.6 });
-        });
+        const exploreHref = exploreButton?.getAttribute?.("href") || "";
+
+        if (exploreButton && (!exploreHref || exploreHref.startsWith("#"))) {
+            exploreButton.addEventListener("click", () => {
+                scrollTo("#about", { duration: 1.6 });
+            });
+        }
     }
 
     function setActiveSection(sectionId) {
