@@ -36,17 +36,32 @@
     let startFallbackTimer = 0;
     let nativeScrollFrame = 0;
     const activeAnimations = [];
+    let sequenceSettled = false;
 
     const select = selector => hero.querySelector(selector);
     const selectAll = selector => Array.from(hero.querySelectorAll(selector));
 
-    function applyStaticFallback() {
+    function applyFinalState() {
         root.classList.remove("hero-intro-pending");
         root.classList.add("hero-intro-running");
         hero.classList.add("hero-intro-final-state");
 
         selectAll(SELECTORS.temporary).forEach(element => {
             element.style.opacity = "0";
+        });
+    }
+
+    function settleFinalState() {
+        if (sequenceSettled) return;
+        sequenceSettled = true;
+
+        applyFinalState();
+        activeAnimations.splice(0).forEach(animation => {
+            try {
+                animation.cancel();
+            } catch (error) {
+                console.warn("Hero animation cleanup skipped:", error);
+            }
         });
     }
 
@@ -116,7 +131,7 @@
         root.classList.add("hero-intro-running");
 
         if (typeof Element.prototype.animate !== "function") {
-            window.setTimeout(applyStaticFallback, 250);
+            window.setTimeout(applyFinalState, 250);
             return;
         }
 
@@ -289,6 +304,9 @@
         // WAAPI fill:"both" owns each phase from its initial frame through its
         // final frame. Do not arm the CSS final-state class during playback;
         // doing so can bypass the intended phase separation.
+        Promise.allSettled(
+            activeAnimations.map(animation => animation.finished)
+        ).then(settleFinalState);
     }
 
     async function prepareHeroImages() {
@@ -359,13 +377,6 @@
     window.addEventListener("pagehide", () => {
         if (startFallbackTimer) window.clearTimeout(startFallbackTimer);
         if (nativeScrollFrame) window.cancelAnimationFrame(nativeScrollFrame);
-
-        activeAnimations.splice(0).forEach(animation => {
-            try {
-                animation.cancel();
-            } catch (error) {
-                console.warn("Hero animation cleanup skipped:", error);
-            }
-        });
+        settleFinalState();
     }, { once: true });
 })();

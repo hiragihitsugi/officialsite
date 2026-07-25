@@ -16,6 +16,13 @@
     };
 
     const fallback = (sections) => {
+        if (!("IntersectionObserver" in window)) {
+            sections.forEach(section => {
+                section.classList.add('cinematic-fallback-visible', 'cinematic-revealed');
+            });
+            return;
+        }
+
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(({ isIntersecting, target }) => {
                 if (!isIntersecting) return;

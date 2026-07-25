@@ -31,10 +31,6 @@ Client SecretはGitHub、HTML、JavaScript、チャットへ貼らないでく�
 8. 生成された設定を `js/media-config.js` へ貼り付けます。
 9. プロジェクトをGitHubへアップロードします。
 
-CloudflareのOrigin制限は次のサイトに設定済みです。
-
-```text
-https://hiragihitsugi.github.io
-```
-
-ローカル確認では `localhost` と `127.0.0.1` も許可されます。
+APIは公開アーカイブ情報だけを返し、取得対象チャンネルはWorker側で
+`hiragi_hitsugi` に固定されています。CORSはGitHub Pagesとローカル確認で
+同じキャッシュを安全に共有できるよう、すべてのOriginからの読み取りを許可します。

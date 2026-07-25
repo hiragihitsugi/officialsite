@@ -2,13 +2,10 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self'; img-src 'self' data:; connect-src 'none'; frame-src 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Twitch連携セットアップ — Node.js不要</title>
-<style>
-:root{color-scheme:dark;--bg:#07080c;--panel:#11131a;--line:#292d3a;--text:#f5f7ff;--muted:#aeb5c8;--accent:#a970ff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#171226 0,#07080c 42%);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.75}
-main{width:min(980px,calc(100% - 32px));margin:48px auto 96px}h1{font-size:clamp(28px,5vw,54px);line-height:1.1;margin:0 0 16px}h2{font-size:22px;margin:0 0 14px}p{color:var(--muted)}.lead{font-size:18px;max-width:760px}.card{background:rgba(17,19,26,.92);border:1px solid var(--line);border-radius:20px;padding:24px;margin-top:20px;box-shadow:0 24px 70px rgba(0,0,0,.28)}.step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start}.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:800}code,textarea,input{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}textarea{width:100%;min-height:360px;background:#080910;color:#e9e7ff;border:1px solid var(--line);border-radius:14px;padding:14px;resize:vertical}input{width:100%;background:#080910;color:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:16px}button,a.button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:12px 18px;background:var(--accent);color:#fff;font-weight:750;text-decoration:none;cursor:pointer;margin-top:12px}button.secondary{background:#242735}.notice{border-left:4px solid var(--accent);padding:10px 16px;background:#151220;border-radius:8px;color:#ddd6f8}.ok{color:#a9f5c4}ol{padding-left:22px}.small{font-size:14px}@media(max-width:600px){main{margin-top:24px}.card{padding:18px}}
-</style>
+<link rel="stylesheet" href="css/twitch-setup.css">
 </head>
 <body><main>
 <p class="small">HIIRAGI HITSUGI / Twitch latest archive setup</p>
@@ -24,7 +21,7 @@ main{width:min(980px,calc(100% - 32px));margin:48px auto 96px}h1{font-size:clamp
  *   TWITCH_CLIENT_ID
  *   TWITCH_CLIENT_SECRET
  * Optional variable:
- *   ALLOWED_ORIGINS=https://hiragihitsugi.github.io,http://localhost:5500
+ *   TWITCH_CHANNEL=hiragi_hitsugi
  */
 
 let tokenCache = {
@@ -35,45 +32,27 @@ let tokenCache = {
 const TWITCH_TOKEN_URL = &quot;https://id.twitch.tv/oauth2/token&quot;;
 const TWITCH_API_URL = &quot;https://api.twitch.tv/helix&quot;;
 const DEFAULT_CHANNEL = &quot;hiragi_hitsugi&quot;;
-const DEFAULT_SITE_ORIGIN = &quot;https://hiragihitsugi.github.io&quot;;
 const CONFIGURED_TWITCH_CLIENT_ID = &quot;y1xa5t8h43ygyd6ygmi4fgsg0i162q&quot;;
 
-function allowedOrigins(env) {
-    const configured = String(env.ALLOWED_ORIGINS || DEFAULT_SITE_ORIGIN)
-        .split(&quot;,&quot;)
-        .map(value =&gt; value.trim())
-        .filter(Boolean);
-
-    return new Set(configured);
-}
-
-function isLocalOrigin(origin) {
-    return /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin || &quot;&quot;);
-}
-
-function corsOrigin(request, env) {
-    const origin = request.headers.get(&quot;Origin&quot;) || &quot;&quot;;
-    if (allowedOrigins(env).has(origin) || isLocalOrigin(origin)) return origin;
-    return DEFAULT_SITE_ORIGIN;
-}
-
-function responseHeaders(request, env, cacheSeconds = 0) {
-    return {
-        &quot;Access-Control-Allow-Origin&quot;: corsOrigin(request, env),
+function responseHeaders(cacheSeconds = 0) {
+    const headers = new Headers({
+        &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;,
         &quot;Access-Control-Allow-Methods&quot;: &quot;GET, OPTIONS&quot;,
-        &quot;Access-Control-Allow-Headers&quot;: &quot;Content-Type&quot;,
+        &quot;Access-Control-Allow-Headers&quot;: &quot;Accept, Content-Type&quot;,
         &quot;Content-Type&quot;: &quot;application/json; charset=utf-8&quot;,
         &quot;Cache-Control&quot;: cacheSeconds &gt; 0
             ? `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}`
             : &quot;no-store&quot;,
-        &quot;Vary&quot;: &quot;Origin&quot;
-    };
+        &quot;X-Content-Type-Options&quot;: &quot;nosniff&quot;,
+        &quot;Referrer-Policy&quot;: &quot;no-referrer&quot;
+    });
+    return headers;
 }
 
-function json(request, env, body, status = 200, cacheSeconds = 0) {
+function json(body, status = 200, cacheSeconds = 0) {
     return new Response(JSON.stringify(body), {
         status,
-        headers: responseHeaders(request, env, cacheSeconds)
+        headers: responseHeaders(cacheSeconds)
     });
 }
 
@@ -190,29 +169,30 @@ export default {
         if (request.method === &quot;OPTIONS&quot;) {
             return new Response(null, {
                 status: 204,
-                headers: responseHeaders(request, env)
+                headers: responseHeaders()
             });
         }
 
         if (request.method !== &quot;GET&quot;) {
-            return json(request, env, { ok: false, error: &quot;Method not allowed&quot; }, 405);
+            return json({ ok: false, error: &quot;Method not allowed&quot; }, 405);
         }
 
         const requestUrl = new URL(request.url);
         if (requestUrl.pathname !== &quot;/latest&quot; &amp;&amp; requestUrl.pathname !== &quot;/&quot;) {
-            return json(request, env, { ok: false, error: &quot;Not found&quot; }, 404);
+            return json({ ok: false, error: &quot;Not found&quot; }, 404);
         }
 
-        const channel = (requestUrl.searchParams.get(&quot;channel&quot;) || DEFAULT_CHANNEL)
-            .trim()
-            .toLowerCase();
+        const channel = String(env.TWITCH_CHANNEL || DEFAULT_CHANNEL).trim().toLowerCase();
+        const requestedChannel = (requestUrl.searchParams.get(&quot;channel&quot;) || channel)
+            .trim().toLowerCase();
 
-        if (!/^[a-z0-9_]{3,25}$/.test(channel)) {
-            return json(request, env, { ok: false, error: &quot;Invalid channel&quot; }, 400);
+        if (!/^[a-z0-9_]{3,25}$/.test(channel) || requestedChannel !== channel) {
+            return json({ ok: false, error: &quot;Invalid channel&quot; }, 400);
         }
 
         const cacheUrl = new URL(request.url);
-        cacheUrl.search = `?channel=${encodeURIComponent(channel)}`;
+        cacheUrl.search = &quot;&quot;;
+        cacheUrl.searchParams.set(&quot;channel&quot;, channel);
         const cacheKey = new Request(cacheUrl.toString(), { method: &quot;GET&quot; });
         const cache = caches.default;
         const cached = await cache.match(cacheKey);
@@ -220,7 +200,7 @@ export default {
 
         try {
             const result = await fetchLatestArchive(channel, env);
-            const response = json(request, env, {
+            const response = json({
                 ok: true,
                 ...result,
                 fetchedAt: new Date().toISOString()
@@ -230,24 +210,18 @@ export default {
             return response;
         } catch (error) {
             console.error(&quot;Twitch latest archive worker error:&quot;, error);
-            return json(request, env, {
+            return json({
                 ok: false,
                 error: &quot;Twitch archive information is temporarily unavailable&quot;
             }, 502);
         }
     }
-};
-</textarea><button onclick="copyText('workerCode',this)">Workerコードをコピー</button></div></section>
+};</textarea><button data-copy-target="workerCode" type="button">Workerコードをコピー</button></div></section>
 
 <section class="card step"><div class="num">3</div><div><h2>Client Secretを登録</h2><ol><li>Workerの <strong>Settings</strong> を開く</li><li><strong>Variables and Secrets</strong> → <strong>Add</strong></li><li>Typeを <strong>Secret</strong> にする</li><li>Nameに <code>TWITCH_CLIENT_SECRET</code></li><li>ValueにTwitchで発行したClient Secret</li><li>保存後、再デプロイ</li></ol><p class="small">Client ID <code>y1xa5t8h43ygyd6ygmi4fgsg0i162q</code> はWorkerコードへ設定済みです。</p></div></section>
 
 <section class="card step"><div class="num">4</div><div><h2>APIをテスト</h2><p>Workerに表示される <code>https://◯◯.workers.dev</code> を開き、末尾に次を付けます。</p><p><code>/latest?channel=hiragi_hitsugi</code></p><p><span class="ok"><code>"ok": true</code></span> が返れば成功です。</p></div></section>
 
-<section class="card step"><div class="num">5</div><div><h2>サイト設定を生成</h2><label for="workerUrl">Worker URL</label><input id="workerUrl" placeholder="https://your-worker.your-subdomain.workers.dev"><button onclick="generateConfig()">設定を生成</button><textarea id="configOutput" readonly style="min-height:130px;margin-top:14px" placeholder="ここに media-config.js の内容が生成されます"></textarea><button class="secondary" onclick="copyText('configOutput',this)">設定をコピー</button><p>コピーした内容で <code>js/media-config.js</code> を丸ごと置き換え、GitHubへアップロードしてください。</p></div></section>
+<section class="card step"><div class="num">5</div><div><h2>サイト設定を生成</h2><label for="workerUrl">Worker URL</label><input id="workerUrl" placeholder="https://your-worker.your-subdomain.workers.dev"><button data-generate-config type="button">設定を生成</button><textarea class="config-output" id="configOutput" readonly placeholder="ここに media-config.js の内容が生成されます"></textarea><button class="secondary" data-copy-target="configOutput" type="button">設定をコピー</button><p>コピーした内容で <code>js/media-config.js</code> を丸ごと置き換え、GitHubへアップロードしてください。</p></div></section>
 </main>
-<script>
-function copyText(id,button){const el=document.getElementById(id);el.focus();el.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}if(navigator.clipboard&&location.protocol!=='file:'){navigator.clipboard.writeText(el.value).then(()=>{}).catch(()=>{})}const old=button.textContent;button.textContent=ok?'コピーしました':'選択しました';setTimeout(()=>button.textContent=old,1600)}
-function generateConfig(){let url=document.getElementById('workerUrl').value.trim().replace(/\/$/,'');const out=document.getElementById('configOutput');if(!/^https:\/\/[a-z0-9._-]+\.workers\.dev$/i.test(url)){out.value='Worker URLを https://...workers.dev の形式で入力してください。';return}out.value='window.MEDIA_CONFIG = Object.freeze({
-    twitchLatestEndpoint: "'+url+'/latest?channel=hiragi_hitsugi"
-});'}
-</script></body></html>
+<script src="js/twitch-setup.js"></script></body></html>

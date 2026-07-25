@@ -4,7 +4,7 @@
  *   TWITCH_CLIENT_ID
  *   TWITCH_CLIENT_SECRET
  * Optional variable:
- *   ALLOWED_ORIGINS=https://hiragihitsugi.github.io,http://localhost:5500
+ *   TWITCH_CHANNEL=hiragi_hitsugi
  */
 
 let tokenCache = {
@@ -15,45 +15,27 @@ let tokenCache = {
 const TWITCH_TOKEN_URL = "https://id.twitch.tv/oauth2/token";
 const TWITCH_API_URL = "https://api.twitch.tv/helix";
 const DEFAULT_CHANNEL = "hiragi_hitsugi";
-const DEFAULT_SITE_ORIGIN = "https://hiragihitsugi.github.io";
 const CONFIGURED_TWITCH_CLIENT_ID = "y1xa5t8h43ygyd6ygmi4fgsg0i162q";
 
-function allowedOrigins(env) {
-    const configured = String(env.ALLOWED_ORIGINS || DEFAULT_SITE_ORIGIN)
-        .split(",")
-        .map(value => value.trim())
-        .filter(Boolean);
-
-    return new Set(configured);
-}
-
-function isLocalOrigin(origin) {
-    return /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin || "");
-}
-
-function corsOrigin(request, env) {
-    const origin = request.headers.get("Origin") || "";
-    if (allowedOrigins(env).has(origin) || isLocalOrigin(origin)) return origin;
-    return DEFAULT_SITE_ORIGIN;
-}
-
-function responseHeaders(request, env, cacheSeconds = 0) {
-    return {
-        "Access-Control-Allow-Origin": corsOrigin(request, env),
+function responseHeaders(cacheSeconds = 0) {
+    const headers = new Headers({
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Headers": "Accept, Content-Type",
         "Content-Type": "application/json; charset=utf-8",
         "Cache-Control": cacheSeconds > 0
             ? `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}`
             : "no-store",
-        "Vary": "Origin"
-    };
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "no-referrer"
+    });
+    return headers;
 }
 
-function json(request, env, body, status = 200, cacheSeconds = 0) {
+function json(body, status = 200, cacheSeconds = 0) {
     return new Response(JSON.stringify(body), {
         status,
-        headers: responseHeaders(request, env, cacheSeconds)
+        headers: responseHeaders(cacheSeconds)
     });
 }
 
@@ -170,29 +152,30 @@ export default {
         if (request.method === "OPTIONS") {
             return new Response(null, {
                 status: 204,
-                headers: responseHeaders(request, env)
+                headers: responseHeaders()
             });
         }
 
         if (request.method !== "GET") {
-            return json(request, env, { ok: false, error: "Method not allowed" }, 405);
+            return json({ ok: false, error: "Method not allowed" }, 405);
         }
 
         const requestUrl = new URL(request.url);
         if (requestUrl.pathname !== "/latest" && requestUrl.pathname !== "/") {
-            return json(request, env, { ok: false, error: "Not found" }, 404);
+            return json({ ok: false, error: "Not found" }, 404);
         }
 
-        const channel = (requestUrl.searchParams.get("channel") || DEFAULT_CHANNEL)
-            .trim()
-            .toLowerCase();
+        const channel = String(env.TWITCH_CHANNEL || DEFAULT_CHANNEL).trim().toLowerCase();
+        const requestedChannel = (requestUrl.searchParams.get("channel") || channel)
+            .trim().toLowerCase();
 
-        if (!/^[a-z0-9_]{3,25}$/.test(channel)) {
-            return json(request, env, { ok: false, error: "Invalid channel" }, 400);
+        if (!/^[a-z0-9_]{3,25}$/.test(channel) || requestedChannel !== channel) {
+            return json({ ok: false, error: "Invalid channel" }, 400);
         }
 
         const cacheUrl = new URL(request.url);
-        cacheUrl.search = `?channel=${encodeURIComponent(channel)}`;
+        cacheUrl.search = "";
+        cacheUrl.searchParams.set("channel", channel);
         const cacheKey = new Request(cacheUrl.toString(), { method: "GET" });
         const cache = caches.default;
         const cached = await cache.match(cacheKey);
@@ -200,7 +183,7 @@ export default {
 
         try {
             const result = await fetchLatestArchive(channel, env);
-            const response = json(request, env, {
+            const response = json({
                 ok: true,
                 ...result,
                 fetchedAt: new Date().toISOString()
@@ -210,7 +193,7 @@ export default {
             return response;
         } catch (error) {
             console.error("Twitch latest archive worker error:", error);
-            return json(request, env, {
+            return json({
                 ok: false,
                 error: "Twitch archive information is temporarily unavailable"
             }, 502);

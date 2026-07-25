@@ -26,13 +26,6 @@
     contain: layout paint;
 }
 
-/* Added in <head>, before first paint. This prevents an initial visible flash. */
-html.cinematic-js .image-section:not(.cinematic-shown):not(.cinematic-playing) .section-visual {
-    opacity: 0;
-    visibility: hidden;
-    clip-path: inset(0 0 100% 0);
-}
-
 /* CSS-only fallback when GSAP CDN is unavailable. */
 html.cinematic-js .image-section.cinematic-fallback-visible .section-visual {
     visibility: visible;
@@ -230,13 +223,6 @@ html.cinematic-js .image-section.cinematic-fallback-visible .section-visual-imag
     transform-origin: bottom center;
     pointer-events: none;
     will-change: transform;
-}
-
-/* Override the older class-based hiding model. The curtain now owns visibility. */
-html.cinematic-js .image-section:not(.cinematic-shown):not(.cinematic-playing) .section-visual {
-    opacity: 1;
-    visibility: visible;
-    clip-path: none;
 }
 
 .image-section.cinematic-revealed .section-visual-curtain {

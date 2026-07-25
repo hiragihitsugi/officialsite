@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src 'none'; form-action 'none'; upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#050816">
     <meta name="robots" content="index, follow">
@@ -13,12 +14,7 @@
     <link rel="stylesheet" href="css/cursor.css?v=4.8.0">
     <link rel="stylesheet" href="css/responsive.css?v=4.0.0">
     <link rel="stylesheet" href="css/page.css?v=4.5.0">
-    <script>
-        document.documentElement.classList.add("about-motion");
-        window.__aboutRevealFallback = window.setTimeout(() => {
-            document.documentElement.classList.remove("about-motion");
-        }, 3500);
-    </script>
+    <script src="js/boot.js" data-page="about"></script>
     <title>ABOUT | HIIRAGI HITSUGI Official Website</title>
     <meta name="description" content="VTuber HIIRAGI HITSUGIのプロフィール、活動内容、配信で大切にしていることを紹介します。">
     <meta property="og:type" content="website">
@@ -97,10 +93,10 @@
                     <p>上手さだけを見せるのではなく、その瞬間の驚きや笑い、悔しさまで共有できる配信を目指しています。</p>
                 </div>
                 <div class="activity-story-grid">
-                    <article class="page-card" data-about-reveal="card" style="--about-reveal-delay: 0ms"><span class="page-card-index">01 / STREAM</span><h3>Game Streaming</h3><p>ゲームの世界へ入り込みながら、コメントと会話し、初見の発見や挑戦を一緒に楽しみます。</p></article>
-                    <article class="page-card" data-about-reveal="card" style="--about-reveal-delay: 90ms"><span class="page-card-index">02 / TALK</span><h3>Free Talk</h3><p>何気ない出来事や好きなものを話しながら、夜に立ち寄れる落ち着いた時間を届けます。</p></article>
-                    <article class="page-card" data-about-reveal="card" style="--about-reveal-delay: 180ms"><span class="page-card-index">03 / VIDEO</span><h3>Video Content</h3><p>配信の見どころやショート、企画動画など、配信外でも楽しめるコンテンツを発信します。</p></article>
-                    <article class="page-card" data-about-reveal="card" style="--about-reveal-delay: 270ms"><span class="page-card-index">04 / PROJECT</span><h3>New Challenges</h3><p>コラボや記念企画をはじめ、VTuberだからこそできる新しい表現へ挑戦していきます。</p></article>
+                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">01 / STREAM</span><h3>Game Streaming</h3><p>ゲームの世界へ入り込みながら、コメントと会話し、初見の発見や挑戦を一緒に楽しみます。</p></article>
+                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">02 / TALK</span><h3>Free Talk</h3><p>何気ない出来事や好きなものを話しながら、夜に立ち寄れる落ち着いた時間を届けます。</p></article>
+                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">03 / VIDEO</span><h3>Video Content</h3><p>配信の見どころやショート、企画動画など、配信外でも楽しめるコンテンツを発信します。</p></article>
+                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">04 / PROJECT</span><h3>New Challenges</h3><p>コラボや記念企画をはじめ、VTuberだからこそできる新しい表現へ挑戦していきます。</p></article>
                 </div>
             </div>
         </section>

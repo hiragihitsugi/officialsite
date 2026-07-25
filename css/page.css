@@ -690,6 +690,10 @@ body.inner-page {
         background .35s ease;
 }
 
+.activity-story-grid > [data-about-reveal="card"]:nth-child(2) { --about-reveal-delay: 90ms; }
+.activity-story-grid > [data-about-reveal="card"]:nth-child(3) { --about-reveal-delay: 180ms; }
+.activity-story-grid > [data-about-reveal="card"]:nth-child(4) { --about-reveal-delay: 270ms; }
+
 .about-motion.about-motion-ready [data-about-reveal="card"]:not(.is-about-visible) {
     opacity: 0;
     transform: translate3d(0, 46px, 0) scale(.975);

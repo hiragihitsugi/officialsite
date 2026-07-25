@@ -18,6 +18,19 @@
     const actionLink = card.querySelector("#twitch-archive-action");
     const status = card.querySelector("#twitch-archive-status");
     const channelUrl = "https://www.twitch.tv/hiragi_hitsugi";
+    const allowedTwitchHosts = new Set(["twitch.tv", "www.twitch.tv"]);
+    const allowedThumbnailHosts = new Set(["static-cdn.jtvnw.net"]);
+
+    const trustedHttpsUrl = (value, allowedHosts, fallback = "") => {
+        try {
+            const url = new URL(String(value));
+            return url.protocol === "https:" && allowedHosts.has(url.hostname)
+                ? url.href
+                : fallback;
+        } catch {
+            return fallback;
+        }
+    };
 
     const setLinks = (url) => {
         [visualLink, actionLink].forEach(link => {
@@ -44,7 +57,7 @@
 
     const formatDuration = (value) => {
         if (!value) return "DURATION UNAVAILABLE";
-        const match = String(value).match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/i);
+        const match = String(value).match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/i);
         if (!match) return String(value).toUpperCase();
         const [, hours, minutes, seconds] = match;
         const parts = [];
@@ -71,14 +84,15 @@
         description.textContent = "最新の公開配信アーカイブです。Twitchで続きを視聴できます。";
         published.textContent = formatDate(archive.publishedAt || archive.createdAt);
         duration.textContent = formatDuration(archive.duration);
-        setLinks(archive.url || channelUrl);
+        setLinks(trustedHttpsUrl(archive.url, allowedTwitchHosts, channelUrl));
         actionLink.textContent = "WATCH ON TWITCH ↗";
 
-        if (archive.thumbnailUrl && image) {
+        const thumbnailUrl = trustedHttpsUrl(archive.thumbnailUrl, allowedThumbnailHosts);
+        if (thumbnailUrl && image) {
             image.addEventListener("error", () => {
                 card.classList.remove("is-loaded");
             }, { once: true });
-            image.src = archive.thumbnailUrl;
+            image.src = thumbnailUrl;
             image.alt = archive.title ? `${archive.title}のサムネイル` : "最新Twitchアーカイブのサムネイル";
         }
     };

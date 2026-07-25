@@ -2567,6 +2567,12 @@ End
     clip-path: inset(0 0 0 0);
 }
 
+.hero-vspo-inspired.hero-intro-final-state .hero-intro-type,
+.hero-vspo-inspired.hero-intro-final-state .hero-character-flash,
+.hero-vspo-inspired.hero-intro-final-state .hero-impact-lines i {
+    opacity: 0;
+}
+
 @media (max-width: 900px) {
     #hero.hero-vspo-inspired { min-height: 680px; }
     .hero-vspo-inspired .hero-back-image,
