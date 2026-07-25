@@ -2,7 +2,7 @@
     HIIRAGI HITSUGI Official Website
 
     loading.js
-    Version 0.3.1
+    Version 0.3.2
 ==================================================*/
 
 "use strict";
@@ -29,6 +29,8 @@ function finishLoader() {
     }
 
     document.body.classList.add("site-loaded");
+    document.documentElement.classList.remove("hero-intro-pending");
+    document.documentElement.classList.add("hero-intro-running");
     window.dispatchEvent(new CustomEvent("siteLoaded"));
 }
 

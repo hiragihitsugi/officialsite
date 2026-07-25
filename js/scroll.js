@@ -2,7 +2,7 @@
     HIIRAGI HITSUGI Official Website
 
     scroll.js
-    Version 1.0.0
+    Version 1.0.1
 ==================================================*/
 
 "use strict";
@@ -23,7 +23,8 @@ const ScrollManager = (() => {
         scrollY: window.scrollY,
         progress: 0,
         activeSection: "",
-        rafPending: false
+        rafPending: false,
+        nativeScrollFrame: 0
     };
 
     const elements = {
@@ -167,6 +168,32 @@ const ScrollManager = (() => {
         }
     }
 
+
+    function animateNativeScroll(targetY, durationSeconds) {
+        if (state.nativeScrollFrame) {
+            window.cancelAnimationFrame(state.nativeScrollFrame);
+        }
+
+        const startY = window.scrollY;
+        const distance = targetY - startY;
+        const durationMs = Math.max(durationSeconds * 1000, 1);
+        const startedAt = performance.now();
+        const easeOutQuint = value => 1 - Math.pow(1 - value, 5);
+
+        const step = now => {
+            const progress = Math.min((now - startedAt) / durationMs, 1);
+            window.scrollTo(0, startY + distance * easeOutQuint(progress));
+
+            if (progress < 1) {
+                state.nativeScrollFrame = window.requestAnimationFrame(step);
+            } else {
+                state.nativeScrollFrame = 0;
+            }
+        };
+
+        state.nativeScrollFrame = window.requestAnimationFrame(step);
+    }
+
     function scrollTo(target, options = {}) {
         const resolvedTarget = resolveTarget(target);
         if (resolvedTarget === null) return;
@@ -174,6 +201,7 @@ const ScrollManager = (() => {
         const offset = options.offset ?? 0;
         const duration = options.duration ?? CONFIG.defaultDuration;
         const immediate = options.immediate ?? false;
+        const forceSmooth = options.forceSmooth ?? false;
 
         if (state.lenis) {
             state.lenis.scrollTo(resolvedTarget, {
@@ -185,13 +213,20 @@ const ScrollManager = (() => {
         }
 
         const top = typeof resolvedTarget === "number"
-            ? resolvedTarget
+            ? resolvedTarget + offset
             : resolvedTarget.getBoundingClientRect().top + window.scrollY + offset;
 
-        window.scrollTo({
-            top,
-            behavior: immediate || supportsReducedMotion() ? "auto" : "smooth"
-        });
+        if (immediate) {
+            window.scrollTo(0, top);
+            return;
+        }
+
+        if (forceSmooth || !supportsReducedMotion()) {
+            animateNativeScroll(top, duration);
+            return;
+        }
+
+        window.scrollTo(0, top);
     }
 
     function handleAnchorClick(event) {
@@ -316,7 +351,7 @@ const ScrollManager = (() => {
         scheduleRender();
 
         console.info(
-            "%cScroll Module Ready — Version 1.0.0",
+            "%cScroll Module Ready — Version 1.0.1",
             "color:#00CFFF;font-weight:bold;"
         );
     }

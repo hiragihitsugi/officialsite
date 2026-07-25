@@ -689,3 +689,18 @@ html.scroll-effects-active .section-atmosphere {
         opacity: .72;
     }
 }
+
+
+/* Hero Static Performance Mode / Version 4.11.0 */
+#hero .hero-sub,
+#hero .hero-title,
+#hero .hero-title span,
+#hero .hero-text,
+#hero .hero-buttons,
+#hero .hero-social,
+#hero .scroll-indicator,
+#hero .scroll-indicator span {
+    animation: none !important;
+    transform: none;
+    will-change: auto;
+}

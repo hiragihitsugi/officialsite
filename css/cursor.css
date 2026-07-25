@@ -1,373 +1,108 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-
-    cursor.css
-    Version : 0.3.0
+    cursor.css / Version 4.10.0
 ==================================================*/
 
-
-
-/*==================================================
-    Hide Default Cursor
-==================================================*/
-
-html{
-
-    cursor:none;
-
+html.custom-cursor-active,
+html.custom-cursor-active body,
+html.custom-cursor-active a,
+html.custom-cursor-active button,
+html.custom-cursor-active input,
+html.custom-cursor-active textarea,
+html.custom-cursor-active select {
+    cursor: none;
 }
 
-body{
-
-    cursor:none;
-
+#cursor-light,
+#cursor-ring,
+#cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transform-origin: center;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
 }
 
-a,
-button,
-input,
-textarea,
-select{
-
-    cursor:none;
-
+#cursor-light {
+    --cursor-scale: 1;
+    width: 320px;
+    height: 320px;
+    z-index: 9000;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 207, 255, .22) 0%,
+        rgba(0, 207, 255, .12) 20%,
+        rgba(0, 207, 255, .065) 39%,
+        rgba(0, 207, 255, .025) 56%,
+        transparent 74%
+    );
+    transition: opacity .35s ease;
 }
 
-
-
-/*==================================================
-    Cursor Light
-==================================================*/
-
-#cursor-light{
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    width:320px;
-
-    height:320px;
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    transform:translate(-50%,-50%);
-
-    z-index:9000;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(0,207,255,.22),
-
-            rgba(0,207,255,.08),
-
-            transparent 72%
-
-        );
-
-    filter:blur(40px);
-
+#cursor-ring {
+    --cursor-scale: 1;
+    width: 34px;
+    height: 34px;
+    z-index: 9100;
+    border: 2px solid rgba(0, 207, 255, .9);
+    border-radius: 50%;
+    box-shadow: 0 0 18px rgba(0, 207, 255, .45);
+    mix-blend-mode: screen;
     transition:
-
-        opacity .35s ease;
-
-}
-
-
-
-/*==================================================
-    Cursor Ring
-==================================================*/
-
-#cursor-ring{
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    width:34px;
-
-    height:34px;
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    transform:translate(-50%,-50%);
-
-    border:2px solid rgba(0,207,255,.9);
-
-    z-index:9100;
-
-    transition:
-
         width .25s ease,
-
         height .25s ease,
-
         border-color .25s ease,
-
         background .25s ease,
-
-        opacity .25s ease;
-
-    box-shadow:
-
-        0 0 18px rgba(0,207,255,.45);
-
+        box-shadow .25s ease,
+        opacity .25s ease,
+        scale .14s ease;
 }
 
-
-
-/*==================================================
-    Cursor Dot
-==================================================*/
-
-#cursor-dot{
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    width:8px;
-
-    height:8px;
-
-    border-radius:50%;
-
-    transform:translate(-50%,-50%);
-
-    background:#66f1ff;
-
-    pointer-events:none;
-
-    z-index:9200;
-
-    box-shadow:
-
-        0 0 15px rgba(0,207,255,.9);
-
+#cursor-dot {
+    --cursor-scale: 1;
+    width: 8px;
+    height: 8px;
+    z-index: 9200;
+    border-radius: 50%;
+    background: #66f1ff;
+    box-shadow: 0 0 15px rgba(0, 207, 255, .9);
+    mix-blend-mode: screen;
+    transition: opacity .25s ease, scale .16s ease;
 }
 
-
-
-/*==================================================
-    Hover State
-==================================================*/
-
-.cursor-hover #cursor-ring{
-
-    width:70px;
-
-    height:70px;
-
-    border-color:#66f1ff;
-
-    background:
-
-        rgba(0,207,255,.08);
-
-    box-shadow:
-
-        0 0 35px rgba(0,207,255,.6);
-
+.cursor-hover #cursor-ring {
+    width: 70px;
+    height: 70px;
+    border-color: #66f1ff;
+    background: rgba(0, 207, 255, .08);
+    box-shadow: 0 0 35px rgba(0, 207, 255, .6);
 }
 
-.cursor-hover #cursor-dot{
-
-    transform:
-
-        translate(-50%,-50%)
-
-        scale(1.4);
-
-}
-
-
-
-/*==================================================
-    Click State
-==================================================*/
-
-.cursor-click #cursor-ring{
-
-    transform:
-
-        translate(-50%,-50%)
-
-        scale(.82);
-
-}
-
-.cursor-click #cursor-dot{
-
-    transform:
-
-        translate(-50%,-50%)
-
-        scale(.6);
-
-}
-
-
-
-/*==================================================
-    Hidden State
-==================================================*/
+.cursor-hover #cursor-dot { --cursor-scale: 1.4; }
+.cursor-click #cursor-ring { --cursor-scale: .82; }
+.cursor-click #cursor-dot { --cursor-scale: .6; }
 
 .cursor-hidden #cursor-light,
-
 .cursor-hidden #cursor-ring,
-
-.cursor-hidden #cursor-dot{
-
-    opacity:0;
-
+.cursor-hidden #cursor-dot {
+    opacity: 0;
 }
 
-
-
-/*==================================================
-    Blend Effect
-==================================================*/
-
-#cursor-ring{
-
-    mix-blend-mode:screen;
-
-}
-
-#cursor-dot{
-
-    mix-blend-mode:screen;
-
-}
-
-
-
-/*==================================================
-    Performance
-==================================================*/
-
-#cursor-light,
-
-#cursor-ring,
-
-#cursor-dot{
-
-    will-change:
-
-        transform,
-
-        left,
-
-        top;
-
-}
-
-
-
-/*==================================================
-    Accessibility
-==================================================*/
-
-@media (pointer:coarse){
-
-    html{
-
-        cursor:auto;
-
-    }
-
-    body{
-
-        cursor:auto;
-
-    }
-
+@media (pointer: coarse), (hover: none) {
+    html,
+    body { cursor: auto; }
     a,
-    button{
-
-        cursor:pointer;
-
-    }
-
+    button { cursor: pointer; }
     #cursor-light,
-
     #cursor-ring,
-
-    #cursor-dot{
-
-        display:none;
-
-    }
-
+    #cursor-dot { display: none; }
 }
 
-
-
-/*==================================================
-    Reduced Motion
-==================================================*/
-
-@media (prefers-reduced-motion:reduce){
-
+@media (prefers-reduced-motion: reduce) {
     #cursor-light,
-
-    #cursor-ring{
-
-        transition:none;
-
-    }
-
-}
-
-
-
-/*==================================================
-    End
-==================================================*/
-/*==================================================
-    Cursor Performance Patch v1.3
-==================================================*/
-
-#cursor-light,
-#cursor-ring,
-#cursor-dot{
-    --cursor-position:translate3d(50vw,50vh,0);
-    will-change:transform,opacity;
-}
-
-#cursor-light,
-#cursor-ring,
-#cursor-dot{
-    transform:var(--cursor-position) translate(-50%,-50%);
-}
-
-#cursor-dot{
-    transform:var(--cursor-position) translate(-50%,-50%);
-}
-
-.cursor-hover #cursor-dot{
-    transform:var(--cursor-position) translate(-50%,-50%) scale(1.4);
-}
-
-.cursor-click #cursor-ring{
-    transform:var(--cursor-position) translate(-50%,-50%) scale(.82);
-}
-
-.cursor-click #cursor-dot{
-    transform:var(--cursor-position) translate(-50%,-50%) scale(.6);
+    #cursor-ring,
+    #cursor-dot { transition: none; }
 }

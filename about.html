@@ -8,11 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=4.0.0">
+    <link rel="stylesheet" href="css/style.css?v=4.12.9">
     <link rel="stylesheet" href="css/loading.css">
-    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="css/cursor.css?v=4.8.0">
     <link rel="stylesheet" href="css/responsive.css?v=4.0.0">
-    <link rel="stylesheet" href="css/page.css?v=4.3.0">
+    <link rel="stylesheet" href="css/page.css?v=4.5.0">
     <script>
         document.documentElement.classList.add("about-motion");
         window.__aboutRevealFallback = window.setTimeout(() => {
@@ -53,13 +53,20 @@
             </div>
         </section>
 
-        <section class="page-section">
-            <div class="page-container profile-overview profile-overview-copy-first">
-                <article class="profile-copy" data-about-reveal="copy">
-                    <p class="profile-name-en">HIIRAGI HITSUGI / VTUBER</p>
+        <section class="page-section about-profile-section">
+            <div class="page-container about-character-stage">
+                <div class="about-stage-dots" aria-hidden="true"></div>
+                <div class="about-outline-name" data-about-reveal="outline" aria-hidden="true">
+                    <span>HIIRAGI</span>
+                    <span>HITSUGI</span>
+                </div>
+
+                <article class="profile-copy about-stage-copy" data-about-reveal="copy">
+                    <p class="profile-name-en">VIRTUAL COMBATANT / STREAMER</p>
                     <h2>柊ひつぎ</h2>
-                    <p>ゲーム配信や雑談を中心に、YouTubeとTwitchで活動する個人VTuberです。戦う日々の合間に、ふっと肩の力を抜ける時間を届けたい。そんな思いで、リスナーのみなさんと一緒に楽しめる居場所をつくっています。</p>
-                    <dl class="profile-facts">
+                    <p class="profile-name-roman">HIIRAGI HITSUGI</p>
+                    <p class="profile-introduction">ゲーム配信や雑談を中心に、YouTubeとTwitchで活動する個人VTuberです。戦う日々の合間に、ふっと肩の力を抜ける時間を届けたい。そんな思いで、リスナーのみなさんと一緒に楽しめる居場所をつくっています。</p>
+                    <dl class="profile-facts about-stage-facts">
                         <div class="profile-fact"><dt>STYLE</dt><dd>戦闘員バーチャルストリーマー</dd></div>
                         <div class="profile-fact"><dt>ACTIVITY</dt><dd>ゲーム配信・雑談・動画</dd></div>
                         <div class="profile-fact"><dt>PLATFORM</dt><dd>YouTube / Twitch</dd></div>
@@ -67,11 +74,19 @@
                     </dl>
                     <div class="page-actions"><a class="page-button" href="index.html#media">WATCH MEDIA <span aria-hidden="true">↗</span></a><a class="page-button" href="guideline.html">GUIDELINE <span aria-hidden="true">↗</span></a></div>
                 </article>
-                <figure class="profile-portrait" data-about-reveal="portrait">
+
+                <figure class="profile-portrait about-stage-keyvisual" data-about-reveal="portrait">
                     <img src="images/keyvisual.webp" alt="VTuber HIIRAGI HITSUGIの全身キービジュアル" loading="eager" decoding="async">
                     <span class="profile-portrait-curtain" aria-hidden="true"></span>
                     <span class="about-image-shine" aria-hidden="true"></span>
                 </figure>
+
+                <figure class="about-mini-character" data-about-reveal="mini">
+                    <img src="images/mini_character.webp" alt="HIIRAGI HITSUGIのSDキャラクター" loading="lazy" decoding="async">
+                </figure>
+
+                <span class="about-stage-mark about-stage-mark-a" aria-hidden="true"></span>
+                <span class="about-stage-mark about-stage-mark-b" aria-hidden="true"></span>
             </div>
         </section>
 
@@ -101,10 +116,10 @@
     </main>
     <footer><div class="footer-logo">HIIRAGI HITSUGI</div><div class="footer-copy">© 2026 HIIRAGI HITSUGI. All Rights Reserved.</div></footer>
     <script src="js/loading.js"></script>
-    <script src="js/cursor.js"></script>
+    <script src="js/cursor.js?v=4.8.0"></script>
     <script src="js/navigation.js"></script>
-    <script src="js/scroll.js?v=4.0.0"></script>
-    <script src="js/about-page.js?v=4.2.0"></script>
+    <script src="js/scroll.js?v=4.12.9"></script>
+    <script src="js/about-page.js?v=4.5.0"></script>
     <script src="js/script.js"></script>
     <div id="scroll-progress"></div>
     <button id="back-to-top" aria-label="ページ上部へ戻る">↑</button>

@@ -2135,3 +2135,498 @@ End
     font-weight: 700;
     letter-spacing: 2px;
 }
+
+
+/*==================================================
+    Hero Static Performance Mode / Version 4.11.0
+    The top Hero intentionally has no decorative animation or compositor-heavy
+    full-screen layers. Keep this block last so older theme rules cannot re-enable
+    those effects.
+==================================================*/
+#hero {
+    isolation: auto;
+    perspective: none;
+}
+
+.hero-background img {
+    transform: scale(1.05);
+    filter: none;
+    will-change: auto;
+}
+
+.hero-overlay {
+    background: rgba(3, 7, 18, .72);
+    opacity: 1;
+}
+
+.hero-content {
+    transform: none;
+    transform-style: flat;
+    will-change: auto;
+}
+
+.hero-title,
+.hero-title span,
+.hero-sub,
+.hero-text,
+.hero-buttons,
+.hero-social,
+.scroll-indicator {
+    transform: none;
+    will-change: auto;
+    animation: none !important;
+}
+
+.hero-title {
+    filter: none;
+}
+
+.hero-title::after,
+.hero-gradient,
+.hero-grid,
+.hero-glow,
+#particles {
+    display: none !important;
+}
+
+.scroll-indicator span {
+    animation: none !important;
+}
+
+/*==================================================
+    VSPO-inspired Hero Sequence / Version 4.12.0
+    One-shot transform/opacity animation only. No canvas, pointer reaction,
+    scroll scrub, filter loop, or continuous Hero animation.
+==================================================*/
+#hero.hero-vspo-inspired {
+    position: relative;
+    height: 100svh;
+    min-height: 700px;
+    overflow: hidden;
+    isolation: isolate;
+    display: block;
+    background: #060817;
+}
+
+.hero-vspo-inspired .hero-scene {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-vspo-inspired .hero-back-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.015);
+}
+
+.hero-vspo-inspired .hero-back-shade {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(3, 5, 16, .84) 0%, rgba(3, 5, 16, .34) 42%, rgba(3, 5, 16, .1) 68%, rgba(3, 5, 16, .42) 100%),
+        linear-gradient(180deg, rgba(3, 5, 16, .34), transparent 35%, rgba(3, 5, 16, .56));
+}
+
+.hero-intro-type {
+    position: absolute;
+    left: clamp(28px, 5vw, 88px);
+    top: 50%;
+    width: min(91vw, 1320px);
+    transform: translate3d(-7%, -58%, 0);
+    opacity: 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    line-height: .76;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.hero-intro-type span {
+    display: block;
+    margin: 0 0 .12em .15em;
+    font-size: clamp(15px, 1.25vw, 22px);
+    line-height: 1;
+    letter-spacing: .52em;
+}
+
+.hero-intro-type strong {
+    display: block;
+    font-size: clamp(72px, 10.7vw, 188px);
+    font-weight: 700;
+}
+
+.hero-intro-type-outline {
+    z-index: 2;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, .93);
+    text-stroke: 1.5px rgba(255, 255, 255, .93);
+}
+
+.hero-intro-type-outline span {
+    color: rgba(255, 255, 255, .9);
+    -webkit-text-stroke: 0;
+}
+
+.hero-intro-type-fill {
+    z-index: 3;
+    color: #fff;
+    clip-path: inset(0 100% 0 0);
+}
+
+.hero-intro-type-fill span { color: #fff; }
+
+.hero-character-stage {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.hero-character-reveal {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    pointer-events: none;
+}
+
+.hero-character-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 1;
+    transform: none;
+    background-color: transparent;
+}
+
+.hero-character-soft-veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: .72;
+    background:
+        linear-gradient(115deg, rgba(3, 5, 16, .72) 0%, rgba(5, 12, 30, .5) 42%, rgba(0, 207, 255, .08) 72%, transparent 100%);
+    will-change: opacity;
+}
+
+/*
+ * The final character raster is never animated. A duplicate of the static
+ * Hero background sits above it and is clipped away during the reveal. This
+ * keeps the exact same character layer from initial decode through the final
+ * frame, eliminating compositor handoffs and end-of-intro flicker.
+ */
+.hero-character-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    pointer-events: none;
+}
+
+.hero-character-cover-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.015);
+}
+
+.hero-character-cover-shade {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(3, 5, 16, .84) 0%, rgba(3, 5, 16, .34) 42%, rgba(3, 5, 16, .1) 68%, rgba(3, 5, 16, .42) 100%),
+        linear-gradient(180deg, rgba(3, 5, 16, .34), transparent 35%, rgba(3, 5, 16, .56));
+}
+
+.hero-character-flash {
+    position: absolute;
+    z-index: 3;
+    top: -20%;
+    left: 43%;
+    width: 10%;
+    height: 145%;
+    opacity: 0;
+    transform: rotate(18deg) translate3d(-460%, 0, 0);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.96), rgba(0,207,255,.62), transparent);
+}
+
+.hero-impact-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    overflow: hidden;
+}
+
+.hero-impact-lines i {
+    position: absolute;
+    left: -15%;
+    top: 50%;
+    width: 130%;
+    height: 2px;
+    opacity: 0;
+    transform-origin: center;
+    background: linear-gradient(90deg, transparent 5%, #fff 35%, #00cfff 60%, transparent 92%);
+}
+
+.hero-impact-lines i:nth-child(1) { --impact-rotate: -13deg; transform: rotate(-13deg) scaleX(.05); }
+.hero-impact-lines i:nth-child(2) { --impact-rotate: 8deg; transform: rotate(8deg) scaleX(.05); }
+.hero-impact-lines i:nth-child(3) { --impact-rotate: -2deg; transform: rotate(-2deg) scaleX(.05); }
+
+.hero-main-content {
+    position: absolute;
+    z-index: 10;
+    right: clamp(30px, 5vw, 88px);
+    bottom: clamp(58px, 8vh, 96px);
+    width: min(570px, calc(100% - 60px));
+    opacity: 0;
+    transform: translate3d(34px, 18px, 0);
+    text-align: right;
+}
+
+.hero-main-kicker {
+    margin: 0 0 14px;
+    color: #7eeeff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .44em;
+}
+
+.hero-main-content h1 {
+    margin: 0;
+    color: #fff;
+    font-family: "Outfit", sans-serif;
+    font-size: clamp(62px, 7.2vw, 122px);
+    font-weight: 700;
+    line-height: .77;
+    letter-spacing: -.055em;
+    text-align: right;
+}
+
+.hero-main-content h1 span { display: block; }
+
+.hero-main-copy {
+    margin: 26px 0 0 auto;
+    max-width: 520px;
+    color: rgba(255,255,255,.9);
+    font-size: clamp(14px, 1.15vw, 18px);
+    line-height: 1.7;
+}
+
+.hero-main-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.hero-profile-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.hero-main-social {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.hero-main-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 999px;
+    background: rgba(5,8,22,.28);
+    color: rgba(255,255,255,.88);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    backdrop-filter: blur(8px);
+}
+
+.hero-edge-copy {
+    position: absolute;
+    z-index: 9;
+    color: rgba(255,255,255,.63);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    opacity: 0;
+}
+
+.hero-edge-copy-left {
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: left top;
+}
+
+.hero-edge-copy-right {
+    right: 25px;
+    top: 120px;
+    writing-mode: vertical-rl;
+}
+
+.hero-scroll-cue {
+    position: absolute;
+    z-index: 12;
+    left: 32px;
+    bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: rgba(255,255,255,.7);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: .3em;
+    text-align: left;
+    opacity: 0;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.hero-scroll-cue p {
+    margin: 0;
+}
+
+.hero-scroll-cue:focus-visible {
+    outline: 2px solid rgba(126, 238, 255, .95);
+    outline-offset: 6px;
+}
+
+.hero-scroll-cue span {
+    display: block;
+    width: 58px;
+    height: 1px;
+    background: rgba(255,255,255,.66);
+}
+
+/*
+ * Hero intro v4.13.0
+ * Final visual styles are armed before the first painted animation frame.
+ * The character image itself remains static; only its background cover moves.
+ * Therefore no property on the final character raster changes at completion.
+ */
+.hero-vspo-inspired.hero-intro-final-state .hero-character-cover {
+    clip-path: polygon(101% 0, 101% 0, 101% 100%, 101% 100%);
+}
+
+.hero-vspo-inspired.hero-intro-final-state .hero-character-soft-veil {
+    opacity: 0;
+}
+
+.hero-vspo-inspired.hero-intro-final-state .hero-main-content {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.hero-vspo-inspired.hero-intro-final-state .hero-edge-copy,
+.hero-vspo-inspired.hero-intro-final-state .hero-scroll-cue {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+}
+
+@media (max-width: 900px) {
+    #hero.hero-vspo-inspired { min-height: 680px; }
+    .hero-vspo-inspired .hero-back-image,
+    .hero-vspo-inspired .hero-character-cover-image { object-position: 50% center; }
+    .hero-intro-type { left: 20px; top: 44%; width: calc(100% - 40px); }
+    .hero-intro-type strong { font-size: clamp(54px, 15vw, 104px); line-height: .8; white-space: normal; }
+    .hero-character-image { object-fit: cover; object-position: 56% center; }
+    .hero-main-content { right: 22px; left: auto; bottom: 82px; width: calc(100% - 44px); }
+    .hero-main-content h1 { font-size: clamp(54px, 13.6vw, 86px); }
+    .hero-main-copy { max-width: 440px; margin-left: auto; }
+    .hero-edge-copy { display: none; }
+}
+
+@media (max-width: 560px) {
+    #hero.hero-vspo-inspired { min-height: 640px; }
+    .hero-vspo-inspired .hero-back-shade,
+    .hero-vspo-inspired .hero-character-cover-shade {
+        background: linear-gradient(180deg, rgba(3,5,16,.18), rgba(3,5,16,.2) 42%, rgba(3,5,16,.82) 75%, rgba(3,5,16,.92));
+    }
+    .hero-character-image { object-position: 51% center; }
+    .hero-intro-type { top: 39%; }
+    .hero-intro-type span { font-size: 10px; letter-spacing: .34em; }
+    .hero-intro-type strong { font-size: clamp(48px, 16.5vw, 74px); }
+    .hero-main-content { right: 18px; bottom: 72px; width: calc(100% - 36px); }
+    .hero-main-content h1 { font-size: clamp(49px, 15.5vw, 70px); }
+    .hero-main-copy { margin-top: 18px; font-size: 14px; }
+    .hero-main-actions { flex-direction: row; justify-content: flex-end; gap: 8px; margin-top: 22px; }
+    .hero-main-actions #explore,
+    .hero-main-actions .secondary-button { width: auto; min-width: 0; padding: 13px 17px; font-size: 10px; }
+    .hero-main-social { display: none; }
+    .hero-scroll-cue { right: 16px; bottom: 20px; }
+    .hero-scroll-cue span { width: 38px; }
+}
+
+/*==================================================
+    Mobile Hero Framing / Version 4.12.5
+    Portrait phones only. Keep the character's face inside the viewport while
+    preserving the desktop/tablet composition and the existing intro timing.
+==================================================*/
+@media (max-width: 768px) and (orientation: portrait) {
+    .hero-vspo-inspired .hero-back-image,
+    .hero-vspo-inspired .hero-character-cover-image {
+        object-position: 40% 50%;
+        transform-origin: 40% 50%;
+    }
+
+    .hero-vspo-inspired .hero-character-stage {
+        --hero-character-origin: 31% 48%;
+    }
+
+    .hero-vspo-inspired .hero-character-image {
+        object-position: 31% 48%;
+    }
+}
+
+@media (max-width: 420px) and (orientation: portrait) {
+    .hero-vspo-inspired .hero-back-image,
+    .hero-vspo-inspired .hero-character-cover-image {
+        object-position: 38% 50%;
+        transform-origin: 38% 50%;
+    }
+
+    .hero-vspo-inspired .hero-character-stage {
+        --hero-character-origin: 28% 46%;
+    }
+
+    .hero-vspo-inspired .hero-character-image {
+        object-position: 28% 46%;
+    }
+}

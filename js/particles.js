@@ -1,632 +1,347 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
+    particles.js / Version 4.10.0
 
-    particles.js
-    Version : 0.3.0
-    Part 1
-
+    Hero geometry animation is retained but disabled by configuration.
+    Set GEOMETRY_ANIMATION_ENABLED to true to restore it.
 ==================================================*/
 
 "use strict";
 
-/*==================================================
-    Canvas
-==================================================*/
+(() => {
+    // Feature switches: implementation is retained for later reuse.
+    // Restore the geometry itself by changing the first value to true.
+    // Pointer interaction stays disabled unless explicitly enabled separately.
+    const GEOMETRY_ANIMATION_ENABLED = false;
+    const GEOMETRY_POINTER_INTERACTION_ENABLED = false;
 
-const particleLayer = document.getElementById("particles");
+    const particleLayer = document.getElementById("particles");
+    if (!particleLayer) return;
 
-let canvas;
-let ctx;
+    if (!GEOMETRY_ANIMATION_ENABLED) {
+        particleLayer.hidden = true;
+        particleLayer.setAttribute("data-animation-enabled", "false");
+        return;
+    }
 
-if (particleLayer) {
+    particleLayer.hidden = false;
+    particleLayer.setAttribute("data-animation-enabled", "true");
 
-    canvas = document.createElement("canvas");
-    ctx = canvas.getContext("2d");
-
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
+    if (!ctx) return;
     particleLayer.appendChild(canvas);
 
-}
+    const CONFIG = Object.freeze({
+        maxSpeed: 0.35,
+        minRadius: 1,
+        maxRadius: 3,
+        interactionRadius: 150,
+        interactionStrength: 3,
+        connectionDistance: 140,
+        connectionOpacity: 0.35,
+        maxDevicePixelRatio: 2,
+        glowRadius: 12,
+        lineBuckets: 12
+    });
 
-/*==================================================
-    Settings
-==================================================*/
+    const BASE_FRAME_MS = 1000 / 60;
+    const state = {
+        width: 1,
+        height: 1,
+        dpr: 1,
+        particles: [],
+        spriteCache: new Map(),
+        rafId: 0,
+        resizeRafId: 0,
+        previousTime: 0,
+        visible: true
+    };
 
-const CONFIG = {
+    // Geometry uses its own optional pointer state and never shares the custom
+    // cursor's coordinates. This keeps Hero cursor behavior equal to other pages.
+    const pointer = {
+        x: -9999,
+        y: -9999,
+        inside: false,
+        active: false
+    };
 
-    particleCount: 80,
-
-    maxSpeed: 0.35,
-
-    minRadius: 1,
-
-    maxRadius: 3,
-
-    color: "rgba(102,241,255,0.85)",
-
-    devicePixelRatio: Math.min(window.devicePixelRatio, 2)
-
-};
-
-/*==================================================
-    Size
-==================================================*/
-
-let width = 0;
-let height = 0;
-
-function resizeCanvas() {
-
-    width = window.innerWidth;
-    height = window.innerHeight;
-
-    canvas.width = width * CONFIG.devicePixelRatio;
-    canvas.height = height * CONFIG.devicePixelRatio;
-
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
-
-    ctx.setTransform(
-        CONFIG.devicePixelRatio,
-        0,
-        0,
-        CONFIG.devicePixelRatio,
-        0,
-        0
-    );
-
-}
-
-resizeCanvas();
-
-window.addEventListener("resize", resizeCanvas);
-
-/*==================================================
-    Particle Class
-==================================================*/
-
-class Particle {
-
-    constructor() {
-
-        this.reset(true);
-
+    if (GEOMETRY_POINTER_INTERACTION_ENABLED) {
+        window.addEventListener("pointermove", event => {
+            const events = event.getCoalescedEvents?.();
+            const point = events?.length ? events[events.length - 1] : event;
+            pointer.x = point.clientX;
+            pointer.y = point.clientY;
+            pointer.inside = true;
+            pointer.active = true;
+        }, { passive: true });
+        document.documentElement.addEventListener("mouseleave", () => {
+            pointer.inside = false;
+            pointer.active = false;
+        });
     }
 
-    reset(randomPosition = false) {
-
-        this.radius =
-            CONFIG.minRadius +
-            Math.random() *
-            (CONFIG.maxRadius - CONFIG.minRadius);
-
-        if (randomPosition) {
-
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-
-        } else {
-
-            this.x = Math.random() > 0.5 ? -20 : width + 20;
-            this.y = Math.random() * height;
-
+    class Particle {
+        constructor() {
+            this.x = 0;
+            this.y = 0;
+            this.vx = 0;
+            this.vy = 0;
+            this.radius = 1;
+            this.opacity = 1;
+            this.spriteKey = "";
+            this.reset(true);
         }
 
-        this.vx =
-            (Math.random() - 0.5) *
-            CONFIG.maxSpeed;
-
-        this.vy =
-            (Math.random() - 0.5) *
-            CONFIG.maxSpeed;
-
-        this.opacity =
-            0.3 + Math.random() * 0.7;
-
-    }
-
-    update() {
-
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (
-
-            this.x < -30 ||
-            this.x > width + 30 ||
-            this.y < -30 ||
-            this.y > height + 30
-
-        ) {
-
-            this.reset(false);
-
-        }
-
-    }
-
-    draw() {
-
-        ctx.beginPath();
-
-        ctx.arc(
-
-            this.x,
-            this.y,
-            this.radius,
-            0,
-            Math.PI * 2
-
-        );
-
-        ctx.fillStyle =
-            `rgba(102,241,255,${this.opacity})`;
-
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = "#66f1ff";
-
-        ctx.fill();
-
-    }
-
-}
-
-/*==================================================
-    Particle List
-==================================================*/
-
-const particles = [];
-
-function createParticles() {
-
-    particles.length = 0;
-
-    for (
-
-        let i = 0;
-
-        i < CONFIG.particleCount;
-
-        i++
-
-    ) {
-
-        particles.push(
-
-            new Particle()
-
-        );
-
-    }
-
-}
-
-createParticles();
-
-/*==================================================
-    Draw
-==================================================*/
-
-function drawBackground() {
-
-    ctx.clearRect(
-
-        0,
-
-        0,
-
-        width,
-
-        height
-
-    );
-
-}
-
-/*==================================================
-    Update
-==================================================*/
-
-function updateParticles() {
-
-    for (const particle of particles) {
-
-        particle.update();
-
-        particle.draw();
-
-    }
-
-}
-
-/*==================================================
-    Animation Loop
-==================================================*/
-
-function animate() {
-
-    drawBackground();
-
-    updateParticles();
-
-    requestAnimationFrame(
-
-        animate
-
-    );
-
-}
-
-animate();
-
-/*==================================================
-    Debug
-==================================================*/
-
-console.info(
-
-    "%cParticles Module Part1 Loaded",
-
-    "color:#66f1ff;font-weight:bold;"
-
-);
-
-/*==================================================
-    Mouse
-==================================================*/
-
-const mouse = {
-
-    x: -9999,
-    y: -9999,
-    radius: 150
-
-};
-
-window.addEventListener("mousemove", (event) => {
-
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-
-});
-
-window.addEventListener("mouseleave", () => {
-
-    mouse.x = -9999;
-    mouse.y = -9999;
-
-});
-
-/*==================================================
-    Mouse Interaction
-==================================================*/
-
-function interactParticles() {
-
-    for (const particle of particles) {
-
-        const dx = particle.x - mouse.x;
-        const dy = particle.y - mouse.y;
-
-        const distance = Math.sqrt(
-
-            dx * dx +
-            dy * dy
-
-        );
-
-        if (distance < mouse.radius) {
-
-            const force =
-
-                (mouse.radius - distance) /
-                mouse.radius;
-
-            particle.x +=
-                (dx / distance) *
-                force *
-                3;
-
-            particle.y +=
-                (dy / distance) *
-                force *
-                3;
-
-        }
-
-    }
-
-}
-
-/*==================================================
-    Connections
-==================================================*/
-
-function drawConnections() {
-
-    const maxDistance = 140;
-
-    for (
-
-        let i = 0;
-
-        i < particles.length;
-
-        i++
-
-    ) {
-
-        for (
-
-            let j = i + 1;
-
-            j < particles.length;
-
-            j++
-
-        ) {
-
-            const p1 = particles[i];
-            const p2 = particles[j];
-
-            const dx =
-
-                p1.x - p2.x;
-
-            const dy =
-
-                p1.y - p2.y;
-
-            const distance = Math.sqrt(
-
-                dx * dx +
-                dy * dy
-
-            );
-
-            if (
-
-                distance < maxDistance
-
-            ) {
-
-                const alpha =
-
-                    (1 -
-
-                    distance /
-
-                    maxDistance)
-
-                    * .35;
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-
-                    p1.x,
-
-                    p1.y
-
-                );
-
-                ctx.lineTo(
-
-                    p2.x,
-
-                    p2.y
-
-                );
-
-                ctx.strokeStyle =
-
-                    `rgba(102,241,255,${alpha})`;
-
-                ctx.lineWidth = 1;
-
-                ctx.stroke();
-
+        reset(randomPosition = false) {
+            this.radius = CONFIG.minRadius + Math.random() * (CONFIG.maxRadius - CONFIG.minRadius);
+            this.spriteKey = this.radius.toFixed(1);
+            this.opacity = 0.3 + Math.random() * 0.7;
+
+            if (randomPosition) {
+                this.x = Math.random() * state.width;
+                this.y = Math.random() * state.height;
+            } else {
+                this.x = Math.random() > 0.5 ? -20 : state.width + 20;
+                this.y = Math.random() * state.height;
             }
 
+            this.vx = (Math.random() - 0.5) * CONFIG.maxSpeed;
+            this.vy = (Math.random() - 0.5) * CONFIG.maxSpeed;
         }
 
+        update(step) {
+            // The former source advanced particles in two simultaneous loops.
+            // Multiplying velocity by two preserves that exact perceived speed,
+            // while rendering only once per display frame.
+            this.x += this.vx * step * 2;
+            this.y += this.vy * step * 2;
+
+            if (
+                this.x < -30 || this.x > state.width + 30 ||
+                this.y < -30 || this.y > state.height + 30
+            ) {
+                this.reset(false);
+            }
+        }
     }
 
-}
+    function particleCount() {
+        if (state.width < 600) return 30;
+        if (state.width < 900) return 45;
+        if (state.width < 1200) return 60;
+        if (state.width < 1600) return 70;
+        return 80;
+    }
 
-/*==================================================
-    Highlight
-==================================================*/
+    function syncParticles() {
+        const target = particleCount();
+        while (state.particles.length < target) state.particles.push(new Particle());
+        if (state.particles.length > target) state.particles.length = target;
+    }
 
-function highlightParticles() {
+    function createSprite(radius) {
+        const glow = CONFIG.glowRadius;
+        const size = Math.ceil((radius + glow) * 2);
+        const sprite = document.createElement("canvas");
+        const spriteCtx = sprite.getContext("2d", { alpha: true });
+        const scale = Math.min(state.dpr, 2);
 
-    for (const particle of particles) {
+        sprite.width = Math.ceil(size * scale);
+        sprite.height = Math.ceil(size * scale);
+        spriteCtx.scale(scale, scale);
 
-        const dx =
-
-            particle.x - mouse.x;
-
-        const dy =
-
-            particle.y - mouse.y;
-
-        const distance = Math.sqrt(
-
-            dx * dx +
-            dy * dy
-
+        const center = size / 2;
+        const gradient = spriteCtx.createRadialGradient(
+            center, center, 0,
+            center, center, radius + glow
         );
+        const coreStop = Math.min(radius / (radius + glow), 0.28);
+        gradient.addColorStop(0, "rgba(102,241,255,1)");
+        gradient.addColorStop(coreStop, "rgba(102,241,255,.98)");
+        gradient.addColorStop(.48, "rgba(102,241,255,.24)");
+        gradient.addColorStop(1, "rgba(102,241,255,0)");
+        spriteCtx.fillStyle = gradient;
+        spriteCtx.fillRect(0, 0, size, size);
+        return { canvas: sprite, size };
+    }
 
-        if (
+    function spriteFor(key) {
+        let sprite = state.spriteCache.get(key);
+        if (!sprite) {
+            sprite = createSprite(Number(key));
+            state.spriteCache.set(key, sprite);
+        }
+        return sprite;
+    }
 
-            distance < mouse.radius
+    function resize() {
+        state.resizeRafId = 0;
+        const bounds = particleLayer.getBoundingClientRect();
+        state.width = Math.max(1, Math.round(bounds.width || window.innerWidth));
+        state.height = Math.max(1, Math.round(bounds.height || window.innerHeight));
+        state.dpr = Math.min(window.devicePixelRatio || 1, CONFIG.maxDevicePixelRatio);
 
-        ) {
+        canvas.width = Math.round(state.width * state.dpr);
+        canvas.height = Math.round(state.height * state.dpr);
+        canvas.style.width = `${state.width}px`;
+        canvas.style.height = `${state.height}px`;
+        ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
 
-            ctx.beginPath();
+        state.spriteCache.clear();
+        syncParticles();
+    }
 
-            ctx.arc(
+    function scheduleResize() {
+        if (state.resizeRafId) return;
+        state.resizeRafId = window.requestAnimationFrame(resize);
+    }
 
-                particle.x,
+    function interact(particle, step) {
+        if (!GEOMETRY_POINTER_INTERACTION_ENABLED || !pointer.active || !pointer.inside) return;
+        const dx = particle.x - pointer.x;
+        const dy = particle.y - pointer.y;
+        const distanceSq = dx * dx + dy * dy;
+        const radiusSq = CONFIG.interactionRadius * CONFIG.interactionRadius;
+        if (distanceSq <= 0 || distanceSq >= radiusSq) return;
 
-                particle.y,
+        const distance = Math.sqrt(distanceSq);
+        const force = (CONFIG.interactionRadius - distance) / CONFIG.interactionRadius;
+        const amount = force * CONFIG.interactionStrength * step / distance;
+        particle.x += dx * amount;
+        particle.y += dy * amount;
+    }
 
-                particle.radius * 2,
+    function update(step) {
+        for (const particle of state.particles) {
+            particle.update(step);
+            interact(particle, step);
+        }
+    }
 
-                0,
-
-                Math.PI * 2
-
+    function drawParticles() {
+        for (const particle of state.particles) {
+            const sprite = spriteFor(particle.spriteKey);
+            const half = sprite.size / 2;
+            ctx.globalAlpha = particle.opacity;
+            ctx.drawImage(
+                sprite.canvas,
+                particle.x - half,
+                particle.y - half,
+                sprite.size,
+                sprite.size
             );
+        }
+        ctx.globalAlpha = 1;
+    }
 
-            ctx.fillStyle =
+    function drawConnections() {
+        const buckets = Array.from({ length: CONFIG.lineBuckets }, () => new Path2D());
+        const used = new Uint8Array(CONFIG.lineBuckets);
+        const maxDistanceSq = CONFIG.connectionDistance * CONFIG.connectionDistance;
+        const particles = state.particles;
 
-                "rgba(255,255,255,.15)";
+        for (let i = 0; i < particles.length - 1; i += 1) {
+            const a = particles[i];
+            for (let j = i + 1; j < particles.length; j += 1) {
+                const b = particles[j];
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+                const distanceSq = dx * dx + dy * dy;
+                if (distanceSq >= maxDistanceSq) continue;
 
+                const normalized = 1 - Math.sqrt(distanceSq) / CONFIG.connectionDistance;
+                const bucket = Math.min(
+                    CONFIG.lineBuckets - 1,
+                    Math.floor(normalized * CONFIG.lineBuckets)
+                );
+                buckets[bucket].moveTo(a.x, a.y);
+                buckets[bucket].lineTo(b.x, b.y);
+                used[bucket] = 1;
+            }
+        }
+
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#66f1ff";
+        for (let i = 0; i < CONFIG.lineBuckets; i += 1) {
+            if (!used[i]) continue;
+            ctx.globalAlpha = ((i + .5) / CONFIG.lineBuckets) * CONFIG.connectionOpacity;
+            ctx.stroke(buckets[i]);
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawHighlights() {
+        if (!GEOMETRY_POINTER_INTERACTION_ENABLED || !pointer.active || !pointer.inside) return;
+        const radiusSq = CONFIG.interactionRadius * CONFIG.interactionRadius;
+        let hasPath = false;
+        ctx.beginPath();
+
+        for (const particle of state.particles) {
+            const dx = particle.x - pointer.x;
+            const dy = particle.y - pointer.y;
+            if (dx * dx + dy * dy >= radiusSq) continue;
+            ctx.moveTo(particle.x + particle.radius * 2, particle.y);
+            ctx.arc(particle.x, particle.y, particle.radius * 2, 0, Math.PI * 2);
+            hasPath = true;
+        }
+
+        if (hasPath) {
+            ctx.globalAlpha = .15;
+            ctx.fillStyle = "#fff";
             ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+    }
 
+    function render(time) {
+        state.rafId = 0;
+        if (!state.visible || document.hidden) {
+            state.previousTime = 0;
+            return;
         }
 
+        const elapsed = state.previousTime
+            ? Math.min(time - state.previousTime, 50)
+            : BASE_FRAME_MS;
+        state.previousTime = time;
+        const step = elapsed / BASE_FRAME_MS;
+
+        ctx.clearRect(0, 0, state.width, state.height);
+        update(step);
+        drawParticles();
+        drawConnections();
+        drawHighlights();
+        start();
     }
 
-}
-
-/*==================================================
-    Particle Count Optimization
-==================================================*/
-
-function updateParticleCount() {
-
-    let count = 80;
-
-    if (width < 1600) count = 70;
-    if (width < 1200) count = 60;
-    if (width < 900) count = 45;
-    if (width < 600) count = 30;
-
-    CONFIG.particleCount = count;
-
-    createParticles();
-
-}
-
-/*==================================================
-    Resize
-==================================================*/
-
-window.addEventListener("resize", () => {
-
-    resizeCanvas();
-
-    updateParticleCount();
-
-});
-
-/*==================================================
-    Visibility API
-==================================================*/
-
-let animationId = null;
-
-function startAnimation() {
-
-    if (!animationId) {
-
-        animationId = requestAnimationFrame(loop);
-
+    function start() {
+        if (state.rafId || !state.visible || document.hidden) return;
+        state.rafId = window.requestAnimationFrame(render);
     }
 
-}
-
-function stopAnimation() {
-
-    if (animationId) {
-
-        cancelAnimationFrame(animationId);
-
-        animationId = null;
-
+    function stop() {
+        if (state.rafId) window.cancelAnimationFrame(state.rafId);
+        state.rafId = 0;
+        state.previousTime = 0;
     }
 
-}
+    const observer = "IntersectionObserver" in window
+        ? new IntersectionObserver(entries => {
+            state.visible = entries[0]?.isIntersecting ?? true;
+            if (state.visible) start();
+            else stop();
+        }, { rootMargin: "120px 0px" })
+        : null;
 
-document.addEventListener("visibilitychange", () => {
+    observer?.observe(particleLayer);
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stop();
+        else start();
+    });
+    window.addEventListener("resize", scheduleResize, { passive: true });
 
-    if (document.hidden) {
-
-        stopAnimation();
-
-    } else {
-
-        startAnimation();
-
-    }
-
-});
-
-/*==================================================
-    Main Loop
-==================================================*/
-
-function loop() {
-
-    animationId = requestAnimationFrame(loop);
-
-    drawBackground();
-
-    updateParticles();
-
-    interactParticles();
-
-    drawConnections();
-
-    highlightParticles();
-
-}
-
-startAnimation();
-
-/*==================================================
-    Mouse Safety
-==================================================*/
-
-const originalInteractParticles = interactParticles;
-
-interactParticles = function () {
-
-    for (const particle of particles) {
-
-        const dx = particle.x - mouse.x;
-        const dy = particle.y - mouse.y;
-
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance > 0 && distance < mouse.radius) {
-
-            const force = (mouse.radius - distance) / mouse.radius;
-
-            particle.x += (dx / distance) * force * 3;
-            particle.y += (dy / distance) * force * 3;
-
-        }
-
-    }
-
-};
-
-/*==================================================
-    Initialize
-==================================================*/
-
-updateParticleCount();
-
-/*==================================================
-    Debug
-==================================================*/
-
-console.info(
-
-    "%cParticles Module Loaded",
-
-    "color:#66F1FF;font-weight:bold;"
-
-);
+    resize();
+    start();
+})();

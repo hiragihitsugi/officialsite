@@ -1,7 +1,7 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
     animation.js
-    Version : 1.5.0
+    Version : 4.11.0
 ==================================================*/
 
 "use strict";
@@ -24,12 +24,8 @@
             return;
         }
 
-        initHeroEntrance();
-        initHeroScroll();
-
-        // Hero pointer parallax is intentionally disabled.
-        // Keeping the Hero free of pointer-driven transforms prevents
-        // custom-cursor latency on GPU/CPU constrained environments.
+        // Hero is intentionally static. No GSAP timeline, scroll scrub,
+        // pointer parallax, or transform animation is registered here.
 
         if (hasScrollTrigger) {
             initSectionEffects();
@@ -118,76 +114,6 @@
                 }
             );
         });
-    }
-
-    function initHeroEntrance() {
-        const titleLetters = gsap.utils.toArray(".hero-title span");
-        const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        gsap.set(".hero-title", { transformPerspective: 900 });
-
-        timeline
-            .from(".hero-sub", {
-                y: 28,
-                opacity: 0,
-                letterSpacing: "1.4em",
-                duration: 0.8
-            })
-            .from(titleLetters, {
-                opacity: 0,
-                yPercent: 115,
-                rotateX: -80,
-                rotateZ: () => gsap.utils.random(-4, 4),
-                transformOrigin: "50% 100%",
-                stagger: 0.045,
-                duration: 0.85
-            }, "-=0.42")
-            .from(".hero-text", {
-                opacity: 0,
-                y: 28,
-                duration: 0.65
-            }, "-=0.45")
-            .from(".hero-buttons > *", {
-                opacity: 0,
-                y: 24,
-                scale: 0.96,
-                stagger: 0.12,
-                duration: 0.55
-            }, "-=0.35")
-            .from(".hero-social a", {
-                opacity: 0,
-                y: 18,
-                scale: 0.96,
-                stagger: 0.08,
-                duration: 0.45
-            }, "-=0.42")
-            .from(".scroll-indicator", {
-                opacity: 0,
-                y: 20,
-                duration: 0.55
-            }, "-=0.35");
-    }
-
-    function initHeroScroll() {
-        if (!hasScrollTrigger) return;
-
-        const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 0.8,
-                invalidateOnRefresh: true
-            }
-        });
-
-        timeline
-            .to(".hero-background img", { scale: 1.2, yPercent: 7, ease: "none" }, 0)
-            .to(".hero-grid", { yPercent: 18, opacity: 0.25, ease: "none" }, 0)
-            .to(".hero-content", { yPercent: -28, opacity: 0, scale: 0.96, ease: "none" }, 0)
-            .to(".hero-social", { y: -40, opacity: 0, ease: "none" }, 0)
-            .to(".scroll-indicator", { y: 35, opacity: 0, ease: "none" }, 0)
-            .to(".hero-overlay", { opacity: 0.92, ease: "none" }, 0);
     }
 
     function initAbout() {

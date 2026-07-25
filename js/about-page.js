@@ -1,6 +1,6 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    ABOUT Page Reveal / Version 4.2.0
+    ABOUT Page Reveal / Version 4.5.0
 ==================================================*/
 
 "use strict";
@@ -65,7 +65,7 @@
     }
 
     console.info(
-        "%cABOUT Reveal Ready — Version 4.2.0",
+        "%cABOUT Reveal Ready — Version 4.5.0",
         "color:#66F1FF;font-weight:bold;"
     );
 })();

@@ -3,7 +3,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/>
-<script>document.documentElement.classList.add("cinematic-js");</script>
+<script>document.documentElement.classList.add("cinematic-js", "hero-intro-pending");</script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>HIIRAGI HITSUGI | Official Website</title>
 <meta content="VTuber HIIRAGI HITSUGIの公式サイト。YouTube・Twitchでの配信、動画、活動情報をまとめています。" name="description"/>
@@ -12,7 +12,7 @@
 <meta content="website" property="og:type"/>
 <meta content="HIIRAGI HITSUGI | Official Website" property="og:title"/>
 <meta content="VTuber HIIRAGI HITSUGIの公式サイト。YouTube・Twitchでの配信、動画、活動情報をまとめています。" property="og:description"/>
-<meta content="images/hero.webp" property="og:image"/>
+<meta content="images/hero_back.webp" property="og:image"/>
 <meta content="https://hiragihitsugi.github.io/officialsite/" property="og:url"/>
 <!-- favicon -->
 <!--
@@ -23,15 +23,15 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
 <!-- CSS -->
-<link href="css/style.css?v=4.0.0" rel="stylesheet"/>
+<link href="css/style.css?v=4.13.0" rel="stylesheet"/>
 <link href="css/loading.css" rel="stylesheet"/>
-<link href="css/cursor.css" rel="stylesheet"/>
+<link href="css/cursor.css?v=4.10.0" rel="stylesheet"/>
 <link href="css/works.css" rel="stylesheet"/>
 <link href="css/media.css?v=1.0.0" rel="stylesheet"/>
 <link href="css/sections.css?v=4.0.0" rel="stylesheet"/>
 <link href="css/cinematic.css?v=3.6.0" rel="stylesheet"/>
 <link href="css/animation.css" rel="stylesheet"/>
-<link href="css/responsive.css?v=4.0.0" rel="stylesheet"/>
+<link href="css/responsive.css?v=4.12.1" rel="stylesheet"/>
 </head>
 <body>
 <!-- ======================================
@@ -77,37 +77,48 @@
 <!-- ======================================
                 Hero
         ======================================= -->
-<section id="hero">
-<div class="hero-background">
-<img alt="VTuber HIIRAGI HITSUGI" fetchpriority="high" src="images/hero.webp"/>
+<section id="hero" class="hero-vspo-inspired" aria-labelledby="hero-main-title">
+<div class="hero-scene" aria-hidden="true">
+<img class="hero-back-image" src="images/hero_back.webp" alt="" fetchpriority="high"/>
+<div class="hero-back-shade"></div>
+<div class="hero-intro-type hero-intro-type-outline">
+<span>ENTER THE</span>
+<strong>VIRTUAL FRONTLINE</strong>
 </div>
-<div class="hero-overlay"></div>
-<div class="hero-gradient"></div>
-<div aria-hidden="true" id="particles"></div>
-<div class="hero-grid"></div>
-<div class="hero-glow"></div>
-<div class="hero-content">
-<p class="hero-sub">VTUBER / STREAMER</p>
-<h1 class="hero-title">
-<span>H</span><span>I</span><span>I</span><span>R</span><span>A</span><span>G</span><span>I</span>
-<br/>
-<span>H</span><span>I</span><span>T</span><span>S</span><span>U</span><span>G</span><span>I</span>
-</h1>
-<p class="hero-text">あなたに癒しを届ける戦闘員バーチャルストリーマー。</p>
-<div class="hero-buttons">
+<div class="hero-intro-type hero-intro-type-fill">
+<span>ENTER THE</span>
+<strong>VIRTUAL FRONTLINE</strong>
+</div>
+<div class="hero-impact-lines"><i></i><i></i><i></i></div>
+<div class="hero-character-stage">
+<div class="hero-character-reveal">
+<img class="hero-character-image" src="images/hero_character.webp" alt="" fetchpriority="high"/>
+<div class="hero-character-soft-veil" aria-hidden="true"></div>
+</div>
+<div class="hero-character-cover" aria-hidden="true">
+<img class="hero-character-cover-image" src="images/hero_back.webp" alt=""/>
+<div class="hero-character-cover-shade"></div>
+</div>
+<div class="hero-character-flash"></div>
+</div>
+<div class="hero-edge-copy hero-edge-copy-left">TACTICAL STREAMER / VIRTUAL CREATOR</div>
+<div class="hero-edge-copy hero-edge-copy-right">HIIRAGI HITSUGI — 2026</div>
+</div>
+<div class="hero-main-content">
+<p class="hero-main-kicker">VTUBER / STREAMER</p>
+<h1 id="hero-main-title"><span>HIIRAGI</span><span>HITSUGI</span></h1>
+<p class="hero-main-copy">あなたに癒しを届ける戦闘員バーチャルストリーマー。</p>
+<div class="hero-main-actions">
 <a class="hero-profile-link" href="about.html" id="explore">PROFILE</a>
 <a class="secondary-button" href="#media">WATCH MEDIA</a>
 </div>
-<div aria-label="公式SNSリンク" class="hero-social">
+<div aria-label="公式SNSリンク" class="hero-main-social">
 <a aria-label="Xを開く" href="https://x.com/home" rel="noopener noreferrer" target="_blank">X</a>
 <a aria-label="YouTubeチャンネルを見る" href="https://www.youtube.com/@hiragi_hitsugi" rel="noopener noreferrer" target="_blank">YouTube</a>
 <a aria-label="Twitchチャンネルを見る" href="https://www.twitch.tv/hiragi_hitsugi" rel="noopener noreferrer" target="_blank">Twitch</a>
 </div>
 </div>
-<div class="scroll-indicator">
-<span></span>
-<p>SCROLL</p>
-</div>
+<button class="hero-scroll-cue" type="button" data-scroll-target="#about" aria-label="次のセクションへスクロール"><span aria-hidden="true"></span><p aria-hidden="true">SCROLL</p></button>
 </section>
 <!-- ======================================
                 About
@@ -428,15 +439,15 @@
 <!-- ======================================
             JavaScript
     ======================================= -->
-<script src="js/loading.js"></script>
-<script src="js/cursor.js"></script>
+<script src="js/loading.js?v=4.12.3"></script>
+<script src="js/cursor.js?v=4.11.0"></script>
 <script src="js/navigation.js"></script>
-<script src="js/scroll.js?v=4.0.0"></script>
-<script src="js/animation.js?v=3.6.0"></script>
+<script src="js/scroll.js?v=4.12.9"></script>
+<script src="js/hero-intro.js?v=4.13.0"></script>
+<script src="js/animation.js?v=4.12.1"></script>
 <script src="js/cinematic.js?v=3.6.0"></script>
 <script src="js/media-config.js?v=3.4.0"></script>
 <script src="js/media.js?v=1.0.0"></script>
-<script src="js/particles.js"></script>
 <script src="js/works.js"></script>
 <script src="js/script.js"></script>
 <!-- Scroll Progress -->
