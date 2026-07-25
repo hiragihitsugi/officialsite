@@ -2,7 +2,7 @@
     HIIRAGI HITSUGI Official Website
 
     hero-intro.js
-    Version 4.13.0
+    Version 4.13.8
 
     The final character image is a permanently static raster. The reveal is
     produced by clipping away a duplicate Hero-background cover above it, so
@@ -131,26 +131,66 @@
         const scrollCue = select(SELECTORS.scrollCue);
         const impactLines = selectAll(SELECTORS.impact);
 
+        /*
+         * Typography is intentionally split into independent phases.
+         * The outline has NO fade-out in its entrance animation. It reaches
+         * its final position and stays fully opaque while the fill wipes in.
+         * Only after the fill is 100% revealed do both layers fade together.
+         */
         play(outline, [
-            { offset: 0, opacity: 0, transform: "translate3d(-7%, -58%, 0)", letterSpacing: "-.01em" },
-            { offset: .18, opacity: 1 },
-            { offset: .68, opacity: 1, transform: "translate3d(0, -58%, 0)", letterSpacing: "-.055em" },
-            { offset: 1, opacity: 0, transform: "translate3d(5%, -58%, 0)", letterSpacing: "-.055em" }
+            { opacity: 0, transform: "translate3d(-7%, -58%, 0)", letterSpacing: "-.01em" },
+            { offset: .24, opacity: 1 },
+            { opacity: 1, transform: "translate3d(0, -58%, 0)", letterSpacing: "-.055em" }
         ], {
-            duration: 1550,
+            duration: 980,
+            delay: 140,
+            easing: "cubic-bezier(.16, 1, .3, 1)"
+        });
+
+        /*
+         * Keep the filled pass on the EXACT same geometry timeline as the
+         * outline. Only its clip/opacity reveal is independent. This prevents
+         * the two copies from drifting while the outline is still tightening
+         * its letter spacing and finishing its horizontal entrance.
+         */
+        play(fill, [
+            { transform: "translate3d(-7%, -58%, 0)", letterSpacing: "-.01em" },
+            { transform: "translate3d(0, -58%, 0)", letterSpacing: "-.055em" }
+        ], {
+            duration: 980,
             delay: 140,
             easing: "cubic-bezier(.16, 1, .3, 1)"
         });
 
         play(fill, [
-            { offset: 0, opacity: 0, clipPath: "inset(0 100% 0 0)", transform: "translate3d(0, -58%, 0)" },
-            { offset: .1, opacity: 1 },
-            { offset: .7, opacity: 1, clipPath: "inset(0 0 0 0)", transform: "translate3d(0, -58%, 0)" },
-            { offset: 1, opacity: 0, clipPath: "inset(0 0 0 0)", transform: "translate3d(5%, -58%, 0)" }
+            { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+            { offset: .08, opacity: 1 },
+            { opacity: 1, clipPath: "inset(0 -48px 0 0)" }
         ], {
-            duration: 1280,
-            delay: 650,
+            duration: 820,
+            delay: 820,
             easing: "cubic-bezier(.77, 0, .18, 1)"
+        });
+
+        /* Hold the completed outline + fill for a beat, then fade together. */
+        play(outline, [
+            { opacity: 1, transform: "translate3d(0, -58%, 0)", letterSpacing: "-.055em" },
+            { opacity: 0, transform: "translate3d(3%, -58%, 0)", letterSpacing: "-.055em" }
+        ], {
+            duration: 260,
+            delay: 1780,
+            easing: "cubic-bezier(.4, 0, 1, 1)",
+            fill: "forwards"
+        });
+
+        play(fill, [
+            { opacity: 1, clipPath: "inset(0 -48px 0 0)", transform: "translate3d(0, -58%, 0)" },
+            { opacity: 0, clipPath: "inset(0 -48px 0 0)", transform: "translate3d(3%, -58%, 0)" }
+        ], {
+            duration: 260,
+            delay: 1780,
+            easing: "cubic-bezier(.4, 0, 1, 1)",
+            fill: "forwards"
         });
 
         impactLines.forEach((line, index) => {
@@ -161,7 +201,7 @@
                 { opacity: 0, transform: `rotate(${rotation}) scaleX(1)` }
             ], {
                 duration: 650,
-                delay: 1280 + index * 90,
+                delay: 1660 + index * 70,
                 easing: "ease-out"
             });
         });
@@ -172,7 +212,7 @@
             { opacity: 0, transform: "rotate(18deg) translate3d(640%, 0, 0)" }
         ], {
             duration: 820,
-            delay: 1320,
+            delay: 1700,
             easing: "cubic-bezier(.4, 0, .2, 1)"
         });
 
@@ -187,8 +227,8 @@
             { offset: .42, clipPath: "polygon(42% 0, 100% 0, 100% 100%, 20% 100%)" },
             { clipPath: "polygon(101% 0, 101% 0, 101% 100%, 101% 100%)" }
         ], {
-            duration: 1580,
-            delay: 1420,
+            duration: 1150,
+            delay: 2100,
             easing: "cubic-bezier(.16, 1, .3, 1)"
         });
 
@@ -203,8 +243,8 @@
             { offset: .72, opacity: .14 },
             { opacity: 0 }
         ], {
-            duration: 1480,
-            delay: 1480,
+            duration: 1100,
+            delay: 2100,
             easing: "cubic-bezier(.22, .72, .2, 1)"
         });
 
@@ -212,8 +252,8 @@
             { opacity: 0, transform: "translate3d(34px, 18px, 0)" },
             { opacity: 1, transform: "translate3d(0, 0, 0)" }
         ], {
-            duration: 880,
-            delay: 2740,
+            duration: 650,
+            delay: 3420,
             easing: "cubic-bezier(.16, 1, .3, 1)"
         });
 
@@ -222,8 +262,8 @@
             { offset: .24, opacity: .28 },
             { opacity: 1, clipPath: "inset(0 0 0 0)" }
         ], {
-            duration: 980,
-            delay: 2700,
+            duration: 600,
+            delay: 3460,
             easing: "cubic-bezier(.16, 1, .3, 1)"
         });
 
@@ -232,8 +272,8 @@
             { offset: .24, opacity: .28 },
             { opacity: 1, clipPath: "inset(0 0 0 0)" }
         ], {
-            duration: 980,
-            delay: 2800,
+            duration: 600,
+            delay: 3520,
             easing: "cubic-bezier(.16, 1, .3, 1)"
         });
 
@@ -241,18 +281,14 @@
             { opacity: 0, transform: "translate3d(0, 8px, 0)" },
             { opacity: 1, transform: "translate3d(0, 0, 0)" }
         ], {
-            duration: 720,
-            delay: 3060,
+            duration: 520,
+            delay: 3580,
             easing: "cubic-bezier(.16, 1, .3, 1)"
         });
 
-        /*
-         * Arm all normal CSS values to the exact final frame in this same task.
-         * Delayed WAAPI effects already apply their first frame via fill:"both",
-         * so this class cannot reveal elements early. At completion there is no
-         * visual state handoff and, critically, no character-raster mutation.
-         */
-        hero.classList.add("hero-intro-final-state");
+        // WAAPI fill:"both" owns each phase from its initial frame through its
+        // final frame. Do not arm the CSS final-state class during playback;
+        // doing so can bypass the intended phase separation.
     }
 
     async function prepareHeroImages() {

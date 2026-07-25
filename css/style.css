@@ -2238,7 +2238,11 @@ End
     position: absolute;
     left: clamp(28px, 5vw, 88px);
     top: 50%;
-    width: min(91vw, 1320px);
+    /* Desktop intro text must use its real rendered width.
+       clip-path on the filled copy clips to this element's border box,
+       so a viewport-limited width truncates the end of VIRTUAL FRONTLINE. */
+    width: max-content;
+    max-width: none;
     transform: translate3d(-7%, -58%, 0);
     opacity: 0;
     font-family: "Space Grotesk", sans-serif;
@@ -2264,7 +2268,8 @@ End
 }
 
 .hero-intro-type-outline {
-    z-index: 2;
+    /* Keep intro typography above the full-screen character cover. */
+    z-index: 7;
     color: transparent;
     -webkit-text-stroke: 1.5px rgba(255, 255, 255, .93);
     text-stroke: 1.5px rgba(255, 255, 255, .93);
@@ -2276,9 +2281,11 @@ End
 }
 
 .hero-intro-type-fill {
-    z-index: 3;
+    /* Filled pass sits above the outline while the character remains covered. */
+    z-index: 8;
     color: #fff;
     clip-path: inset(0 100% 0 0);
+    overflow: visible;
 }
 
 .hero-intro-type-fill span { color: #fff; }
@@ -2536,7 +2543,7 @@ End
 }
 
 /*
- * Hero intro v4.13.0
+ * Hero intro v4.13.1
  * Final visual styles are armed before the first painted animation frame.
  * The character image itself remains static; only its background cover moves.
  * Therefore no property on the final character raster changes at completion.
