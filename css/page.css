@@ -818,41 +818,21 @@ body.inner-page {
     padding: clamp(16px, 2.4vw, 30px) clamp(8px, 1.5vw, 20px) 0;
 }
 
-.profile-portrait-curtain {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    pointer-events: none;
-    transform: scaleX(0);
-    transform-origin: right center;
-    background:
-        linear-gradient(115deg, rgba(4, 9, 22, .99), rgba(9, 29, 48, .99) 54%, rgba(4, 9, 22, .99));
-}
-
-/* Stable reveal: the image always exists; a cover slides away on entry. */
-.about-motion.about-motion-ready .profile-portrait .profile-portrait-curtain {
-    transform: scaleX(1);
-    transition: transform 1.18s cubic-bezier(.77, 0, .18, 1) .04s;
-}
-
-.about-motion.about-motion-ready .profile-portrait.is-about-visible .profile-portrait-curtain {
-    transform: scaleX(0);
-}
-
 .about-motion.about-motion-ready [data-about-reveal="portrait"] {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round var(--radius-lg));
+    clip-path: none;
     transform: translate3d(0, 0, 0);
     transition:
-        transform 1.12s cubic-bezier(.16, 1, .3, 1),
+        opacity .78s ease,
+        transform 1.18s cubic-bezier(.16, 1, .3, 1),
         border-color .5s ease,
         box-shadow .7s ease;
 }
 
 .about-motion.about-motion-ready [data-about-reveal="portrait"]:not(.is-about-visible) {
-    opacity: 1;
-    clip-path: inset(0 0 0 0 round var(--radius-lg));
-    transform: translate3d(28px, 0, 0) scale(.985);
+    opacity: 0;
+    clip-path: none;
+    transform: translate3d(28px, 18px, 0) scale(.985);
 }
 
 .about-motion.about-motion-ready [data-about-reveal="portrait"] img {
@@ -861,7 +841,7 @@ body.inner-page {
 }
 
 .about-motion.about-motion-ready [data-about-reveal="portrait"]:not(.is-about-visible) img {
-    transform: scale(1.055) translate3d(2%, 1.5%, 0);
+    transform: scale(1.045) translate3d(2%, 1.25%, 0);
 }
 
 .about-motion.about-motion-ready [data-about-reveal="portrait"].is-about-visible {
@@ -1105,12 +1085,6 @@ body.inner-page {
         drop-shadow(0 36px 58px rgba(0, 0, 0, .34));
 }
 
-.about-stage-keyvisual .profile-portrait-curtain {
-    inset: 3% 0 0 0;
-    border-radius: 0;
-    clip-path: polygon(0 0, 100% 0, 94% 100%, 7% 100%);
-}
-
 .about-mini-character {
     position: absolute;
     right: -2%;
@@ -1213,7 +1187,7 @@ body.inner-page {
 
     .about-outline-name {
         top: 4%;
-        right: -4%;
+        right: 0;
         left: auto;
         z-index: -1;
         font-size: clamp(58px, 13vw, 94px);
@@ -1273,8 +1247,8 @@ body.inner-page {
 
     .about-outline-name {
         top: 31%;
-        right: -13%;
-        font-size: clamp(48px, 15vw, 72px);
+        right: 4px;
+        font-size: clamp(44px, 13vw, 60px);
     }
 
     .about-mini-character {
