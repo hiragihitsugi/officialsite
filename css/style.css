@@ -2242,6 +2242,265 @@ End
         linear-gradient(180deg, rgba(3, 5, 16, .34), transparent 35%, rgba(3, 5, 16, .56));
 }
 
+/*
+ * Diagonal depth bars
+ * Bars stay fixed while a clip boundary continuously travels from their
+ * lower-left edge to their upper-right edge.
+ */
+.hero-depth-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    contain: layout paint;
+    transition: opacity 700ms ease;
+}
+
+.hero-depth-lines-back {
+    z-index: 3;
+}
+
+.hero-depth-lines-front {
+    z-index: 6;
+}
+
+.hero-depth-lines i {
+    --bar-color: #00cfff;
+    --bar-left: -24vw;
+    --bar-top: 100%;
+    --bar-width: clamp(8px, 1vw, 16px);
+    --bar-height: clamp(64px, 8vw, 138px);
+    --bar-opacity: .8;
+    --bar-duration: 9s;
+    --bar-delay: 0s;
+    --bar-entry-delay: 0s;
+    position: absolute;
+    left: var(--bar-left);
+    top: var(--bar-top);
+    width: var(--bar-width);
+    height: var(--bar-height);
+    border-radius: 0;
+    opacity: 0;
+    transform: skewX(-41deg);
+    transform-origin: center;
+    animation:
+        hero-depth-bar-enter
+        1000ms
+        cubic-bezier(.4, 0, .2, 1)
+        var(--bar-entry-delay)
+        both
+        !important;
+    animation-play-state: paused !important;
+    backface-visibility: hidden;
+}
+
+.hero-depth-lines i::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    background: var(--bar-color);
+    clip-path: inset(100% 0 0 0);
+    animation:
+        hero-depth-bar-clip-rise
+        var(--bar-duration)
+        linear
+        var(--bar-delay)
+        infinite
+        both
+        !important;
+    animation-play-state: paused !important;
+}
+
+.hero-depth-lines-back i {
+    --bar-opacity: .48;
+    filter: blur(.25px);
+}
+
+.hero-depth-lines-front i {
+    --bar-opacity: .86;
+}
+
+.hero-depth-lines-back i:nth-child(1) {
+    --bar-color: #00cfff;
+    --bar-left: 8%;
+    --bar-top: 14%;
+    --bar-width: clamp(9px, 1.05vw, 18px);
+    --bar-height: clamp(82px, 10.5vw, 180px);
+    --bar-delay: -8.2s;
+    --bar-duration: 6.6s;
+    --bar-entry-delay: .08s;
+}
+
+.hero-depth-lines-back i:nth-child(2) {
+    --bar-color: #ff4f9a;
+    --bar-left: 28%;
+    --bar-top: 68%;
+    --bar-width: clamp(6px, .65vw, 11px);
+    --bar-height: clamp(58px, 6.8vw, 116px);
+    --bar-delay: -3.8s;
+    --bar-duration: 5.6s;
+    --bar-entry-delay: .32s;
+}
+
+.hero-depth-lines-back i:nth-child(3) {
+    --bar-color: #7568df;
+    --bar-left: 42%;
+    --bar-top: 28%;
+    --bar-width: clamp(14px, 1.7vw, 29px);
+    --bar-height: clamp(105px, 14vw, 238px);
+    --bar-delay: -6.4s;
+    --bar-duration: 7s;
+    --bar-entry-delay: .56s;
+}
+
+.hero-depth-lines-back i:nth-child(4) {
+    --bar-color: #263552;
+    --bar-left: 61%;
+    --bar-top: 75%;
+    --bar-width: clamp(7px, .8vw, 14px);
+    --bar-height: clamp(68px, 8vw, 136px);
+    --bar-delay: -1.7s;
+    --bar-duration: 6.1s;
+    --bar-entry-delay: .8s;
+}
+
+.hero-depth-lines-back i:nth-child(5) {
+    --bar-color: #a66cff;
+    --bar-left: 76%;
+    --bar-top: 10%;
+    --bar-width: clamp(11px, 1.35vw, 23px);
+    --bar-height: clamp(88px, 11vw, 188px);
+    --bar-delay: -10.5s;
+    --bar-duration: 6.3s;
+    --bar-entry-delay: 1.04s;
+}
+
+.hero-depth-lines-back i:nth-child(6) {
+    --bar-color: #ff6b72;
+    --bar-left: 91%;
+    --bar-top: 56%;
+    --bar-width: clamp(6px, .7vw, 12px);
+    --bar-height: clamp(62px, 7.2vw, 122px);
+    --bar-delay: -5.2s;
+    --bar-duration: 5.3s;
+    --bar-entry-delay: 1.28s;
+}
+
+.hero-depth-lines-back i:nth-child(7) {
+    --bar-color: #19e0ff;
+    --bar-left: 36%;
+    --bar-top: 28%;
+    --bar-width: clamp(12px, 1.5vw, 26px);
+    --bar-height: clamp(132px, 17vw, 290px);
+    --bar-delay: -2.9s;
+    --bar-duration: 4.8s;
+    --bar-entry-delay: 1.4s;
+}
+
+.hero-depth-lines-back i:nth-child(8) {
+    --bar-color: #ff4f9a;
+    --bar-left: 68%;
+    --bar-top: 52%;
+    --bar-width: clamp(16px, 2vw, 34px);
+    --bar-height: clamp(148px, 19vw, 324px);
+    --bar-delay: -4.6s;
+    --bar-duration: 5.8s;
+    --bar-entry-delay: 1.52s;
+}
+
+.hero-depth-lines-front i:nth-child(1) {
+    --bar-color: #0edcff;
+    --bar-left: 16%;
+    --bar-top: 76%;
+    --bar-width: clamp(15px, 2vw, 34px);
+    --bar-height: clamp(120px, 16vw, 272px);
+    --bar-delay: -7.8s;
+    --bar-duration: 5s;
+    --bar-entry-delay: .2s;
+}
+
+.hero-depth-lines-front i:nth-child(2) {
+    --bar-color: #ff4f9a;
+    --bar-left: 36%;
+    --bar-top: 7%;
+    --bar-width: clamp(8px, 1vw, 17px);
+    --bar-height: clamp(76px, 9vw, 153px);
+    --bar-delay: -2.1s;
+    --bar-duration: 4.3s;
+    --bar-entry-delay: .44s;
+}
+
+.hero-depth-lines-front i:nth-child(3) {
+    --bar-color: #8977ff;
+    --bar-left: 55%;
+    --bar-top: 48%;
+    --bar-width: clamp(18px, 2.45vw, 42px);
+    --bar-height: clamp(145px, 19vw, 324px);
+    --bar-delay: -5.7s;
+    --bar-duration: 5.4s;
+    --bar-entry-delay: .68s;
+}
+
+.hero-depth-lines-front i:nth-child(4) {
+    --bar-color: #eafcff;
+    --bar-left: 72%;
+    --bar-top: 80%;
+    --bar-width: clamp(6px, .7vw, 12px);
+    --bar-height: clamp(66px, 7.8vw, 133px);
+    --bar-delay: -6.5s;
+    --bar-duration: 4s;
+    --bar-entry-delay: .92s;
+}
+
+.hero-depth-lines-front i:nth-child(5) {
+    --bar-color: #ff6b72;
+    --bar-left: 87%;
+    --bar-top: 24%;
+    --bar-width: clamp(12px, 1.55vw, 26px);
+    --bar-height: clamp(98px, 12.5vw, 213px);
+    --bar-delay: -.9s;
+    --bar-duration: 4.7s;
+    --bar-entry-delay: 1.16s;
+}
+
+.hero-vspo-inspired.hero-intro-final-state .hero-depth-lines {
+    opacity: 1;
+}
+
+.hero-vspo-inspired.hero-intro-final-state .hero-depth-lines i {
+    animation-play-state: running !important;
+}
+
+.hero-vspo-inspired.hero-intro-final-state .hero-depth-lines i::before {
+    animation-play-state: running !important;
+}
+
+@keyframes hero-depth-bar-enter {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: var(--bar-opacity);
+    }
+}
+
+@keyframes hero-depth-bar-clip-rise {
+    0% {
+        clip-path: inset(100% 0 0 0);
+    }
+
+    50% {
+        clip-path: inset(0 0 0 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 100% 0);
+    }
+}
+
 .hero-intro-type {
     position: absolute;
     left: clamp(28px, 5vw, 88px);

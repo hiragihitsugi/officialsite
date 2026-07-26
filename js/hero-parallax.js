@@ -2,7 +2,7 @@
     HIIRAGI HITSUGI Official Website
 
     hero-parallax.js
-    Version 1.2.0
+    Version 1.3.0
 
     Subtle pointer depth for the completed Hero. The intro remains untouched:
     parallax is enabled only after hero-intro-final-state has been applied.
@@ -26,8 +26,8 @@
     const DEPTH = Object.freeze({
         backgroundX: -9.75,
         backgroundY: -6,
-        characterX: 22.5,
-        characterY: 15,
+        characterX: 33.75,
+        characterY: 22.5,
         contentX: 6,
         contentY: 4.125
     });
