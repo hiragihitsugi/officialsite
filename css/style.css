@@ -2194,11 +2194,17 @@ End
 }
 
 /*==================================================
-    VSPO-inspired Hero Sequence / Version 4.12.0
-    One-shot transform/opacity animation only. No canvas, pointer reaction,
-    scroll scrub, filter loop, or continuous Hero animation.
+    VSPO-inspired Hero Sequence / Version 4.14.0
+    The intro stays one-shot. Subtle pointer depth is composed through CSS
+    variables only after the sequence reaches its final state.
 ==================================================*/
 #hero.hero-vspo-inspired {
+    --hero-back-x: 0px;
+    --hero-back-y: 0px;
+    --hero-character-x: 0px;
+    --hero-character-y: 0px;
+    --hero-content-x: 0px;
+    --hero-content-y: 0px;
     position: relative;
     height: 100svh;
     min-height: 700px;
@@ -2223,7 +2229,9 @@ End
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transform: scale(1.015);
+    transform:
+        translate3d(var(--hero-back-x), var(--hero-back-y), 0)
+        scale(1.025);
 }
 
 .hero-vspo-inspired .hero-back-shade {
@@ -2295,6 +2303,12 @@ End
     inset: 0;
     z-index: 5;
     overflow: hidden;
+    transform:
+        translate3d(
+            var(--hero-character-x),
+            var(--hero-character-y),
+            0
+        );
 }
 
 .hero-character-reveal {
@@ -2352,7 +2366,9 @@ End
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transform: scale(1.015);
+    transform:
+        translate3d(var(--hero-back-x), var(--hero-back-y), 0)
+        scale(1.025);
 }
 
 .hero-character-cover-shade {
@@ -2558,7 +2574,12 @@ End
 
 .hero-vspo-inspired.hero-intro-final-state .hero-main-content {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform:
+        translate3d(
+            var(--hero-content-x),
+            var(--hero-content-y),
+            0
+        );
 }
 
 .hero-vspo-inspired.hero-intro-final-state .hero-edge-copy,

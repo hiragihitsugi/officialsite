@@ -24,8 +24,8 @@
             return;
         }
 
-        // Hero is intentionally static. No GSAP timeline, scroll scrub,
-        // pointer parallax, or transform animation is registered here.
+        // Hero intro and post-intro pointer depth are owned by their dedicated
+        // modules. No competing Hero transform animation is registered here.
 
         if (hasScrollTrigger) {
             initSectionEffects();

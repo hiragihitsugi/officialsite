@@ -4,6 +4,7 @@ GitHub Pages向けの静的Webサイトです。
 
 - トップページ: `index.html`
 - Hero演出: `js/hero-intro.js` / `css/style.css`
+- Hero視差追従: `js/hero-parallax.js`（イントロ完了後・マウス／ペン環境のみ。縮小モーション環境では移動量を半減）
 - Hero画像: `images/hero_back.webp` / `images/hero_character.webp`
 - 問い合わせ設定: `CONTACT_SETUP.md`
 - Twitch設定: `TWITCH_SETUP.md`
