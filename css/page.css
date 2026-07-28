@@ -1199,7 +1199,7 @@ body.inner-page {
 
 .about-profile-section {
     padding-top: clamp(74px, 7vw, 112px) !important;
-    padding-bottom: 0 !important;
+    padding-bottom: clamp(82px, 8vw, 122px) !important;
     overflow: hidden;
 }
 
@@ -1486,7 +1486,7 @@ body.inner-page {
 @media (max-width: 560px) {
     .about-profile-section {
         padding-top: 58px !important;
-        padding-bottom: 0 !important;
+        padding-bottom: 58px !important;
     }
 
     .about-profile-section + .creator-section {
