@@ -1,0 +1,82 @@
+/*==================================================
+    HIIRAGI HITSUGI Official Website
+    Language Switcher / Version 1.0.0
+==================================================*/
+
+.language-switch {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    gap: 8px;
+    margin-left: clamp(2px, .5vw, 8px);
+    padding: 6px 9px;
+    border: 1px solid rgba(102, 241, 255, .18);
+    border-radius: 999px;
+    background: rgba(5, 12, 28, .5);
+}
+
+.language-switch > span {
+    width: 1px;
+    height: 13px;
+    background: rgba(255, 255, 255, .14);
+}
+
+.language-switch button {
+    position: relative;
+    min-width: 25px;
+    padding: 2px 0;
+    border: 0;
+    background: transparent;
+    color: rgba(231, 251, 255, .4);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: .08em;
+    cursor: pointer;
+    transition: color .25s ease, text-shadow .25s ease;
+}
+
+.language-switch button:hover,
+.language-switch button:focus-visible {
+    color: rgba(231, 251, 255, .8);
+}
+
+.language-switch button.is-active {
+    color: var(--cyan2);
+    text-shadow: 0 0 12px rgba(102, 241, 255, .44);
+}
+
+.language-switch button:focus-visible {
+    outline: 1px solid var(--cyan2);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+.standalone-language-switch {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 20;
+    margin: 0;
+    backdrop-filter: blur(12px);
+}
+
+@media (max-width: 980px) {
+    header nav .language-switch {
+        margin: 18px 0 0;
+        padding: 9px 13px;
+    }
+
+    header nav .language-switch button {
+        min-width: 32px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 560px) {
+    .standalone-language-switch {
+        top: 16px;
+        right: 16px;
+    }
+}
