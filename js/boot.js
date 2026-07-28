@@ -19,5 +19,13 @@
         window.__aboutRevealFallback = window.setTimeout(() => {
             root.classList.remove("about-motion");
         }, 3500);
+        return;
+    }
+
+    if (page === "guideline") {
+        root.classList.add("guideline-motion");
+        window.__guidelineRevealFallback = window.setTimeout(() => {
+            root.classList.remove("guideline-motion");
+        }, 3500);
     }
 })();

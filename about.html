@@ -2,18 +2,20 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src 'none'; form-action 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://unavatar.io; connect-src 'self'; frame-src 'none'; form-action 'none'; upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#050816">
     <meta name="robots" content="index, follow">
+    <link rel="icon" href="data:,">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unavatar.io" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=4.12.9">
     <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/cursor.css?v=4.8.0">
     <link rel="stylesheet" href="css/responsive.css?v=4.0.0">
-    <link rel="stylesheet" href="css/page.css?v=4.5.0">
+    <link rel="stylesheet" href="css/page.css?v=4.7.0">
     <script src="js/boot.js" data-page="about"></script>
     <title>ABOUT | HIIRAGI HITSUGI Official Website</title>
     <meta name="description" content="VTuber HIIRAGI HITSUGIのプロフィール、活動内容、配信で大切にしていることを紹介します。">
@@ -32,8 +34,6 @@
                 <a href="index.html">HOME</a>
                 <a href="about.html" aria-current="page">ABOUT</a>
                 <a href="guideline.html">GUIDELINE</a>
-                <a href="index.html#media">MEDIA</a>
-                <a href="index.html#works">CONTENTS</a>
                 <a href="index.html#contact">CONTACT</a>
         </nav>
         <button class="hamburger" type="button" aria-label="メニューを開く" aria-controls="primary-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -85,27 +85,64 @@
             </div>
         </section>
 
-        <section class="page-section">
+        <section class="page-section creator-section" aria-labelledby="creator-heading">
             <div class="page-container">
                 <div class="page-section-heading" data-about-reveal="heading">
-                    <div><p class="page-section-label">WHAT I DO</p><h2>配信を通して、同じ時間を一緒に楽しむ。</h2></div>
-                    <p>上手さだけを見せるのではなく、その瞬間の驚きや笑い、悔しさまで共有できる配信を目指しています。</p>
+                    <div>
+                        <p class="page-section-label">CREATORS</p>
+                        <h2 id="creator-heading">Creative Partners</h2>
+                    </div>
+                    <p>HIIRAGI HITSUGIのビジュアルを形づくってくださったクリエイターの皆様をご紹介します。</p>
                 </div>
-                <div class="activity-story-grid">
-                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">01 / STREAM</span><h3>Game Streaming</h3><p>ゲームの世界へ入り込みながら、コメントと会話し、初見の発見や挑戦を一緒に楽しみます。</p></article>
-                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">02 / TALK</span><h3>Free Talk</h3><p>何気ない出来事や好きなものを話しながら、夜に立ち寄れる落ち着いた時間を届けます。</p></article>
-                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">03 / VIDEO</span><h3>Video Content</h3><p>配信の見どころやショート、企画動画など、配信外でも楽しめるコンテンツを発信します。</p></article>
-                    <article class="page-card" data-about-reveal="card"><span class="page-card-index">04 / PROJECT</span><h3>New Challenges</h3><p>コラボや記念企画をはじめ、VTuberだからこそできる新しい表現へ挑戦していきます。</p></article>
-                </div>
-            </div>
-        </section>
 
-        <section class="page-section">
-            <div class="page-container">
-                <div class="message-panel" data-about-reveal="panel">
-                    <p>忙しい日も、少し疲れた夜も、ここへ来たらちょっと笑えて、明日へ進む力を持ち帰れる。そんな場所をみなさんと一緒につくっていきたいです。</p>
-                    <div class="message-signature">HIIRAGI HITSUGI</div>
+                <div class="creator-grid">
+                    <a class="creator-card" href="https://x.com/_tamuotamu" target="_blank" rel="noopener noreferrer" data-about-reveal="card" aria-label="たむお様のXプロフィールを開く">
+                        <span class="creator-card-number" aria-hidden="true">01</span>
+                        <span class="creator-avatar" data-initial="T">
+                            <img src="https://unavatar.io/x/_tamuotamu" alt="たむお様のXプロフィール画像" loading="lazy" decoding="async" data-creator-avatar>
+                        </span>
+                        <span class="creator-card-copy">
+                            <span class="creator-role">DESIGN / MODELING</span>
+                            <strong>たむお<span class="creator-honorific">様</span></strong>
+                            <span class="creator-handle">@_tamuotamu</span>
+                        </span>
+                        <span class="creator-x-mark" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" role="img"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg>
+                        </span>
+                    </a>
+
+                    <a class="creator-card" href="https://x.com/saetsukura" target="_blank" rel="noopener noreferrer" data-about-reveal="card" aria-label="津倉冴様のXプロフィールを開く">
+                        <span class="creator-card-number" aria-hidden="true">02</span>
+                        <span class="creator-avatar" data-initial="S">
+                            <img src="https://unavatar.io/x/saetsukura" alt="津倉冴様のXプロフィール画像" loading="lazy" decoding="async" data-creator-avatar>
+                        </span>
+                        <span class="creator-card-copy">
+                            <span class="creator-role">FIRST KEY VISUAL</span>
+                            <strong>津倉冴<span class="creator-honorific">様</span></strong>
+                            <span class="creator-handle">@saetsukura</span>
+                        </span>
+                        <span class="creator-x-mark" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" role="img"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg>
+                        </span>
+                    </a>
+
+                    <a class="creator-card" href="https://x.com/Hanami_haru330" target="_blank" rel="noopener noreferrer" data-about-reveal="card" aria-label="花見はる様のXプロフィールを開く">
+                        <span class="creator-card-number" aria-hidden="true">03</span>
+                        <span class="creator-avatar" data-initial="H">
+                            <img src="https://unavatar.io/x/Hanami_haru330" alt="花見はる様のXプロフィール画像" loading="lazy" decoding="async" data-creator-avatar>
+                        </span>
+                        <span class="creator-card-copy">
+                            <span class="creator-role">2ND ANNIVERSARY KEY VISUAL</span>
+                            <strong>花見はる<span class="creator-honorific">様</span></strong>
+                            <span class="creator-handle">@Hanami_haru330</span>
+                        </span>
+                        <span class="creator-x-mark" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" role="img"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg>
+                        </span>
+                    </a>
                 </div>
+
+                <p class="creator-avatar-credit">Profile images via <a href="https://unavatar.io" target="_blank" rel="noopener noreferrer">Unavatar</a></p>
             </div>
         </section>
     </main>
@@ -114,7 +151,7 @@
     <script src="js/cursor.js?v=4.8.0"></script>
     <script src="js/navigation.js"></script>
     <script src="js/scroll.js?v=4.12.9"></script>
-    <script src="js/about-page.js?v=4.5.0"></script>
+    <script src="js/about-page.js?v=4.6.0"></script>
     <script src="js/script.js"></script>
     <div id="scroll-progress"></div>
     <button id="back-to-top" aria-label="ページ上部へ戻る">↑</button>

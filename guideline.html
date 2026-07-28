@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#050816">
     <meta name="robots" content="index, follow">
+    <link rel="icon" href="data:,">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -13,7 +14,8 @@
     <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/cursor.css?v=4.8.0">
     <link rel="stylesheet" href="css/responsive.css?v=4.0.0">
-    <link rel="stylesheet" href="css/page.css?v=4.4.0">
+    <link rel="stylesheet" href="css/page.css?v=4.7.0">
+    <script src="js/boot.js" data-page="guideline"></script>
     <title>GUIDELINE | HIIRAGI HITSUGI Official Website</title>
     <meta name="description" content="HIIRAGI HITSUGIの二次創作、配信切り抜き、SNS投稿などに関するガイドラインです。">
     <meta property="og:type" content="website">
@@ -31,15 +33,13 @@
                 <a href="index.html">HOME</a>
                 <a href="about.html">ABOUT</a>
                 <a href="guideline.html" aria-current="page">GUIDELINE</a>
-                <a href="index.html#media">MEDIA</a>
-                <a href="index.html#works">CONTENTS</a>
                 <a href="index.html#contact">CONTACT</a>
         </nav>
         <button class="hamburger" type="button" aria-label="メニューを開く" aria-controls="primary-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </header>
     <main class="page-main">
-        <section class="page-hero page-hero-guideline" id="page-top">
-            <div class="page-hero-media" aria-hidden="true"><img src="images/hero4.webp" alt="" fetchpriority="high"></div>
+        <section class="page-hero page-hero-guideline" id="page-top" data-guideline-reveal="hero">
+            <div class="page-hero-media" aria-hidden="true"><img src="images/hero4.webp" alt="" fetchpriority="high"><span class="about-image-shine"></span></div>
             <div class="page-hero-overlay"></div><div class="page-hero-grid"></div>
             <div class="page-hero-content">
                 <p class="page-eyebrow">FAN ACTIVITIES / CONTENT USE</p>
@@ -50,26 +50,26 @@
 
         <section class="page-section">
             <div class="page-container">
-                <div class="page-section-heading">
+                <div class="page-section-heading" data-guideline-reveal="heading">
                     <div><p class="page-section-label">BEFORE YOU CREATE</p><h2>好きの気持ちが、誰かを傷つけない形で広がるように。</h2></div>
                     <p>ファンアートや切り抜きなどの活動を歓迎しています。以下の内容を確認し、作品や配信への敬意をもってお楽しみください。</p>
                 </div>
-                <p class="guideline-note">このページは現時点の活動方針に基づく仮ガイドラインです。活動内容や権利関係に応じて、予告なく更新する場合があります。</p>
+                <p class="guideline-note" data-guideline-reveal="note">このページは現時点の活動方針に基づく仮ガイドラインです。活動内容や権利関係に応じて、予告なく更新する場合があります。</p>
 
                 <div class="guideline-grid">
-                    <article class="guideline-card"><span class="guideline-index">01 / FAN ART</span><h2>二次創作</h2><p>ファンアート、漫画、動画、音楽など、個人の趣味の範囲での二次創作を歓迎します。</p><ul><li>投稿時に公式作品と誤認されないようにしてください。</li><li>他者の権利を侵害する素材は使用しないでください。</li><li>活動やキャラクターの印象を著しく損なう表現はお控えください。</li></ul></article>
-                    <article class="guideline-card"><span class="guideline-index">02 / CLIPS</span><h2>配信の切り抜き</h2><p>公開中の配信アーカイブを利用した切り抜き動画の投稿は、以下の範囲で歓迎します。</p><ul><li>元配信のURLとチャンネル名を概要欄へ記載してください。</li><li>発言の意図が変わるような編集や、誤解を招くタイトルは避けてください。</li><li>メンバー限定・非公開・削除済みコンテンツは使用しないでください。</li></ul></article>
-                    <article class="guideline-card"><span class="guideline-index">03 / SNS</span><h2>SNSでの共有</h2><p>配信の感想、スクリーンショット、応援投稿は歓迎です。ネタバレや他の方への配慮をお願いします。</p><ul><li>公式アカウントを装う行為は禁止です。</li><li>個人情報の特定や詮索につながる投稿はしないでください。</li><li>他の配信者・視聴者への攻撃的な投稿はお控えください。</li></ul></article>
-                    <article class="guideline-card"><span class="guideline-index">04 / COMMERCIAL</span><h2>収益化・販売</h2><p>動画プラットフォームの標準的な広告収益は可能です。グッズ販売など継続的・商業的な利用は事前にご相談ください。</p><ul><li>公式グッズと誤認される販売はできません。</li><li>ロゴや公式画像の無断商品化は禁止です。</li><li>企業・団体による利用はCONTACTからお問い合わせください。</li></ul></article>
-                    <article class="guideline-card"><span class="guideline-index">05 / PROHIBITED</span><h2>禁止事項</h2><p>次の内容に該当する利用はお断りします。</p><ul><li><strong>なりすまし、誹謗中傷、差別的または反社会的な表現</strong></li><li>第三者の権利・プライバシーを侵害する内容</li><li>政治・宗教活動への利用、違法行為を助長する利用</li><li>公式素材やコンテンツの無断転載・再配布</li><li><strong>AI学習への利用：</strong>柊ひつぎが公開するモデル・画像・イラスト・映像その他の素材を、生成AIを含むAIの学習、追加学習、データセット作成、モデル生成その他これらに準ずる目的で使用する行為は、個人・法人、営利・非営利、公開・非公開を問わず、いかなる理由でも禁止します。</li></ul></article>
-                    <article class="guideline-card"><span class="guideline-index">06 / CONTACT</span><h2>判断に迷ったとき</h2><p>ガイドラインだけでは判断できない利用や、お仕事・メディア掲載・イベント利用については事前にお問い合わせください。</p><ul><li>すべてのご相談へ個別回答できない場合があります。</li><li>権利者から申し出があった場合は、その指示を優先してください。</li><li>問題が確認された場合、公開停止や削除をお願いすることがあります。</li></ul></article>
+                    <article class="guideline-card" data-guideline-reveal="card"><span class="guideline-index">01 / FAN ART</span><h2>二次創作</h2><p>ファンアート、漫画、動画、音楽など、個人の趣味の範囲での二次創作を歓迎します。</p><ul><li>投稿時に公式作品と誤認されないようにしてください。</li><li>他者の権利を侵害する素材は使用しないでください。</li><li>活動やキャラクターの印象を著しく損なう表現はお控えください。</li></ul></article>
+                    <article class="guideline-card" data-guideline-reveal="card"><span class="guideline-index">02 / CLIPS</span><h2>配信の切り抜き</h2><p>公開中の配信アーカイブを利用した切り抜き動画の投稿は、以下の範囲で歓迎します。</p><ul><li>元配信のURLとチャンネル名を概要欄へ記載してください。</li><li>発言の意図が変わるような編集や、誤解を招くタイトルは避けてください。</li><li>メンバー限定・非公開・削除済みコンテンツは使用しないでください。</li></ul></article>
+                    <article class="guideline-card" data-guideline-reveal="card"><span class="guideline-index">03 / SNS</span><h2>SNSでの共有</h2><p>配信の感想、スクリーンショット、応援投稿は歓迎です。ネタバレや他の方への配慮をお願いします。</p><ul><li>公式アカウントを装う行為は禁止です。</li><li>個人情報の特定や詮索につながる投稿はしないでください。</li><li>他の配信者・視聴者への攻撃的な投稿はお控えください。</li></ul></article>
+                    <article class="guideline-card" data-guideline-reveal="card"><span class="guideline-index">04 / COMMERCIAL</span><h2>収益化・販売</h2><p>動画プラットフォームの標準的な広告収益は可能です。グッズ販売など継続的・商業的な利用は事前にご相談ください。</p><ul><li>公式グッズと誤認される販売はできません。</li><li>ロゴや公式画像の無断商品化は禁止です。</li><li>企業・団体による利用はCONTACTからお問い合わせください。</li></ul></article>
+                    <article class="guideline-card" data-guideline-reveal="card"><span class="guideline-index">05 / PROHIBITED</span><h2>禁止事項</h2><p>次の内容に該当する利用はお断りします。</p><ul><li><strong>なりすまし、誹謗中傷、差別的または反社会的な表現</strong></li><li>第三者の権利・プライバシーを侵害する内容</li><li>政治・宗教活動への利用、違法行為を助長する利用</li><li>公式素材やコンテンツの無断転載・再配布</li><li><strong>AI学習への利用：</strong>柊ひつぎが公開するモデル・画像・イラスト・映像その他の素材を、生成AIを含むAIの学習、追加学習、データセット作成、モデル生成その他これらに準ずる目的で使用する行為は、個人・法人、営利・非営利、公開・非公開を問わず、いかなる理由でも禁止します。</li></ul></article>
+                    <article class="guideline-card" data-guideline-reveal="card"><span class="guideline-index">06 / CONTACT</span><h2>判断に迷ったとき</h2><p>ガイドラインだけでは判断できない利用や、お仕事・メディア掲載・イベント利用については事前にお問い合わせください。</p><ul><li>すべてのご相談へ個別回答できない場合があります。</li><li>権利者から申し出があった場合は、その指示を優先してください。</li><li>問題が確認された場合、公開停止や削除をお願いすることがあります。</li></ul></article>
                 </div>
             </div>
         </section>
 
         <section class="page-section">
             <div class="page-container">
-                <div class="guideline-closing">
+                <div class="guideline-closing" data-guideline-reveal="closing">
                     <div><p class="page-section-label">THANK YOU</p><h2>応援と創作を、いつもありがとうございます。</h2></div>
                     <div><p>みなさんの作品や言葉が活動の力になっています。お互いを尊重しながら、楽しいコミュニティを一緒につくっていけたら嬉しいです。</p><div class="page-actions"><a class="page-button" href="index.html#contact">CONTACT <span aria-hidden="true">↗</span></a><a class="page-button" href="about.html">ABOUT <span aria-hidden="true">↗</span></a></div></div>
                 </div>
@@ -81,6 +81,7 @@
     <script src="js/cursor.js?v=4.8.0"></script>
     <script src="js/navigation.js"></script>
     <script src="js/scroll.js?v=4.12.9"></script>
+    <script src="js/guideline-page.js?v=1.0.1"></script>
     <script src="js/script.js"></script>
     <div id="scroll-progress"></div>
     <button id="back-to-top" aria-label="ページ上部へ戻る">↑</button>

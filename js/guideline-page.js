@@ -1,47 +1,29 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    ABOUT Page Reveal / Version 4.5.0
+    GUIDELINE Page Reveal / Version 1.0.1
 ==================================================*/
 
 "use strict";
 
 (() => {
     const root = document.documentElement;
-    const hero = document.querySelector('[data-about-reveal="hero"]');
+    const hero = document.querySelector('[data-guideline-reveal="hero"]');
     const targets = Array.from(
-        document.querySelectorAll('[data-about-reveal]:not([data-about-reveal="hero"])')
-    );
-    const creatorAvatars = Array.from(
-        document.querySelectorAll("[data-creator-avatar]")
+        document.querySelectorAll(
+            '[data-guideline-reveal]:not([data-guideline-reveal="hero"])'
+        )
     );
 
     function reveal(element) {
-        if (!element || element.classList.contains("is-about-visible")) return;
-        element.classList.add("is-about-visible");
+        if (!element || element.classList.contains("is-guideline-visible")) return;
+        element.classList.add("is-guideline-visible");
     }
 
     function revealHero() {
         window.requestAnimationFrame(() => {
             window.requestAnimationFrame(() => reveal(hero));
         });
-    }
-
-    function initializeCreatorAvatars() {
-        creatorAvatars.forEach(avatar => {
-            const showAvatar = () => avatar.classList.add("is-loaded");
-            const showFallback = () => {
-                avatar.classList.remove("is-loaded");
-                avatar.removeAttribute("src");
-            };
-
-            avatar.addEventListener("load", showAvatar, { once: true });
-            avatar.addEventListener("error", showFallback, { once: true });
-
-            if (avatar.complete) {
-                if (avatar.naturalWidth > 0) showAvatar();
-                else showFallback();
-            }
-        });
+        window.setTimeout(() => reveal(hero), 160);
     }
 
     function initializeObserver() {
@@ -58,18 +40,16 @@
             });
         }, {
             root: null,
-            rootMargin: "0px 0px -12% 0px",
-            threshold: 0.12
+            rootMargin: "0px 0px -10% 0px",
+            threshold: 0.1
         });
 
         targets.forEach(target => observer.observe(target));
     }
 
     function init() {
-        window.clearTimeout(window.__aboutRevealFallback);
-        root.classList.add("about-motion-ready");
-
-        initializeCreatorAvatars();
+        window.clearTimeout(window.__guidelineRevealFallback);
+        root.classList.add("guideline-motion-ready");
         initializeObserver();
 
         if (document.body.classList.contains("site-loaded")) {
@@ -87,7 +67,7 @@
     }
 
     console.info(
-        "%cABOUT Reveal Ready — Version 4.5.0",
+        "%cGUIDELINE Reveal Ready — Version 1.0.1",
         "color:#66F1FF;font-weight:bold;"
     );
 })();
