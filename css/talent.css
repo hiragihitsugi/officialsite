@@ -1,6 +1,6 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    HOME Talent Stage / Version 1.0.12
+    HOME Talent Stage / Version 1.0.20
 ==================================================*/
 
 #about.talent-section {
@@ -53,11 +53,11 @@
 .talent-face {
     position: absolute;
     z-index: -1;
-    top: 8%;
-    right: 2%;
+    top: 4%;
+    right: 4%;
     left: auto;
-    width: min(51vw, 780px);
-    height: 72%;
+    width: min(55vw, 840px);
+    height: 76%;
     overflow: hidden;
     opacity: .18;
     translate: none;
@@ -79,7 +79,7 @@
     height: 100%;
     object-fit: cover;
     object-position: 62% 6%;
-    transform: scale(1.65);
+    transform: scale(1.76);
     transform-origin: 62% 12%;
 }
 
@@ -145,7 +145,7 @@
 .talent-keyvisual {
     position: absolute;
     z-index: 2;
-    top: 1%;
+    top: 3%;
     left: 20%;
     width: auto;
     height: 130%;
@@ -383,12 +383,19 @@
     }
 
     .talent-face {
-        top: 12%;
-        right: -5%;
+        top: 9%;
+        right: -26%;
         left: auto;
-        width: 91%;
-        height: 55%;
-        opacity: .13;
+        width: 86%;
+        height: 54%;
+        opacity: .12;
+        clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .talent-face img {
+        object-position: 68% 4%;
+        transform: scale(1.72);
+        transform-origin: 70% 10%;
     }
 
     .talent-keyvisual {
@@ -435,10 +442,10 @@
     #media.media-image-section .section-visual-image {
         width: 100%;
         height: 100%;
-        inset: 0 auto auto 50%;
-        translate: -50% 0;
+        inset: 0;
+        translate: none;
         object-fit: contain;
-        object-position: 47% top;
+        object-position: center top;
         opacity: .68;
     }
 }
@@ -468,9 +475,10 @@
     }
 
     .talent-face {
-        right: -14%;
+        top: 10%;
+        right: -30%;
         left: auto;
-        width: 108%;
+        width: 92%;
     }
 
     .talent-copy {

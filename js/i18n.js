@@ -1,6 +1,6 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    JP / EN Language Switcher / Version 1.0.3
+    JP / EN Language Switcher / Version 1.0.4
 ==================================================*/
 
 "use strict";
@@ -60,6 +60,26 @@
         "ゲームと雑談を中心に、YouTubeとTwitchで活動する個人VTuber。あなたに癒しと、ふっと立ち寄れる時間を届けます。": "An independent VTuber active on YouTube and Twitch, centered on games and free talk. Bringing you comfort and a place to drop by anytime.",
         "ゲーム配信・雑談・動画": "Game streams, free talk, and videos",
         "ゲーム配信や雑談を中心に、YouTubeとTwitchで活動する個人VTuberです。戦う日々の合間に、ふっと肩の力を抜ける時間を届けたい。そんな思いで、リスナーのみなさんと一緒に楽しめる居場所をつくっています。": "An independent VTuber active mainly on YouTube and Twitch with game streams and free talk. Between the battles of everyday life, I want to give you a moment to unwind—a place we can enjoy together.",
+        "個人VTuber・柊ひつぎ（ひいらぎひつぎ）。あなたに癒しを届ける戦闘員バーチャルストリーマー。": "Independent VTuber Hiiragi Hitsugi. A combatant virtual streamer bringing comfort to you.",
+        "柊ひつぎ（ひいらぎひつぎ）は、ゲームと雑談を中心にYouTubeとTwitchで活動する個人VTuber・Streamer。あなたに癒しと、ふっと立ち寄れる時間を届けます。": "Hiiragi Hitsugi is an independent VTuber and streamer active on YouTube and Twitch, mainly sharing games and free talk. Bringing you comfort and a place to drop by anytime.",
+        "柊ひつぎ（ひいらぎひつぎ）は、ゲーム配信や雑談を中心にYouTubeとTwitchで活動する個人VTuber・Streamerです。戦う日々の合間に、ふっと肩の力を抜ける時間を届けたい。そんな思いで、リスナーのみなさんと一緒に楽しめる居場所をつくっています。": "Hiiragi Hitsugi is an independent VTuber and streamer active mainly on YouTube and Twitch with game streams and free talk. Between the battles of everyday life, I want to give you a moment to unwind—a place we can enjoy together with the community.",
+        "柊ひつぎ（ひいらぎひつぎ）公式サイト | 個人VTuber・Streamer": "Hiiragi Hitsugi Official Website | Independent VTuber & Streamer",
+        "個人VTuber・Streamer、柊ひつぎ（ひいらぎひつぎ／HIIRAGI HITSUGI）の公式サイト。YouTube・Twitchの配信、動画、プロフィール、活動情報を掲載しています。": "The official website of independent VTuber and streamer Hiiragi Hitsugi, featuring YouTube and Twitch streams, videos, profile, and activity updates.",
+        "個人VTuber・Streamer、柊ひつぎの公式サイト。配信、動画、プロフィール、活動情報を掲載しています。": "The official website of independent VTuber and streamer Hiiragi Hitsugi, featuring streams, videos, profile, and activity updates.",
+        "個人VTuber・Streamer、柊ひつぎの公式サイト。YouTube・Twitchで活動中。": "The official website of independent VTuber and streamer Hiiragi Hitsugi, active on YouTube and Twitch.",
+        "柊ひつぎ 公式サイト": "Hiiragi Hitsugi Official Website",
+        "柊ひつぎ（HIIRAGI HITSUGI）の公式キービジュアル": "Official key visual of Hiiragi Hitsugi",
+        "柊ひつぎ プロフィール | 個人VTuber・Streamer": "Hiiragi Hitsugi Profile | Independent VTuber & Streamer",
+        "個人VTuber・Streamer、柊ひつぎ（ひいらぎひつぎ／HIIRAGI HITSUGI）のプロフィール。YouTube・Twitchでの活動内容、キャラクター、クリエイター情報を紹介します。": "Profile of independent VTuber and streamer Hiiragi Hitsugi, including YouTube and Twitch activities, character details, and creator credits.",
+        "あなたに癒しを届ける個人VTuber・Streamer、柊ひつぎのプロフィール。": "Profile of Hiiragi Hitsugi, an independent VTuber and streamer bringing comfort to you.",
+        "個人VTuber・柊ひつぎのキービジュアル": "Key visual of independent VTuber Hiiragi Hitsugi",
+        "柊ひつぎ（ひいらぎひつぎ）のプロフィールと活動情報。": "Profile and activity information for Hiiragi Hitsugi.",
+        "柊ひつぎ 二次創作・配信ガイドライン | VTuber": "Hiiragi Hitsugi Fan Work & Stream Guidelines | VTuber",
+        "個人VTuber・柊ひつぎ（ひいらぎひつぎ）の公式ガイドライン。ファンアート、配信切り抜き、SNS投稿、収益化、AI学習への利用などの方針を掲載しています。": "Official guidelines for independent VTuber Hiiragi Hitsugi, covering fan art, stream clips, social media posts, monetization, and AI training.",
+        "柊ひつぎ 二次創作・配信ガイドライン": "Hiiragi Hitsugi Fan Work & Stream Guidelines",
+        "ファンアート、配信切り抜き、SNS投稿など、柊ひつぎのコンテンツ利用方針をご案内します。": "Content-use guidelines for Hiiragi Hitsugi, including fan art, stream clips, and social media posts.",
+        "柊ひつぎ公式ガイドライン": "Official Hiiragi Hitsugi guidelines",
+        "個人VTuber・柊ひつぎのファン活動、二次創作、配信切り抜きに関する方針。": "Guidelines for fan activities, derivative works, and stream clips involving independent VTuber Hiiragi Hitsugi.",
         "ゲーム配信を軸に、雑談や動画、企画など幅広い活動を届けていきます。": "Centered on game streaming, with free talk, videos, projects, and more.",
         "このページは現時点の活動方針に基づく仮ガイドラインです。活動内容や権利関係に応じて、予告なく更新する場合があります。": "These provisional guidelines reflect the current activity policy and may be updated without notice as activities or rights circumstances change.",
         "コラボ、出演、制作のご相談やメッセージはこちらからお送りください。内容を確認のうえ、必要に応じて返信いたします。": "Send collaboration, appearance, production inquiries, or messages here. We will review your message and reply when necessary.",
