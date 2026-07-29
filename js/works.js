@@ -1,6 +1,6 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    Infinite LINKS Slider / Version 2.3.1
+    Infinite LINKS Slider / Version 2.3.2
 ==================================================*/
 
 "use strict";
@@ -166,7 +166,6 @@
             lastPointerX = event.clientX;
             lastPointerTime = performance.now();
             carousel.classList.add("is-dragging");
-            carousel.setPointerCapture(event.pointerId);
             pause(3800);
         });
 
@@ -181,7 +180,10 @@
             lastPointerX = event.clientX;
             lastPointerTime = now;
 
-            if (Math.abs(dragDelta) > 5) dragMoved = true;
+            if (Math.abs(dragDelta) > 5 && !dragMoved) {
+                dragMoved = true;
+                carousel.setPointerCapture(event.pointerId);
+            }
             setTrackPosition(dragStartPosition - dragDelta);
         });
 
@@ -297,5 +299,5 @@
             }, "-=.16");
     }
 
-    console.info("%cInfinite LINKS Slider v2.3.1 Ready", "color:#66F1FF;font-weight:bold;");
+    console.info("%cInfinite LINKS Slider v2.3.2 Ready", "color:#66F1FF;font-weight:bold;");
 })();
