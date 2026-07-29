@@ -1,0 +1,479 @@
+/*==================================================
+    HIIRAGI HITSUGI Official Website
+    HOME Talent Stage / Version 1.0.12
+==================================================*/
+
+#about.talent-section {
+    min-height: clamp(800px, 63vw, 980px);
+    padding-block: 0;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 72% 28%, rgba(81, 198, 226, .11), transparent 29%),
+        linear-gradient(135deg, #07101c 0%, #050816 48%, #071423 100%);
+}
+
+#about.talent-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    background:
+        linear-gradient(90deg, rgba(102, 241, 255, .025) 1px, transparent 1px),
+        linear-gradient(rgba(102, 241, 255, .025) 1px, transparent 1px);
+    background-size: 74px 74px;
+    mask-image: linear-gradient(90deg, #000, transparent 76%);
+}
+
+#about.talent-section::after {
+    content: "";
+    position: absolute;
+    right: -8%;
+    bottom: -32%;
+    z-index: -2;
+    width: min(68vw, 1060px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(102, 241, 255, .08);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 7vw rgba(102, 241, 255, .018),
+        0 0 0 14vw rgba(102, 241, 255, .012);
+}
+
+.talent-dots {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    opacity: .4;
+    background-image: radial-gradient(circle, rgba(102, 241, 255, .25) 1px, transparent 1.5px);
+    background-size: 18px 18px;
+    mask-image: linear-gradient(115deg, #000 0%, rgba(0, 0, 0, .55) 43%, transparent 77%);
+}
+
+.talent-face {
+    position: absolute;
+    z-index: -1;
+    top: 8%;
+    right: 2%;
+    left: auto;
+    width: min(51vw, 780px);
+    height: 72%;
+    overflow: hidden;
+    opacity: .18;
+    translate: none;
+    clip-path: polygon(13% 0, 100% 0, 83% 100%, 0 100%);
+    filter: grayscale(.22) saturate(.65) brightness(1.35);
+}
+
+.talent-face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, #050816 0%, transparent 24%, transparent 72%, #050816 100%),
+        linear-gradient(180deg, #050816 0%, transparent 15%, transparent 67%, #050816 100%);
+}
+
+.talent-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 6%;
+    transform: scale(1.65);
+    transform-origin: 62% 12%;
+}
+
+.talent-stage {
+    position: relative;
+    height: clamp(800px, 63vw, 980px);
+}
+
+.talent-stage::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    right: 50%;
+    bottom: -1px;
+    width: 100vw;
+    height: clamp(120px, 14vw, 190px);
+    pointer-events: none;
+    translate: 50% 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(5, 8, 22, .18) 26%,
+        rgba(5, 8, 22, .72) 70%,
+        #050816 100%
+    );
+    backdrop-filter: blur(7px);
+    mask-image: linear-gradient(to bottom, transparent, #000 40%, #000);
+}
+
+.talent-heading-block {
+    position: absolute;
+    z-index: 4;
+    top: clamp(100px, 11vw, 164px);
+    left: 0;
+}
+
+.talent-heading-block .section-title {
+    margin-bottom: 22px;
+}
+
+.talent-role {
+    color: rgba(231, 251, 255, .5);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .24em;
+}
+
+.talent-word {
+    position: absolute;
+    z-index: -1;
+    top: clamp(100px, 9vw, 138px);
+    left: clamp(-10px, -1vw, 0px);
+    color: rgba(102, 241, 255, .07);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(112px, 15vw, 228px);
+    font-weight: 700;
+    line-height: .8;
+    letter-spacing: -.07em;
+    white-space: nowrap;
+}
+
+.talent-keyvisual {
+    position: absolute;
+    z-index: 2;
+    top: 1%;
+    left: 20%;
+    width: auto;
+    height: 130%;
+    max-width: none;
+    object-fit: contain;
+    filter: drop-shadow(0 24px 38px rgba(0, 0, 0, .34));
+    mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 65%,
+        rgba(0, 0, 0, .88) 69%,
+        rgba(0, 0, 0, .5) 73%,
+        transparent 79%
+    );
+}
+
+.talent-copy {
+    position: absolute;
+    z-index: 5;
+    bottom: clamp(30px, 4vw, 58px);
+    left: 50%;
+    width: min(980px, 72vw);
+    display: grid;
+    grid-template-columns: minmax(220px, .85fr) minmax(300px, 1.15fr) auto;
+    grid-template-rows: auto auto auto;
+    align-items: center;
+    column-gap: clamp(24px, 3vw, 46px);
+    padding: clamp(25px, 2.6vw, 36px) clamp(30px, 3.5vw, 52px);
+    overflow: hidden;
+    translate: -50% 0;
+    border: 1px solid rgba(147, 226, 241, .18);
+    border-radius: clamp(24px, 3vw, 34px);
+    background:
+        radial-gradient(circle at 50% 0, rgba(67, 218, 242, .11), transparent 44%),
+        linear-gradient(145deg, rgba(255, 255, 255, .052), transparent 58%),
+        rgba(7, 16, 31, .79);
+    box-shadow:
+        0 28px 90px rgba(0, 0, 0, .32),
+        0 0 54px rgba(0, 207, 255, .045),
+        inset 0 1px 0 rgba(255, 255, 255, .035);
+    text-align: center;
+    backdrop-filter: blur(22px) saturate(1.08);
+}
+
+.talent-copy::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: clamp(92px, 10vw, 142px);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--cyan2), transparent);
+    box-shadow: 0 0 16px rgba(102, 241, 255, .24);
+}
+
+.talent-index {
+    grid-column: 1;
+    grid-row: 1;
+    color: var(--cyan2);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .2em;
+}
+
+.talent-copy h2 {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 17px;
+    font-size: clamp(38px, 4.4vw, 60px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .02em;
+}
+
+.talent-name-en {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: center;
+    display: inline-flex;
+    margin-top: 13px;
+    padding: 7px 13px;
+    background: rgba(102, 241, 255, .12);
+    color: rgba(231, 251, 255, .75);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .15em;
+}
+
+.talent-introduction {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    max-width: 430px;
+    margin: 0;
+    padding: 8px clamp(24px, 2.6vw, 38px);
+    border-right: 1px solid rgba(147, 226, 241, .1);
+    border-left: 1px solid rgba(147, 226, 241, .1);
+    color: rgba(231, 251, 255, .62);
+    font-size: 14px;
+    line-height: 1.9;
+    text-align: left;
+}
+
+.talent-more-link {
+    grid-column: 3;
+    grid-row: 1 / 4;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-width: 172px;
+    margin: 0;
+    padding: 14px 22px;
+    border: 1px solid rgba(102, 241, 255, .24);
+    border-radius: 999px;
+    background: rgba(5, 12, 28, .48);
+    color: #e7fbff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    transition:
+        transform .32s ease,
+        border-color .32s ease,
+        background .32s ease,
+        box-shadow .32s ease;
+}
+
+.talent-more-link:hover,
+.talent-more-link:focus-visible {
+    transform: translate3d(0, -3px, 0);
+    border-color: rgba(102, 241, 255, .76);
+    background: rgba(0, 207, 255, .11);
+    box-shadow: 0 14px 38px rgba(0, 207, 255, .11);
+}
+
+.talent-more-link:focus-visible {
+    outline: 2px solid var(--cyan2);
+    outline-offset: 4px;
+}
+
+/* The former ABOUT artwork and curtain reveal now belong to MEDIA. */
+#media.media-image-section {
+    background-color: #050816;
+    background-image: none;
+}
+
+#media.media-image-section::before {
+    z-index: 1;
+}
+
+#media.media-image-section .section-visual-image {
+    inset: 34px auto auto 50%;
+    width: min(92vw, 1320px);
+    height: calc(100% - 68px);
+    opacity: .82;
+    translate: -50% 0;
+    object-fit: contain;
+    object-position: center top;
+    filter: brightness(.74) contrast(1.06) saturate(.76);
+}
+
+#media.media-image-section .section-visual-backdrop {
+    filter: blur(18px) brightness(.4) saturate(.72);
+}
+
+#media.media-image-section .section-visual-shade {
+    background:
+        linear-gradient(180deg, rgba(5, 8, 22, .56) 0%, rgba(5, 8, 22, .36) 38%, rgba(5, 8, 22, .7) 100%),
+        linear-gradient(90deg, rgba(5, 8, 22, .58), rgba(5, 8, 22, .22) 55%, rgba(5, 8, 22, .54));
+}
+
+#media.media-image-section .media-card {
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .014)),
+        rgba(7, 14, 27, .82);
+    backdrop-filter: blur(12px);
+}
+
+@media (max-width: 1000px) {
+    #about.talent-section,
+    .talent-stage {
+        min-height: 850px;
+        height: 850px;
+    }
+
+    .talent-keyvisual {
+        left: 16%;
+        height: 122%;
+    }
+
+    .talent-copy {
+        width: calc(100% - 64px);
+        grid-template-columns: minmax(190px, .8fr) minmax(250px, 1.2fr) auto;
+        column-gap: 22px;
+        padding-inline: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    #about.talent-section {
+        min-height: 900px;
+        margin: 0;
+        padding-inline: 0;
+    }
+
+    .talent-stage {
+        width: 100%;
+        height: 900px;
+        min-height: 900px;
+        padding-inline: 22px;
+    }
+
+    .talent-stage::after {
+        height: 150px;
+        backdrop-filter: blur(5px);
+    }
+
+    .talent-heading-block {
+        top: 72px;
+        left: 22px;
+    }
+
+    .talent-heading-block .section-title {
+        margin-bottom: 15px;
+    }
+
+    .talent-word {
+        top: 80px;
+        left: 11px;
+        font-size: clamp(86px, 27vw, 150px);
+    }
+
+    .talent-face {
+        top: 12%;
+        right: -5%;
+        left: auto;
+        width: 91%;
+        height: 55%;
+        opacity: .13;
+    }
+
+    .talent-keyvisual {
+        top: 9%;
+        left: 28%;
+        height: 82%;
+        mask-image: linear-gradient(
+            to bottom,
+            #000 0%,
+            #000 73%,
+            rgba(0, 0, 0, .85) 80%,
+            rgba(0, 0, 0, .42) 89%,
+            transparent 100%
+        );
+    }
+
+    .talent-copy {
+        right: auto;
+        bottom: 42px;
+        left: 50%;
+        width: calc(100% - 44px);
+        display: block;
+        padding: 25px 23px;
+        translate: -50% 0;
+    }
+
+    .talent-copy h2 {
+        font-size: clamp(38px, 13vw, 56px);
+    }
+
+    .talent-introduction {
+        margin-top: 17px;
+        padding: 0;
+        border: 0;
+        font-size: 13px;
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    .talent-more-link {
+        margin-top: 19px;
+    }
+
+    #media.media-image-section .section-visual-image {
+        width: 100%;
+        height: 100%;
+        inset: 0 auto auto 50%;
+        translate: -50% 0;
+        object-fit: contain;
+        object-position: 47% top;
+        opacity: .68;
+    }
+}
+
+@media (max-width: 600px) {
+    .talent-keyvisual {
+        left: -16vw;
+    }
+}
+
+@media (max-width: 420px) {
+    #about.talent-section,
+    .talent-stage {
+        min-height: 840px;
+        height: 840px;
+    }
+
+    .talent-role {
+        font-size: 9px;
+        letter-spacing: .18em;
+    }
+
+    .talent-keyvisual {
+        top: 10%;
+        left: -16vw;
+        height: 78%;
+    }
+
+    .talent-face {
+        right: -14%;
+        left: auto;
+        width: 108%;
+    }
+
+    .talent-copy {
+        bottom: 28px;
+    }
+}

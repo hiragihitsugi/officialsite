@@ -1,4 +1,4 @@
-/* HIIRAGI HITSUGI — cinematic.js / Version 2.9.0 */
+/* HIIRAGI HITSUGI — cinematic.js / Version 3.7.0 */
 "use strict";
 
 (() => {
@@ -48,6 +48,13 @@
 
         const configs = {
             about: {
+                curtainFrom: { scaleY: 1, scaleX: 1, transformOrigin: 'bottom center' },
+                curtainTo: { scaleY: 0 },
+                imageFrom: { xPercent: 7, yPercent: 2.5, scale: 1.10 },
+                lightFrom: -180,
+                lightTo: 720
+            },
+            media: {
                 curtainFrom: { scaleY: 1, scaleX: 1, transformOrigin: 'bottom center' },
                 curtainTo: { scaleY: 0 },
                 imageFrom: { xPercent: 7, yPercent: 2.5, scale: 1.10 },

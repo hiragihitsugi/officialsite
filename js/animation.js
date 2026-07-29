@@ -1,7 +1,7 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
     animation.js
-    Version : 4.11.0
+    Version : 4.12.5
 ==================================================*/
 
 "use strict";
@@ -19,7 +19,14 @@
     window.addEventListener("siteLoaded", initializeAnimations, { once: true });
 
     function initializeAnimations() {
-        if (!hasGSAP || reduceMotion) {
+        initTalentScrollReveal();
+
+        if (!hasGSAP) {
+            document.documentElement.classList.add("motion-reduced");
+            return;
+        }
+
+        if (reduceMotion) {
             document.documentElement.classList.add("motion-reduced");
             return;
         }
@@ -30,7 +37,6 @@
         if (hasScrollTrigger) {
             initSectionEffects();
             initSectionTransitions();
-            initAbout();
             initSkills();
             initMedia();
             initContact();
@@ -116,16 +122,103 @@
         });
     }
 
-    function initAbout() {
-        const timeline = gsap.timeline({
-            scrollTrigger: { trigger: "#about", start: "top 72%", once: true }
+    function initTalentScrollReveal() {
+        const section = document.querySelector("#about.talent-section");
+        if (!section || typeof Element.prototype.animate !== "function") return;
+
+        const entries = [
+            {
+                element: section.querySelector(".talent-dots"),
+                from: { opacity: 0, transform: "scale(1.035)" },
+                to: { opacity: .4, transform: "scale(1)" },
+                duration: 1050,
+                delay: 0
+            },
+            {
+                element: section.querySelector(".talent-word"),
+                from: { opacity: 0, transform: "translate3d(-72px, 0, 0)" },
+                to: { opacity: 1, transform: "translate3d(0, 0, 0)" },
+                duration: 900,
+                delay: 130
+            },
+            {
+                element: section.querySelector(".talent-face"),
+                from: { opacity: 0, transform: "translate3d(6%, 0, 0) scale(1.025)" },
+                to: { opacity: .18, transform: "translate3d(0, 0, 0) scale(1)" },
+                duration: 1150,
+                delay: 210
+            },
+            {
+                element: section.querySelector(".talent-keyvisual"),
+                from: { opacity: 0, transform: "translate3d(7%, 1.5%, 0) scale(1.045)" },
+                to: { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+                duration: 1280,
+                delay: 280
+            },
+            {
+                element: section.querySelector(".talent-copy"),
+                from: { opacity: 0, transform: "translate3d(0, 58px, 0) scale(.985)" },
+                to: { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+                duration: 920,
+                delay: 490
+            }
+        ];
+
+        section.querySelectorAll(".talent-heading-block > *").forEach((element, index) => {
+            entries.push({
+                element,
+                from: { opacity: 0, transform: "translate3d(0, 28px, 0)" },
+                to: { opacity: 1, transform: "translate3d(0, 0, 0)" },
+                duration: 700,
+                delay: 210 + (index * 80)
+            });
         });
 
-        timeline
-            .from("#about .section-title", { opacity: 0, x: -70, duration: 0.7 })
-            .from(".about-statement > *", { opacity: 0, y: 44, stagger: 0.1, duration: 0.7 }, "-=0.4")
-            .from(".about-lead", { opacity: 0, y: 28, duration: 0.6 }, "-=0.45")
-            .from(".about-principles > div", { opacity: 0, y: 22, stagger: 0.1, duration: 0.5 }, "-=0.3");
+        section.querySelectorAll(".talent-copy > *").forEach((element, index) => {
+            entries.push({
+                element,
+                from: { opacity: 0, transform: "translate3d(0, 18px, 0)" },
+                to: { opacity: 1, transform: "translate3d(0, 0, 0)" },
+                duration: 520,
+                delay: 650 + (index * 65)
+            });
+        });
+
+        const animations = entries
+            .filter(({ element }) => element)
+            .map(({ element, from, to, duration, delay }) => {
+                const animation = element.animate([from, to], {
+                    duration,
+                    delay,
+                    easing: "cubic-bezier(.22, 1, .36, 1)",
+                    fill: "both"
+                });
+                animation.pause();
+                animation.currentTime = 0;
+                return animation;
+            });
+
+        const reveal = () => {
+            if (section.classList.contains("is-talent-revealed")) return;
+            section.classList.add("is-talent-revealed");
+            animations.forEach(animation => animation.play());
+        };
+
+        if (!("IntersectionObserver" in window)) {
+            reveal();
+            return;
+        }
+
+        const observer = new IntersectionObserver((observations) => {
+            if (!observations.some(observation => observation.isIntersecting)) return;
+            observer.disconnect();
+            reveal();
+        }, {
+            threshold: .1,
+            rootMargin: "0px 0px -18% 0px"
+        });
+
+        observer.observe(section);
     }
 
     function initSkills() {

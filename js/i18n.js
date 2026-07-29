@@ -1,6 +1,6 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    JP / EN Language Switcher / Version 1.0.2
+    JP / EN Language Switcher / Version 1.0.3
 ==================================================*/
 
 "use strict";
@@ -57,6 +57,7 @@
         "お問い合わせ内容": "Message",
         "ガイドラインだけでは判断できない利用や、お仕事・メディア掲載・イベント利用については事前にお問い合わせください。": "Please contact us in advance regarding uses not covered by these guidelines, business requests, media features, or event use.",
         "ゲームと雑談を中心に配信": "Game streams and free talk",
+        "ゲームと雑談を中心に、YouTubeとTwitchで活動する個人VTuber。あなたに癒しと、ふっと立ち寄れる時間を届けます。": "An independent VTuber active on YouTube and Twitch, centered on games and free talk. Bringing you comfort and a place to drop by anytime.",
         "ゲーム配信・雑談・動画": "Game streams, free talk, and videos",
         "ゲーム配信や雑談を中心に、YouTubeとTwitchで活動する個人VTuberです。戦う日々の合間に、ふっと肩の力を抜ける時間を届けたい。そんな思いで、リスナーのみなさんと一緒に楽しめる居場所をつくっています。": "An independent VTuber active mainly on YouTube and Twitch with game streams and free talk. Between the battles of everyday life, I want to give you a moment to unwind—a place we can enjoy together.",
         "ゲーム配信を軸に、雑談や動画、企画など幅広い活動を届けていきます。": "Centered on game streaming, with free talk, videos, projects, and more.",
