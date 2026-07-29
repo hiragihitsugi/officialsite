@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hiragihitsugi.github.io/officialsite/sitemap.xml
