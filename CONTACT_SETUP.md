@@ -18,5 +18,6 @@
 
 - `_honey` はブラウザの自動入力による誤検知を避けるため削除しました。
 - `_url` に公開サイトURLを明示しました。
+- Referrer Policyを `no-referrer-when-downgrade` に固定し、HTTPSのFormSubmitへ `/officialsite/` を含む参照元URLを送信します。
 - `_autoresponse` を設定し、入力されたメールアドレスへ受付確認を自動返信します。
 - 自動返信はFormSubmitの仕様上、通常のPOST送信・reCAPTCHA有効の構成で動作します。
