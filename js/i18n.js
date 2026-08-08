@@ -1,6 +1,6 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    JP / EN Language Switcher / Version 1.0.4
+    JP / EN Language Switcher / Version 1.0.5
 ==================================================*/
 
 "use strict";
@@ -59,8 +59,14 @@
         "ゲームと雑談を中心に配信": "Game streams and free talk",
         "ゲームと雑談を中心に、YouTubeとTwitchで活動する個人VTuber。あなたに癒しと、ふっと立ち寄れる時間を届けます。": "An independent VTuber active on YouTube and Twitch, centered on games and free talk. Bringing you comfort and a place to drop by anytime.",
         "ゲーム配信・雑談・動画": "Game streams, free talk, and videos",
+        "ゲーム配信を中心にYouTube・Twitchで活動する個人V（個人勢VTuber）、柊ひつぎ（ひいらぎひつぎ／HIIRAGI HITSUGI）の公式サイト。配信、動画、プロフィール、活動情報を掲載しています。": "The official website of independent VTuber Hiiragi Hitsugi, featuring game streams on YouTube and Twitch, videos, profile, and activity updates.",
+        "ゲーム配信を中心にYouTube・Twitchで活動する個人V、柊ひつぎの公式サイト。": "The official website of independent VTuber Hiiragi Hitsugi, centered on game streams on YouTube and Twitch.",
+        "ゲーム配信を中心にYouTube・Twitchで活動する個人V、柊ひつぎの公式サイト。配信、動画、プロフィール、活動情報を掲載しています。": "The official website of independent VTuber Hiiragi Hitsugi, featuring game streams on YouTube and Twitch, videos, profile, and activity updates.",
         "ゲーム配信や雑談を中心に、YouTubeとTwitchで活動する個人VTuberです。戦う日々の合間に、ふっと肩の力を抜ける時間を届けたい。そんな思いで、リスナーのみなさんと一緒に楽しめる居場所をつくっています。": "An independent VTuber active mainly on YouTube and Twitch with game streams and free talk. Between the battles of everyday life, I want to give you a moment to unwind—a place we can enjoy together.",
         "個人VTuber・柊ひつぎ（ひいらぎひつぎ）。あなたに癒しを届ける戦闘員バーチャルストリーマー。": "Independent VTuber Hiiragi Hitsugi. A combatant virtual streamer bringing comfort to you.",
+        "個人V（個人勢VTuber）の柊ひつぎ（ひいらぎひつぎ）。あなたに癒しを届ける戦闘員バーチャルストリーマー。": "Independent VTuber Hiiragi Hitsugi. A combatant virtual streamer bringing comfort to you.",
+        "柊ひつぎ公式サイト｜個人V・個人勢VTuber": "Hiiragi Hitsugi Official Website | Independent VTuber",
+        "柊ひつぎ（ひいらぎひつぎ）は、ゲームと雑談を中心にYouTubeとTwitchで活動する個人V・個人勢VTuber。あなたに癒しと、ふっと立ち寄れる時間を届けます。": "Hiiragi Hitsugi is an independent VTuber active on YouTube and Twitch, mainly sharing games and free talk. Bringing you comfort and a place to drop by anytime.",
         "柊ひつぎ（ひいらぎひつぎ）は、ゲームと雑談を中心にYouTubeとTwitchで活動する個人VTuber・Streamer。あなたに癒しと、ふっと立ち寄れる時間を届けます。": "Hiiragi Hitsugi is an independent VTuber and streamer active on YouTube and Twitch, mainly sharing games and free talk. Bringing you comfort and a place to drop by anytime.",
         "柊ひつぎ（ひいらぎひつぎ）は、ゲーム配信や雑談を中心にYouTubeとTwitchで活動する個人VTuber・Streamerです。戦う日々の合間に、ふっと肩の力を抜ける時間を届けたい。そんな思いで、リスナーのみなさんと一緒に楽しめる居場所をつくっています。": "Hiiragi Hitsugi is an independent VTuber and streamer active mainly on YouTube and Twitch with game streams and free talk. Between the battles of everyday life, I want to give you a moment to unwind—a place we can enjoy together with the community.",
         "柊ひつぎ（ひいらぎひつぎ）公式サイト | 個人VTuber・Streamer": "Hiiragi Hitsugi Official Website | Independent VTuber & Streamer",
