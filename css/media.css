@@ -1,6 +1,6 @@
 /*==================================================
     HIIRAGI HITSUGI Official Website
-    media.css / Version 1.0.0
+    media.css / Version 1.0.1
 ==================================================*/
 
 #media {
@@ -27,6 +27,7 @@
 .media-studio {
     position: relative;
     z-index: 1;
+    min-width: 0;
 }
 
 .media-heading-row {
@@ -62,6 +63,7 @@
     grid-template-columns: minmax(0, 1.12fr) minmax(340px, .88fr);
     gap: clamp(18px, 2.4vw, 32px);
     margin-top: clamp(54px, 7vw, 88px);
+    min-width: 0;
 }
 
 .media-card {

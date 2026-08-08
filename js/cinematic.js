@@ -57,7 +57,7 @@
             media: {
                 curtainFrom: { scaleY: 1, scaleX: 1, transformOrigin: 'bottom center' },
                 curtainTo: { scaleY: 0 },
-                imageFrom: { xPercent: 7, yPercent: 2.5, scale: 1.10 },
+                imageFrom: { xPercent: 0, yPercent: 2.5, scale: 1.06 },
                 lightFrom: -180,
                 lightTo: 720
             },
